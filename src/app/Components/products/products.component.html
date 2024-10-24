@@ -1,0 +1,46 @@
+
+ <div class="container my-4">
+  <div class="row">
+    <!-- Sidebar for filters -->
+    <div class="col-md-3">
+      <button class="btn btn-link" (click)="clearFilter()">Clear all</button>
+      <div class="sidebar">
+        <!-- Categories Filter -->
+        <app-select-checkbox 
+          title="Categories" 
+          [dataEntity]="categories" 
+          [selectEntity]="selectedCategory" 
+          (filterValue)="onCategoryChange($event)">
+        </app-select-checkbox>
+
+        <!-- Brands Filter -->
+        <app-select-checkbox 
+          title="Brand" 
+          [dataEntity]="brands" 
+          [selectEntity]="selectedBrand" 
+          (filterValue)="onBrandChange($event)">
+        </app-select-checkbox>
+      </div>
+    </div>
+
+    <!-- Main section for products -->
+    <div class="col-md-9">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>On Sale</h4>
+        <div>
+          <label for="sort">Sort By:</label>
+          <select id="sort">
+            <option value="position">Position</option>
+            <option value="price">Price</option>
+            <option value="name">Name</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngFor="let product of filteredProducts" class="col-md-4 mb-4">
+          <app-product-list [data]="product" (item)="addToCart($event)"></app-product-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

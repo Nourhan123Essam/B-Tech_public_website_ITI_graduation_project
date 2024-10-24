@@ -1,0 +1,26 @@
+.brand-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5px;
+  }
+  
+  .brand-item {
+    flex: 0 0 auto;
+    width: 100px;
+    text-align: center;
+  }
+  
+  .container {
+    position: relative;
+  }
+  
+  .btn-outline-dark {
+    z-index: 10; /* Ensure buttons are on top */
+  }
+  
+  .overflow-hidden {
+    overflow-x: hidden;
+  }
+  

@@ -1,0 +1,20 @@
+<div class="container my-4 position-relative">
+    <button class="btn btn-outline-dark position-absolute start-0 top-50 translate-middle-y" (click)="scrollLeft()">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    
+    <div class="d-flex align-items-center overflow-hidden" #brandContainer>
+      <div *ngFor="let brand of brands" class="brand-item text-center mx-3">
+        <img [src]="brand.icon" class="brand-icon" [alt]="brand.name">
+        <p>{{ brand.name }}</p>
+      </div>
+    </div>
+  
+    <button class="btn btn-outline-dark position-absolute end-0 top-50 translate-middle-y" (click)="scrollRight()">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  
+  

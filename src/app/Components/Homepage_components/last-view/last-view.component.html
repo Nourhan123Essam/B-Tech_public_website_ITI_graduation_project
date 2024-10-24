@@ -1,0 +1,16 @@
+<div class="last-viewed">
+    <h6>Last Viewed Products</h6>
+    <div *ngIf="lastViewedProducts.length > 0; else noProducts">
+      <div class="product-container">
+        <div *ngFor="let product of lastViewedProducts" class="product-card"> 
+          <img [src]="product.image" alt="{{product.name}}" (click)="openProductDetails(product)">
+          <h6>{{product.name}}</h6>
+        </div>
+      </div>
+    </div>
+    <ng-template #noProducts>
+      <p>No recently viewed products.</p>
+    </ng-template>
+  </div>
+  
+  
