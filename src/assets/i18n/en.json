@@ -1,0 +1,44 @@
+{
+  "language": "العربية",
+  "topbar": {
+    "My_delivery_area": "My delivery area:",
+    "city": "Cairo",
+    "sall_on_BTECH": "Sell on B.TECH",
+    "call": "Call"
+  },
+
+  "nav": {
+    "categories": "Categories",
+    "daily_deals": "Daily Deals",
+    "search_placeholder": "Search",
+    "sign_in": "Sign in",
+    "cart": "Cart"
+  },
+
+  "footer": {
+    "call_support": "Call support",
+    "support_number": "19966",
+    "warranty_section": "B.TECH warranty",
+    "warranty_items": ["Ultra", "Ariston", "Indesit", "Babyliss", "Miele"],
+    "services_section": "B.TECH services",
+    "services_items": ["Minicash", "TECH CARE", "B.TECH Branches"],
+    "faqs_section": "B.TECH FAQs",
+    "faqs_items": ["Returns FAQs"],
+    "trending_section": "Trending now",
+    "trending_items": [
+      "Everyday Deals",
+      "Mobile",
+      "Braun offers",
+      "TVs",
+      "Accessories",
+      "Oppo",
+      "Samsung",
+      "Apple"
+    ],
+    "connect_section": "Connect with us",
+    "download_app_section": "Download the B.TECH app",
+    "copyright": "© B.TECH for Trade and Distribution, all rights reserved.",
+    "terms_conditions": "Terms & Conditions",
+    "returns_policy": "Returns Policy"
+  }
+}

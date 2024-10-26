@@ -1,0 +1,43 @@
+{
+  "language": "english",
+  "topbar": {
+    "My_delivery_area":"منطقة التوصيل: ",
+    "city": "القاهرة",
+    "sall_on_BTECH":"بيع على بي تك",
+    "call":"اتصل على"
+  },
+  "nav": {
+    "categories": "فئات",
+    "daily_deals": "عروض كل اليوم",
+    "search_placeholder": "بحث",
+    "sign_in": "تسجيل الدخول",
+    "cart": "عربة التسوق"
+  },
+
+  "footer": {
+    "call_support": "اتصل بالدعم",
+    "support_number": "19966",
+    "warranty_section": "ضمان B.TECH",
+    "warranty_items": ["ألترا", "أريستون", "إنديست", "بيبيليس", "ميلي"],
+    "services_section": "خدمات B.TECH",
+    "services_items": ["ميني كاش", "TECH CARE", "فروع B.TECH"],
+    "faqs_section": "الأسئلة الشائعة في B.TECH",
+    "faqs_items": ["أسئلة شائعة حول الإرجاع"],
+    "trending_section": "المتداول الآن",
+    "trending_items": [
+      "عروض يومية",
+      "هواتف",
+      "عروض براون",
+      "تلفزيونات",
+      "إكسسوارات",
+      "أوبو",
+      "سامسونج",
+      "أبل"
+    ],
+    "connect_section": "تواصل معنا",
+    "download_app_section": "حمل تطبيق B.TECH",
+    "copyright": "© حقوق الطبع والنشر محفوظة لـ B.TECH للتجارة والتوزيع.",
+    "terms_conditions": "الشروط والأحكام",
+    "returns_policy": "سياسة الإرجاع"
+  }
+}
