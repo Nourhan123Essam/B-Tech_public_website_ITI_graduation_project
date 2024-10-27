@@ -1,8 +1,16 @@
-import { Component } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from '../app/Components/main_component/Header/header.component';
-import { PromotionComponent } from './Components/Home/promotion.component';
-import { FooterComponent } from './Components/main_component/Footer/footer.component';
+
+import { Component, OnInit } from '@angular/core';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Route,
+  Router,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
+import { HeaderComponent } from './shared/Header/header.component';
+import { PromotionComponent } from '../app/Components/Home/promotion.component';
+import { FooterComponent } from './shared/Footer/footer.component';
 import { ProductListComponent } from './Components/ProductPage_Component/product-list/product-list.component';
 import { BannerComponent } from './Components/Homepage_components/banner/banner.component';
 import { FeaturesComponent } from './Components/Homepage_components/features/features.component';
@@ -14,30 +22,96 @@ import { RemeberByPhooneComponent } from './Components/remeber-by-phoone/remeber
 import { filter } from 'rxjs/internal/operators/filter';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,RouterOutlet,HeaderComponent,PromotionComponent,FooterComponent,ProductListComponent,BannerComponent,BrandsComponent,FeaturesComponent,CartComponent,LastViewComponent,SignInComponent,RemeberByPhooneComponent],
+// <<<<<<< HEAD
+//   imports: [ReactiveFormsModule,CommonModule,RouterOutlet,HeaderComponent,PromotionComponent,FooterComponent,ProductListComponent,BannerComponent,BrandsComponent,FeaturesComponent,CartComponent,LastViewComponent,SignInComponent,RemeberByPhooneComponent],
+// =======
+  imports: [
+    RouterOutlet,
+    RouterModule,
+    HeaderComponent,
+    PromotionComponent,
+    FooterComponent,
+    ProductListComponent,
+    BannerComponent,
+    BrandsComponent,
+    FeaturesComponent,
+    CartComponent,
+    LastViewComponent,
+    TranslateModule,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent  {
   title = 'b-tech';
+// <<<<<<< HEAD
   
-    showHeaderFooter = true;
+//     showHeaderFooter = true;
 
-    private hiddenRoutes = ['/sign-in', '/remember-by-phoone','/sign-up'];
+//     private hiddenRoutes = ['/sign-in', '/remember-by-phoone','/sign-up'];
 
   
-    constructor(private router: Router) {
-      this.router.events
-        .pipe(filter(event => event instanceof NavigationEnd))
-        .subscribe((event: NavigationEnd) => {
-          this.showHeaderFooter = !this.hiddenRoutes.includes(event.url);
-        });
-    }
+//     constructor(private router: Router) {
+//       this.router.events
+//         .pipe(filter(event => event instanceof NavigationEnd))
+//         .subscribe((event: NavigationEnd) => {
+//           this.showHeaderFooter = !this.hiddenRoutes.includes(event.url);
+//         });
+//     }
   
+// =======
+//   showHeader:boolean = true;
+//   constructor(private router:Router,private translate: TranslateService) {
+//     let lang=localStorage.getItem('language');
+//     translate.use(lang as string);
+//     router.events.subscribe((val) => {
+//       if (val instanceof NavigationEnd) {
+//         if (val.url.includes( '/checkout'))
+//           this.showHeader=false;
+//         else
+//         this.showHeader=true;
+//       }
+//     });
+//   }
+// }
+
+// // required for AOT compilation
+// export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+//   return new TranslateHttpLoader(http);
+// >>>>>>> 23ec8ceb6f19be91c8c2c776c056d70757ba50cc
+
+
+
+showHeaderFooter = true;
+showHeader: boolean = true;
+private hiddenRoutes = ['/sign-in', '/remember-by-phoone', '/sign-up'];
+
+constructor(private router: Router, private translate: TranslateService) {
+  let lang = localStorage.getItem('language');
+  translate.use(lang as string);
+
+  this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+      this.showHeaderFooter = !this.hiddenRoutes.includes(event.url);
+      
+      this.showHeader = !event.url.includes('/checkout');
+    });
 }
+}
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
+
+

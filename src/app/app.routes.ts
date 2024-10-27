@@ -1,12 +1,12 @@
 import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './Components/products/products.component';
 import { DetailsComponent } from './Components/details/details.component';
-import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { PromotionComponent } from './Components/Home/promotion.component';
 import { SignInComponent } from './Components/sign-in/sign-in.component';
 import { RemeberByPhooneComponent } from './Components/remeber-by-phoone/remeber-by-phoone.component';
 import { NgModule } from '@angular/core';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 export const routes: Routes = [
 
