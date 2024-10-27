@@ -1,0 +1,145 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+}
+
+.logo-image {
+  height: 30px;
+}
+
+.language {
+  position: absolute;
+  right: 20px; /* ضبط المسافة من اليمين */
+}
+
+.language-link {
+  color: #333;
+  font-size: 16px;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+}
+
+.language-link:hover {
+  color: #ff5722; 
+}
+
+
+
+.container {
+    padding-top: 20px;
+  }
+  
+  .card {
+    border-radius: 10px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+
+  .btn{
+    background-color: black;
+    color:white;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .btn-block {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .invalid-feedback {
+    display: block;
+    font-size: 14px;
+    color: red;
+  }
+  
+  input.ng-touched.ng-invalid {
+    border-color: red;
+  }
+  
+  .circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 50vh;  */
+  }
+  
+  .circle {
+    width: 80vh;
+    height: 80vh;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .animated-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  @media (max-width: 767px) {
+    .circle {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .circle {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .circle {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  @keyframes waveAnimation {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+    60% { transform: rotate(0deg); } /* Stop waving and return to the original position */
+  }
+
+  .cirlce{
+    border:1px solid rgb(254, 206, 148);
+    border-radius:100% ;
+    width: 150px;
+    height: 150px;
+    margin-left: 230px;
+    background-color: rgb(254, 206, 148);
+  }
+  
+  .height{
+    height: 40vh;
+
+   }
+  

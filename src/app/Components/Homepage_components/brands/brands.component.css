@@ -23,4 +23,6 @@
   .overflow-hidden {
     overflow-x: hidden;
   }
-  
+  .small-text {
+    font-size: 0.8rem;
+  }

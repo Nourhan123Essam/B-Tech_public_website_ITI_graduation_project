@@ -1,67 +1,67 @@
 .last-viewed {
-    padding: 20px;
-  }
-  
-  .last-viewed h5 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-  }
-  
-  .product-container {
-    display: flex; 
-    flex-wrap: nowrap;
-    gap: 15px; 
-    overflow-y: auto; 
-    padding: 10px 0;
-  }
-  
-  .product-card {
-    width: 100%;
-    flex :auto; 
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .product-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .product-card h6 {
-    font-size: 0.85em; /* حجم خط أصغر لتوفير المساحة */
-    font-weight: 600;
-    color: #333;
-    margin: 5px 0; /* مسافة أصغر بين النصوص */
-  }
-  
-  .product-card .price {
-    font-size: 1em; /* حجم خط أصغر لتوفير المساحة */
-    font-weight: bold;
-    color: #e60000;
-    margin: 5px 0; /* مسافة أصغر بين النصوص */
-  }
-  
-  .last-viewed .product-container::-webkit-scrollbar {
-    height: 8px;
-  }
-  
-  .last-viewed .product-container::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-  }
-  
-  .last-viewed .product-container::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-  
+  padding: 20px;
+}
+
+.last-viewed h5 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 15px;
+  overflow-x: auto; 
+  padding: 10px 0;
+  scroll-behavior: smooth; 
+}
+
+.product-card {
+  flex: 0 0 150px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.product-card h6 {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #333;
+  margin: 5px 0;
+}
+
+.product-card .price {
+  font-size: 1em;
+  font-weight: bold;
+  color: #e60000;
+  margin: 5px 0;
+}
+
+/* Scrollbar Styling */
+.last-viewed .product-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.last-viewed .product-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+.last-viewed .product-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

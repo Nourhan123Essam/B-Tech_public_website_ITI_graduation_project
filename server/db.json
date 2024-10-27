@@ -56,23 +56,28 @@
   ],
 
   "Images":[
-    { "url": "https://cdn.pixabay.com/photo/2022/09/27/19/46/ai-generated-7483596_960_720.jpg", "createdAt": "2024-10-18T10:30:00Z" },
-    { "url": "https://jooinn.com/images/lonely-tree-reflection-3.jpg", "createdAt": "2024-11-19T08:00:00Z" },
-    { "url": "https://wallpaperaccess.com/full/4723250.jpg", "createdAt": "2024-10-18T11:30:00Z" },
-    { "url": "http://wallup.net/wp-content/uploads/2016/03/10/319576-photography-landscape-nature-water-grass-trees-plants-sunrise-lake.jpg", "createdAt": "2024-10-19T12:00:00Z" }
+    { "url": "https://btech.com/media/homecontent/banner/l/g/lg_oct._2368x800_en.jpg", "createdAt": "2024-10-18T10:30:00Z" },
+    { "url": "https://btech.com/media/homecontent/banner/s/a/samsung__web-banner__2368x800_en_1_.png", "createdAt": "2024-11-19T08:00:00Z" },
+    { "url": "https://btech.com/media/homecontent/banner/o/c/october_banque_misr_offer__web-banner__2368x800_en.png", "createdAt": "2024-10-18T11:30:00Z" },
+    { "url": "https://btech.com/media/homecontent/banner/b/e/beko_web-banner__2368x800_en.png", "createdAt": "2024-10-19T12:00:00Z" }
   ],
 
   "brands":[
     
-      { "name": "Samsung Shop", "icon": "https://fakeimg.pl/50x50/" },
-      { "name": "Daily Deals", "icon": "https://fakeimg.pl/50x50/" },
-      { "name": "Cash Offers", "icon": "https://fakeimg.pl/50x50/" },
-      { "name": "Cooking Offers", "icon": "https://fakeimg.pl/50x50/" },
-      { "name": "Mobiles", "icon": "https://fakeimg.pl/50x50/"},
-      { "name": "TVs", "icon": "https://fakeimg.pl/50x50/" },
-      { "name": "Air Conditioners", "icon": "https://fakeimg.pl/50x50/" },
-      { "name": "Small Home Appliances", "icon": "https://fakeimg.pl/50x50/" },
-      { "name": "Large Home Appliances", "icon": "https://fakeimg.pl/50x50/" }
+      { "name": "Samsung Shop", "icon": "https://btech.com/media/homecontent/category/cache/96x96/l/o/logo-round.png" },
+      { "name": "Daily Deals", "icon": "https://btech.com/media/homecontent/category/o/c/october_app_icons__highlight_12_100x100.png" },
+      { "name": "Cash Offers", "icon": "https://btech.com/media/homecontent/category/o/c/october_app_icons__highlight_17_100x100_en.png" },
+      { "name": "Cooking Offers", "icon": "https://btech.com/media/homecontent/category/cache/96x96/c/o/cookingfestival_generic__highlight_100x100_en.png" },
+      { "name": "Mobiles", "icon": "https://btech.com/media/homecontent/category/cache/96x96/o/c/october_app_icons__highlight_03_100x100.png"},
+      { "name": "TVs", "icon": "https://btech.com/media/homecontent/category/cache/96x96/o/c/october_app_icons__highlight_02_100x100.png" },
+      { "name": "Air Conditioners", "icon": "https://btech.com/media/homecontent/category/cache/96x96/o/c/october_app_icons__highlight_22_100x100.png" },
+      { "name": "Small Home Appliances", "icon": "https://btech.com/media/homecontent/category/cache/96x96/o/c/october_app_icons__highlight_05_100x100.png" },
+      { "name": "Large Home Appliances", "icon": "https://btech.com/media/homecontent/category/cache/96x96/o/c/october_app_icons__highlight_04_100x100.png" },
+      { "name": "Laptop", "icon": "https://btech.com/media/homecontent/category/cache/96x96/o/c/october_app_icons__highlight_07_100x100.png" },
+      { "name": "Accessories", "icon": "https://btech.com/media/homecontent/category/cache/96x96/o/c/october_app_icons__highlight_06_100x100.png" },
+      { "name": "Electronics", "icon": "https://btech.com/media/homecontent/category/cache/96x96/o/c/october_app_icons__highlight_01_100x100.png" },
+      { "name": "Personal Care", "icon": "https://btech.com/media/homecontent/category/cache/96x96/o/c/october_app_icons__highlight_08_100x100.png" }
+
     
     
   ]

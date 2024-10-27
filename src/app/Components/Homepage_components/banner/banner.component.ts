@@ -12,7 +12,7 @@ interface Image {
   standalone: true,
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.css'],
-  imports:[CommonModule]
+  imports: [CommonModule]
 })
 export class BannerComponent implements OnInit {
   images: Image[] = [];
@@ -25,7 +25,9 @@ export class BannerComponent implements OnInit {
 
   loadImages() {
     this.http.get<Image[]>('http://localhost:3000/Images').subscribe((data) => {
-      this.images = data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      this.images = data
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, 5);
     });
   }
 }
