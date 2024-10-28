@@ -31,9 +31,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
-// <<<<<<< HEAD
-//   imports: [ReactiveFormsModule,CommonModule,RouterOutlet,HeaderComponent,PromotionComponent,FooterComponent,ProductListComponent,BannerComponent,BrandsComponent,FeaturesComponent,CartComponent,LastViewComponent,SignInComponent,RemeberByPhooneComponent],
-// =======
+
   imports: [
     RouterOutlet,
     RouterModule,
@@ -53,22 +51,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent  {
   title = 'b-tech';
-// <<<<<<< HEAD
-  
-//     showHeaderFooter = true;
 
-//     private hiddenRoutes = ['/sign-in', '/remember-by-phoone','/sign-up'];
-
-  
-//     constructor(private router: Router) {
-//       this.router.events
-//         .pipe(filter(event => event instanceof NavigationEnd))
-//         .subscribe((event: NavigationEnd) => {
-//           this.showHeaderFooter = !this.hiddenRoutes.includes(event.url);
-//         });
-//     }
-  
-// =======
   showHeader:boolean = true;
   private hiddenRoutes = ['/sign-in', '/remember-by-phoone', '/sign-up', '/checkout']; // إضافة المسارات التي تريد إخفاء الهيدر والفوتر بها
 
@@ -81,38 +64,11 @@ export class AppComponent  {
         this.showHeader = !this.hiddenRoutes.some(route => val.url.includes(route));
       }
     });
-  
+
   }
 }
 
 // // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
-// >>>>>>> 23ec8ceb6f19be91c8c2c776c056d70757ba50cc
-
-
-
-// showHeaderFooter = true;
-// showHeader: boolean = true;
-// private hiddenRoutes = ['/sign-in', '/remember-by-phoone', '/sign-up'];
-
-// constructor(private router: Router, private translate: TranslateService) {
-//   let lang = localStorage.getItem('language');
-//   translate.use(lang as string);
-
-//   this.router.events
-//     .pipe(filter(event => event instanceof NavigationEnd))
-//     .subscribe((event: NavigationEnd) => {
-//       this.showHeaderFooter = !this.hiddenRoutes.includes(event.url);
-      
-//       this.showHeader = !event.url.includes('/checkout');
-//     });
-// }
-// }
-
-// // required for AOT compilation
-// export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-//   return new TranslateHttpLoader(http);
-// }
-
 }
