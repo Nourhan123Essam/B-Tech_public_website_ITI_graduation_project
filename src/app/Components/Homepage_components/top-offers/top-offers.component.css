@@ -1,0 +1,82 @@
+.top-offers {
+    padding: 1rem;
+    background-color: #000; /* خلفية سوداء للقسم */
+    color: #fff; /* لون النص أبيض للتباين */
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .top-offers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .top-offers-header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .top-offers-header button {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .top-offers-header button:hover {
+    background-color: #ddd; /* خلفية أفتح عند التحويم */
+  }
+  
+  .product-container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  
+  .product-card {
+    background-color: #fff;
+    color: #000;
+    border-radius: 8px;
+    width: 150px; /* عرض الكارت */
+    min-width: 150px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* ظل للكارت */
+    padding: 0.5rem;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .product-card h6 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    color: #333;
+  }
+  
+  .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #d32f2f; /* لون السعر الأحمر لجذب الانتباه */
+    margin: 0.5rem 0;
+  }
+  
+  .monthly-pay {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 0.25rem;
+  }
+  

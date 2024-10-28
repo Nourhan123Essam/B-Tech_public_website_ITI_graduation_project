@@ -35,7 +35,7 @@ export class RemeberByPhooneComponent {
           }
         },
         (error) => {
-          console.error('Error:', error); // عرض أي أخطاء تحدث
+          console.error('Error:', error); 
         }
       );
     } else {

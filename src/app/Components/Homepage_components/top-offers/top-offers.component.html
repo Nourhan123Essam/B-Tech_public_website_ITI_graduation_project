@@ -1,0 +1,13 @@
+<div class="top-offers">
+  <div class="top-offers-header">
+    <h2>Top Offers</h2>
+    <button>Shop now</button>
+  </div>
+  <div class="product-container">
+    <div *ngFor="let product of expensiveProducts" class="product-card"> 
+      <img [src]="product.images?.[0]?.url" alt="{{ product.translations?.[0]?.Name }}" >
+      
+      <h6>{{ product.price | currency }}</h6>
+    </div>
+  </div>
+</div>

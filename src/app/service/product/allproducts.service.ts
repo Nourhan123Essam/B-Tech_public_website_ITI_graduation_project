@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ProductB } from '../../models/product-b';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class AllproductsService {
 
   // Ensure this method returns an Observable
   getallproducts():Observable<any[]> {
+    return this.http.get<any[]>(this.productUrl);
+  }
+
+  getproducts():Observable<ProductB[]> {
     return this.http.get<any[]>(this.productUrl);
   }
 
