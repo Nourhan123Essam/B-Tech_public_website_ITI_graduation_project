@@ -31,7 +31,7 @@ export class RemeberByPhooneComponent {
           if (response.redirectTo === 'sign-in') {
             this.router.navigate(['sign-in']);
           } else if (response.redirectTo === 'sign-up') {
-            this.router.navigate(['create-account']);
+            this.router.navigate(['sign-up']);
           }
         },
         (error) => {

@@ -69,49 +69,50 @@ export class AppComponent  {
 //     }
   
 // =======
-//   showHeader:boolean = true;
-//   constructor(private router:Router,private translate: TranslateService) {
-//     let lang=localStorage.getItem('language');
-//     translate.use(lang as string);
-//     router.events.subscribe((val) => {
-//       if (val instanceof NavigationEnd) {
-//         if (val.url.includes( '/checkout'))
-//           this.showHeader=false;
-//         else
-//         this.showHeader=true;
-//       }
+  showHeader:boolean = true;
+  private hiddenRoutes = ['/sign-in', '/remember-by-phoone', '/sign-up', '/checkout']; // إضافة المسارات التي تريد إخفاء الهيدر والفوتر بها
+
+  constructor(private router: Router, private translate: TranslateService) {
+    let lang = localStorage.getItem('language');
+    translate.use(lang as string);
+
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.showHeader = !this.hiddenRoutes.some(route => val.url.includes(route));
+      }
+    });
+  
+  }
+}
+
+// // required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+// >>>>>>> 23ec8ceb6f19be91c8c2c776c056d70757ba50cc
+
+
+
+// showHeaderFooter = true;
+// showHeader: boolean = true;
+// private hiddenRoutes = ['/sign-in', '/remember-by-phoone', '/sign-up'];
+
+// constructor(private router: Router, private translate: TranslateService) {
+//   let lang = localStorage.getItem('language');
+//   translate.use(lang as string);
+
+//   this.router.events
+//     .pipe(filter(event => event instanceof NavigationEnd))
+//     .subscribe((event: NavigationEnd) => {
+//       this.showHeaderFooter = !this.hiddenRoutes.includes(event.url);
+      
+//       this.showHeader = !event.url.includes('/checkout');
 //     });
-//   }
+// }
 // }
 
 // // required for AOT compilation
 // export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 //   return new TranslateHttpLoader(http);
-// >>>>>>> 23ec8ceb6f19be91c8c2c776c056d70757ba50cc
+// }
 
-
-
-showHeaderFooter = true;
-showHeader: boolean = true;
-private hiddenRoutes = ['/sign-in', '/remember-by-phoone', '/sign-up'];
-
-constructor(private router: Router, private translate: TranslateService) {
-  let lang = localStorage.getItem('language');
-  translate.use(lang as string);
-
-  this.router.events
-    .pipe(filter(event => event instanceof NavigationEnd))
-    .subscribe((event: NavigationEnd) => {
-      this.showHeaderFooter = !this.hiddenRoutes.includes(event.url);
-      
-      this.showHeader = !event.url.includes('/checkout');
-    });
 }
-}
-
-// required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
-}
-
-
