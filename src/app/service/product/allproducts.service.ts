@@ -18,16 +18,20 @@ export class AllproductsService {
     return this.http.get<ProductB[]>(`${this.thisapi}/product`);
   }
 
-  fillterproduct():Observable<any[]> {
-    return this.http.get<any[]>('https://fakestoreapi.com/products/category/jewelery');
+  fillterproduct():Observable<ProductB[]> {
+    return this.http.get<ProductB[]>('https://fakestoreapi.com/products/category/jewelery');
   }
   
-  getProductById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.thisapi}/product/${id}`);
+  getProductById(id: number): Observable<ProductB> {
+    return this.http.get<ProductB>(`${this.thisapi}/product/${id}`);
   }
 
   getProductsByCategoryId(categoryId: number): Observable<ProductB[]> {
     return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryId/${categoryId}`);
   }
  
+  getProductsByCategoryName(categoryName: string): Observable<ProductB[]> {
+    return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryName/${categoryName}`);
+  }
+
 }
