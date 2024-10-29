@@ -12,6 +12,7 @@ export interface DiscountB {
   appliesToShipping: boolean;
   isActive: boolean;
   minimumPurchaseAmount: number;
+  
   orders: OrderB[];
 }
 

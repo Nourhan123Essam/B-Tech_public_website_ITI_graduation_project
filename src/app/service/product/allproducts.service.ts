@@ -1,20 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ProductB } from '../../models/product-b';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AllproductsService {
 
-  private productUrl = 'https://fakestoreapi.com/products';
-   
-
   constructor(private http: HttpClient) {}
 
-  // Ensure this method returns an Observable
-  getallproducts():Observable<any[]> {
-    return this.http.get<any[]>(this.productUrl);
+  private thisapi='https://localhost:7122/api';
+
+ 
+  getallproducts():Observable<ProductB[]> {
+    return this.http.get<ProductB[]>(`${this.thisapi}/product`);
   }
 
   fillterproduct():Observable<any[]> {
@@ -22,8 +23,11 @@ export class AllproductsService {
   }
   
   getProductById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.productUrl}/${id}`);
+    return this.http.get<any>(`${this.thisapi}/product/${id}`);
   }
 
+  getProductsByCategoryId(categoryId: number): Observable<ProductB[]> {
+    return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryId/${categoryId}`);
+  }
  
 }

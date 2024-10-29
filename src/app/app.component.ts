@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { TopOffersComponent } from './Components/Homepage_components/top-offers/top-offers.component';
 
 
 @Component({
@@ -47,6 +48,7 @@ import { HttpClient } from '@angular/common/http';
     CartComponent,
     LastViewComponent,
     TranslateModule,
+    TopOffersComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
