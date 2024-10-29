@@ -75,48 +75,46 @@ export class ProductsComponent implements OnInit {
     });
 }
 
-  onCategoryChange(category: string | null): void {
-    this.selectedCategory = category;
-    this.applyFilters();
-  }
+  // onCategoryChange(category: string | null): void {
+  //   this.selectedCategory = category;
+  //   this.applyFilters();
+  // }
 
   onBrandChange(brand: string | null): void {
     this.selectedBrand = brand;
     this.applyFilters();
   }
 
-  applyFilters(): void {
-    this.filteredProducts = this.products.filter(product => {
-        console.log("Checking Product ID:", product.id);
-        console.log("Product Categories:", product.productCategories);
+  onCategoryChange(categoryName: string | null): void {
+    this.selectedCategory = categoryName;
+    this.applyFilters();
+}
 
-        const matchesCategory = this.selectedCategory
-            ? product.productCategories && product.productCategories.some(category => {
-                console.log("Category Details for Product ID", product.id, ":", category);
-                
-                const translations = category.category?.translations;
-                console.log("Translations:", translations);
+applyFilters(): void {
+    if (this.selectedCategory) {
+        // البحث عن `CategoryId` بناءً على `categoryName`
+        const selectedCategoryObj = this.categories.find(category => 
+            category.translations && category.translations[0].categoryName === this.selectedCategory
+        );
 
-                const categoryName = translations && translations[0]?.categoryName;
-                console.log("Category Name for Product ID", product.id, ":", categoryName);
-
-                return categoryName && categoryName.toLowerCase() === this.selectedCategory!.toLowerCase();
-            })
-            : true;
-
-        const matchesBrand = this.selectedBrand
-            ? product.translations && product.translations.some(translation => {
-                const brandName = translation.BrandName;
-                console.log("Brand Name for Product ID", product.id, ":", brandName);
-                return brandName && brandName.toLowerCase() === this.selectedBrand!.toLowerCase();
-            })
-            : true;
-
-        console.log("Product ID:", product.id, "Matches Category:", matchesCategory, "Matches Brand:", matchesBrand);
-        return matchesCategory && matchesBrand;
-    });
-
-    console.log("Filtered Products after applying filters:", this.filteredProducts);
+        if (selectedCategoryObj) {
+            const categoryId = selectedCategoryObj.id;
+            this.service.getProductsByCategoryId(categoryId).subscribe(
+                (res: any) => {
+                    if (res.isSuccess && Array.isArray(res.entity)) {
+                        this.filteredProducts = res.entity;
+                    } else {
+                        console.error("Unexpected data format:", res);
+                    }
+                },
+                error => {
+                    console.error("Error fetching filtered products:", error);
+                }
+            );
+        }
+    } else {
+        this.filteredProducts = this.products; // عرض كل المنتجات عند عدم اختيار تصنيف
+    }
 }
 
 

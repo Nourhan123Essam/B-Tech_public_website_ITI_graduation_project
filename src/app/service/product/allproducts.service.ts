@@ -11,9 +11,11 @@ export class AllproductsService {
 
   constructor(private http: HttpClient) {}
 
+  private thisapi='https://localhost:7122/api';
+
  
   getallproducts():Observable<ProductB[]> {
-    return this.http.get<ProductB[]>(`${environment.apiBaseUrl}/product`);
+    return this.http.get<ProductB[]>(`${this.thisapi}/product`);
   }
 
   fillterproduct():Observable<any[]> {
@@ -21,8 +23,11 @@ export class AllproductsService {
   }
   
   getProductById(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiBaseUrl}/product/${id}`);
+    return this.http.get<any>(`${this.thisapi}/product/${id}`);
   }
 
+  getProductsByCategoryId(categoryId: number): Observable<ProductB[]> {
+    return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryId/${categoryId}`);
+  }
  
 }

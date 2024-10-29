@@ -9,12 +9,15 @@ import { environment } from '../../../environments/environment';
 })
 export class CategoryService {
 
+  private thisapi='https://localhost:7122/api';
+
+
   constructor(private http:HttpClient) { }
 
 
 
   getallcategory():Observable<CategoryB[]>{
-    return this.http.get<CategoryB[]>(`${environment.apiBaseUrl}/Category`)
+    return this.http.get<CategoryB[]>(`${this.thisapi}/Category`)
    }
  
 }
