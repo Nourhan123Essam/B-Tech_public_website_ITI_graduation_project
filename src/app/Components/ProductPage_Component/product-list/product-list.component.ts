@@ -14,9 +14,20 @@ export class ProductListComponent {
 constructor(private router:Router
 ) {}
 
-openProductDetails(data: any) {
-  this.router.navigate(['/details', data.id]);
+ngOnChanges() {
+  console.log('Product data:', this.data);
 }
+
+openProductDetails(data: any) {
+  if (data && data.product && data.product.id) {
+    const productId = data.product.id; // استخدم المعرف من كائن المنتج
+    console.log('Navigating to product details with ID:', productId);
+    this.router.navigate(['/details', productId]);
+  } else {
+    console.error('Product ID is undefined or data is invalid:', data);
+  }
+}
+
 
 
 

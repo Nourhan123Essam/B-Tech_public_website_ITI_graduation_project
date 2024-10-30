@@ -1,17 +1,52 @@
-
-<div class="container" class="my-5">
-    <div class="row">
-      <div class="col-md-6">
-        <img [src]="product?.image" class="img-fluid" [alt]="product?.name">
+<!-- <div class="container my-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngIf="product" class="product-info">
+        <h1>{{ product.translations[0]?.name }}</h1>
+        <p class="price">Price: {{ product.price }}</p>
+        <img [src]="product.images[0]?.url" alt="{{ product.translations[0]?.name }}" *ngIf="product.images.length > 0" class="img-fluid">
+        <p>Description: {{ product.translations[0]?.description }}</p>
       </div>
-      <div class="col-md-6">
-        <h1>{{ product?.name }}</h1>
-        <p>{{ product?.description }}</p>
-        <h3>{{ product?.price }} EGP</h3>
-        <button class="btn btn-primary" >Add to Cart</button>
-        <button class="btn btn-warning" >Buy with minicash</button>
-
-      </div>
+      <button class="btn btn-primary">Add to Cart</button>
+      <button class="btn btn-warning">Buy with minicash</button>
     </div>
   </div>
-  
+</div> -->
+
+<div class="container my-5">
+  <div class="row">
+    <!-- Left Column: Image -->
+    <div class="col-md-6">
+      <img [src]="product.images[0]?.url" alt="{{ product.translations[0]?.name }}" *ngIf="product.images.length > 0" class="img-fluid">
+    </div>
+
+    <!-- Right Column: Product Details -->
+    <div class="col-md-6">
+      <div class="product-info">
+        <div *ngIf="product" class="product-info">
+        <h1>{{ product.translations[0]?.name }}</h1>
+         <br>
+        <p class="price">Price: {{ product.price }}</p>
+        <br>
+        <p>Description: {{ product.translations[0]?.description }}</p>
+      </div>
+      <button class="btn btn-primary">Add to Cart</button>
+      <button class="btn btn-warning">Buy with minicash</button>
+    </div>
+  </div>
+</div>
+
+<table class="specifications-table" *ngIf="product.specifications?.length > 0">
+  <thead>
+    <tr>
+      <th>Specification</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let spec of product.specifications">
+      <td>{{ getSpecificationDetail(spec, 2).key }}</td> <!-- Display the key -->
+      <td>{{ getSpecificationDetail(spec, 2).value }}</td> <!-- Display the value -->
+    </tr>
+  </tbody>
+</table>

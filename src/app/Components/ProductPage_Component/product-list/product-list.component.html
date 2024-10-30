@@ -1,11 +1,14 @@
-<div class="card">
-  <img [src]="data.images && data.images.length > 0 ? data.images[0].url : 'default-image-url.png'" 
+<div class="card"(click)="openProductDetails(data)" >
+  <img [src]="data.product.images && data.product.images.length > 0 ? data.product.images[0].url : 'default-image-url.png'" 
        class="card-img-top" 
-       (click)="openProductDetails(data)" 
-       [alt]="data.name">
+     
+       [alt]="data.product.translations?.[0]?.name || 'Product Image'">
   <div class="card-body">
-    <h5 class="card-title">{{ data.name }}</h5>
-    <p class="card-text">{{ data.price }} EGP</p>
+    <h5 class="card-title">{{ data.product.translations?.[0]?.name || 'Product Name' }}</h5>
+    <p class="card-text">{{ data.product.price }} EGP</p>
+    
     <button class="btn btn-warning" (click)="add()">Add to Cart</button>
   </div>
 </div>
+
+

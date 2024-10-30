@@ -7,6 +7,7 @@ import { SelectCheckboxComponent } from '../ProductPage_Component/select-checkbo
 import { ProductB } from '../../models/product-b';
 import { CategoryB } from '../../models/category-b';
 import { CommonModule } from '@angular/common';
+import { ProductCategoryB } from '../../models/product-category-b';
 
 @Component({
   selector: 'app-products',
@@ -22,6 +23,7 @@ export class ProductsComponent implements OnInit {
   categoryNames: string[] = [];
   brands: string[] = ['Apple', 'Samsung', 'Sony', 'LG', 'Dell'];
   cartProducts: any[] = [];
+  productCategories:ProductCategoryB[]=[];
 
   selectedCategory: string | null = null;
   selectedBrand: string | null = null;
@@ -33,19 +35,17 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getallproducts();
+    this.getAllProducts();
     this.getallcateory();
   }
 
-  getallproducts() {
+  getAllProducts() {
     this.service.getallproducts().subscribe(
       (res: any) => {
         console.log("Products API response:", res);
-        
-        // تأكد أن `entity` هو مصفوفة قبل تخصيصه إلى المنتجات
         if (res.isSuccess && Array.isArray(res.entity)) {
-          this.products = res.entity; // تعيين المنتجات من `entity`
-          this.filteredProducts = res.entity;
+          this.products = res.entity;
+          this.filteredProducts = this.products; // Display all products initially
         } else {
           console.error("Unexpected data format:", res);
         }
@@ -56,76 +56,54 @@ export class ProductsComponent implements OnInit {
     );
   }
   
-  
   getallcateory() {
     this.catservice.getallcategory().subscribe((res: any) => {
-        console.log("Category API full response:", res);
-
         if (res.isSuccess && Array.isArray(res.entity)) {
             this.categories = res.entity;
-            console.log("Parsed Categories:", this.categories);
-            this.categoryNames = res.entity.map((category: CategoryB) => {
-                const categoryName = category.translations?.[0]?.categoryName;
-                console.log("Extracted Category Name:", categoryName);
-                return categoryName;
-            }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
-        } else {
-            console.error("Unexpected data format:", res);
+            this.categoryNames = res.entity.map((category: CategoryB) => 
+              category.translations?.[0]?.categoryName
+            ).filter(Boolean);
         }
     });
-}
+  }
 
-  // onCategoryChange(category: string | null): void {
-  //   this.selectedCategory = category;
+
+  // onBrandChange(brand: string | null): void {
+  //   this.selectedBrand = brand;
   //   this.applyFilters();
   // }
 
-  onBrandChange(brand: string | null): void {
-    this.selectedBrand = brand;
-    this.applyFilters();
-  }
-
   onCategoryChange(categoryName: string | null): void {
     this.selectedCategory = categoryName;
-    this.applyFilters();
-}
-
-applyFilters(): void {
-    if (this.selectedCategory) {
-        // البحث عن `CategoryId` بناءً على `categoryName`
-        const selectedCategoryObj = this.categories.find(category => 
-            category.translations && category.translations[0].categoryName === this.selectedCategory
-        );
-
-        if (selectedCategoryObj) {
-            const categoryId = selectedCategoryObj.id;
-            this.service.getProductsByCategoryId(categoryId).subscribe(
-                (res: any) => {
-                    if (res.isSuccess && Array.isArray(res.entity)) {
-                        this.filteredProducts = res.entity;
-                    } else {
-                        console.error("Unexpected data format:", res);
-                    }
-                },
-                error => {
-                    console.error("Error fetching filtered products:", error);
-                }
-            );
+  
+    const selectedCategory = this.categories.find(
+      category => category.translations?.[0]?.categoryName === categoryName
+    );
+  
+    if (selectedCategory) {
+      this.service.getProductsByCategoryId(selectedCategory.id).subscribe(
+        (products: ProductB[]) => {
+          if (Array.isArray(products)) {
+            console.log('Product entity data:', products); 
+            this.filteredProducts = products; 
+            console.log('Filtered products:', this.filteredProducts); // تسجيل هنا
+          } else {
+            console.error('Unexpected data format:', products);
+          }
+        },
+        error => {
+          console.error("Error fetching products by category:", error);
         }
-    } else {
-        this.filteredProducts = this.products; // عرض كل المنتجات عند عدم اختيار تصنيف
+      );
     }
-}
-
-
+  }
   
   
-
   clearFilter(): void {
     this.selectedCategory = null;
-    this.selectedBrand = null;
     this.filteredProducts = this.products;
   }
+
 
   addToCart(event: any) {
     if ("card" in localStorage) {

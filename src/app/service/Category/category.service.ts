@@ -19,5 +19,7 @@ export class CategoryService {
   getallcategory():Observable<CategoryB[]>{
     return this.http.get<CategoryB[]>(`${this.thisapi}/Category`)
    }
+
+   
  
 }
