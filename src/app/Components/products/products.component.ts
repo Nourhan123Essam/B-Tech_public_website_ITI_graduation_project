@@ -19,8 +19,8 @@ export class ProductsComponent implements OnInit {
   products: ProductB[] = [];
   filteredProducts: ProductB[] = [];
   categories: CategoryB[] = [];
-  categoryNames: string[] = [];
-  brands: string[] = ['Apple', 'Samsung', 'Sony', 'LG', 'Dell'];
+  categoryNames: string[] = [];  //main 
+  brands: string[] = [];         //sub
   cartProducts: any[] = [];
 
   selectedCategory: string | null = null;
@@ -34,8 +34,11 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getallproducts();
+    this.getSubCategories();
     this.getallcateory();
   }
+  
+  
 
   getallproducts() {
     this.service.getallproducts().subscribe(
@@ -58,21 +61,48 @@ export class ProductsComponent implements OnInit {
   
   
   getallcateory() {
-    this.catservice.getallcategory().subscribe((res: any) => {
+    
+    this.catservice.getmainCategories().subscribe((res: any[]) => {
         console.log("Category API full response:", res);
 
-        if (res.isSuccess && Array.isArray(res.entity)) {
-            this.categories = res.entity;
-            console.log("Parsed Categories:", this.categories);
-            this.categoryNames = res.entity.map((category: CategoryB) => {
-                const categoryName = category.translations?.[0]?.categoryName;
-                console.log("Extracted Category Name:", categoryName);
-                return categoryName;
-            }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
-        } else {
-            console.error("Unexpected data format:", res);
-        }
+         // استخراج أسماء الفئات الرئيسية
+         this.categoryNames = res.map((item) => {
+          const categoryName = item.category?.translations?.[0]?.categoryName;
+          console.log("Extracted Category Name:", categoryName);
+          return categoryName;
+      }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
+  }, 
+  error => {
+      console.error("Error fetching main categories:", error);
     });
+  }
+        // if (res.isSuccess && Array.isArray(res.entity)) {
+        //     this.categories = res.entity;
+        //     console.log("Parsed Categories:", this.categories);
+        //     this.categoryNames = res.entity.map((category: CategoryB) => {
+        //         const categoryName = category.translations?.[0]?.categoryName;
+        //         console.log("Extracted Category Name:", categoryName);
+        //         return categoryName;
+        //     }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
+        // } else {
+        //     console.error("Unexpected data format:", res);
+        // }
+ 
+
+getSubCategories() {
+  this.catservice.getsubCategories().subscribe((res: any[]) => {
+    console.log("Sub Categories API response:", res);
+
+    this.brands= res.map((item) => {
+      const categoryName = item.category?.translations?.[0]?.categoryName;
+      console.log("Extracted Category Name:", categoryName);
+      return categoryName;
+  }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
+}, 
+error => {
+  console.error("Error fetching main categories:", error);
+    
+  });
 }
 
   // onCategoryChange(category: string | null): void {

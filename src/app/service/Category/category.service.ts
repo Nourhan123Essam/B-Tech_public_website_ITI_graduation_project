@@ -44,6 +44,5 @@ export class CategoryService {
   const params = new HttpParams().set('languageId', languageId.toString());
   return this.http.get<CategoryB[]>(`${this.thisapi}/Category/FilterByLanguage`, {params})
  }
-
  
 }
