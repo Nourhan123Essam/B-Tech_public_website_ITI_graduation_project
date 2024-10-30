@@ -22,7 +22,16 @@ export class ProductsComponent implements OnInit {
   categoryNames: string[] = [];  //main 
   brands: string[] = [];         //sub
   cartProducts: any[] = [];
+ // In your component's .ts file
+  priceOptions = [
+    { id: 1, name: ' Under 1000' },
+    { id: 2, name: ' 1000 - 15000' },
+    { id: 3, name: ' 15000 - 25000' },
+    { id: 4, name: ' Over 25000' }
+  ];
 
+  priceNames = this.priceOptions.map(option => option.name);
+  selectedPrice: any;
   selectedCategory: string | null = null;
   selectedBrand: string | null = null;
 
@@ -119,6 +128,13 @@ error => {
     this.selectedCategory = categoryName;
     this.applyFilters();
 }
+
+onPriceChange(selectedPrice: any) {
+  this.selectedPrice = selectedPrice;
+  console.log('Selected Price:', this.selectedPrice);
+  // Apply filtering logic based on selected price range
+}
+
 
 applyFilters(): void {
     if (this.selectedCategory) {
