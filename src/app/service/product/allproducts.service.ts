@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ProductB } from '../../models/product-b';
 import { environment } from '../../../environments/environment';
 
@@ -22,13 +22,22 @@ export class AllproductsService {
     return this.http.get<ProductB[]>('https://fakestoreapi.com/products/category/jewelery');
   }
   
-  getProductById(id: number): Observable<ProductB> {
-    return this.http.get<ProductB>(`${this.thisapi}/product/${id}`);
+// <<<<<<< HEAD
+//   getProductById(id: number): Observable<ProductB> {
+//     return this.http.get<ProductB>(`${this.thisapi}/product/${id}`);
+// =======
+ 
+  getProductById(id: Number): Observable<any> {
+    return this.http.get(`${this.thisapi}/Product/${id}`);
+
   }
 
   getProductsByCategoryId(categoryId: number): Observable<ProductB[]> {
     return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryId/${categoryId}`);
   }
+
+ 
+  
  
   getProductsByCategoryName(categoryName: string): Observable<ProductB[]> {
     return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryName/${categoryName}`);

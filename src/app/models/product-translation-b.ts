@@ -1,7 +1,7 @@
 import { ProductB } from "./product-b";
 
 export interface ProductTranslationB {
-  Name: string;
+  name: string;
   BrandName?: string;
   Description?: string;
   ProductId: number;
