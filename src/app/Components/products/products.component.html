@@ -10,8 +10,15 @@
           [selectEntity]="selectedCategory" 
           (filterValue)="onCategoryChange($event)">
         </app-select-checkbox>
-    <div>
-    <app-select-checkbox 
+        
+        <app-select-checkbox 
+          title="Brand" 
+          [dataEntity]="brands" 
+          [selectEntity]="selectedBrand" 
+          (filterValue)="onBrandChange($event)">
+        </app-select-checkbox>
+
+     <app-select-checkbox 
           title="Price" 
           [dataEntity]="priceNames" 
           [selectEntity]="selectedPrice" 
