@@ -28,6 +28,17 @@ export class ProductsComponent implements OnInit {
   selectedCategory: string | null = null;
   selectedBrand: string | null = null;
 
+//price////
+  priceOptions = [
+    { id: 1, name: ' Under 1000' },
+    { id: 2, name: ' 1000 - 15000' },
+    { id: 3, name: ' 15000 - 25000' },
+    { id: 4, name: ' Over 25000' }
+  ];
+
+  priceNames = this.priceOptions.map(option => option.name);
+  selectedPrice: any;
+
   constructor(
     private service: AllproductsService,
     private catservice: CategoryService,
@@ -37,6 +48,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.getallcateory();
+    this.getSubCategories();
   }
 
   getAllProducts() {
@@ -44,8 +56,11 @@ export class ProductsComponent implements OnInit {
       (res: any) => {
         console.log("Products API response:", res);
         if (res.isSuccess && Array.isArray(res.entity)) {
-          this.products = res.entity;
-          this.filteredProducts = this.products; // Display all products initially
+          this.products = res.entity
+          
+        console.log("proooo",this.products)          
+          this.filteredProducts = this.products;
+          console.log("filter",this.filteredProducts) // Display all products initially
         } else {
           console.error("Unexpected data format:", res);
         }
@@ -68,11 +83,21 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  // onBrandChange(brand: string | null): void {
-  //   this.selectedBrand = brand;
-  //   this.applyFilters();
+  // getSubCategories() {
+  //   this.catservice.getsubCategories().subscribe((res: any[]) => {
+  //     console.log("Sub Categories API response:", res);
+  
+  //     this.brands= res.map((item) => {
+  //       const categoryName = item.category?.translations?.[0]?.categoryName;
+  //       console.log("Extracted Category Name:", categoryName);
+  //       return categoryName;
+  //   }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
+  // }, 
+  // error => {
+  //   console.error("Error fetching main categories:", error);
+      
+  //   });
   // }
-
   onCategoryChange(categoryName: string | null): void {
     this.selectedCategory = categoryName;
   
@@ -98,6 +123,11 @@ export class ProductsComponent implements OnInit {
     }
   }
   
+  onPriceChange(selectedPrice: any) {
+    this.selectedPrice = selectedPrice;
+    console.log('Selected Price:', this.selectedPrice);
+    // Apply filtering logic based on selected price range
+  }
   
   clearFilter(): void {
     this.selectedCategory = null;
