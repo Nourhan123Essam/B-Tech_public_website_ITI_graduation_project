@@ -30,16 +30,27 @@
           <div class="collapse navbar-collapse " id="navbarNav">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <!-- Categories Dropdown -->
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle " href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          {{'nav.categories'|translate}}
-                      </a>
-                      <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                          <li><a class="dropdown-item" href="#">Category 1</a></li>
-                          <li><a class="dropdown-item" href="#">Category 2</a></li>
-                          <li><a class="dropdown-item" href="#">Category 3</a></li>
-                      </ul>
+                  <li class="nav-item dropdown" [ngClass]="{ 'dropdown-ar': isArabic, 'dropdown-en': !isArabic }">
+                    <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ 'nav.categories' | translate }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                      <li *ngFor="let category of categories" class="dropdown-submenu">
+                        <!-- Main Category Item -->
+                        <a class="dropdown-item" href="#" (click)="onCategoryClick(category.name)">
+                          {{ category.name }}
+                        </a>
+                        <!-- Subcategory Dropdown -->
+                        <ul class="dropdown-menu">
+                          <li *ngFor="let subCategory of category.subCategories">
+                            <a class="dropdown-item" href="#">{{ subCategory }}</a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
                   </li>
+
+
 
                   <!-- Daily Deals -->
                   <li class="nav-item col-md-8">
@@ -50,7 +61,7 @@
               <!-- Search Bar -->
               <form class="d-flex mx-auto w-50 ">
                   <input class="form-control me-2 mx-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-secondary" type="submit">
+                  <button title="b" class="btn btn-outline-secondary" type="submit">
                       <i class="fas fa-search"></i>
                   </button>
               </form>
@@ -73,8 +84,6 @@
                     </a>
                   </li> -->
               </ul>
-
-       
 
           </div>
       </div>

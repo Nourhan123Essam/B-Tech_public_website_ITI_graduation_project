@@ -45,3 +45,55 @@
       margin-top: 10px;
     }
   }
+
+  dropdown-submenu {
+    position: relative;
+  }
+
+  .dropdown-submenu > .dropdown-menu {
+    top: 0;
+    margin-top: -5px;
+    left: 100%; /* تأكد من أن الفئة الفرعية تظهر بشكل صحيح */
+  }
+
+
+ /* Position nested dropdowns */
+.dropdown-submenu .dropdown-menu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  height: 100%;
+  margin-top: -1px;
+}
+
+.dropdown-submenu:hover .dropdown-menu {
+  display: block;
+}
+
+ /* ------------------- Shared styles for both LTR and RTL ------------------- */
+.dropdown-menu {
+  text-align: start;
+}
+
+ /* ------------------- Submenu position for LTR (English) ------------------- */
+.dropdown-submenu .dropdown-menu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  height: 100%;
+  margin-top: -1px;
+}
+
+.dropdown-en .dropdown-submenu:hover .dropdown-menu {
+  display: block;
+}
+
+ /* ---------------- Adjust submenu position for RTL (Arabic) ---------------- */
+.dropdown-ar .dropdown-submenu .dropdown-menu {
+  left: auto;
+  right: 100%;
+}
+
+.dropdown-ar .dropdown-submenu:hover .dropdown-menu {
+  display: block;
+}
