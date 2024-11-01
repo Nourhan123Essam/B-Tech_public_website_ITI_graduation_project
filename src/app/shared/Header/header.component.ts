@@ -72,15 +72,14 @@ subCategories: string[] = [];  // Holds the subcategories of the selected main c
 getallcategory() {
   this.catservice.getallcategory().subscribe((res: any) => {
       if (res.isSuccess && Array.isArray(res.entity)) {
-          // Map categories from API and add sample subcategories if subCategories are not provided
           this.categories = res.entity.map((category: any) => {
-              // Determine index based on isArabic flag (0 for English, 1 for Arabic)
+              //  index  (0 for English, 1 for Arabic)
               const translationIndex = this.isArabic ? 1 : 0;
               const categoryName = category.translations?.[translationIndex]?.categoryName;
 
               let subCategories: string[] = [];
 
-              // Assign sample subcategories based on main category name
+              // المرفوض هنا هنجيبها من ال api 
               if (categoryName === "Mobiles & Tablets" || categoryName === "الهواتف والأجهزة اللوحية") {
                   subCategories = ["Mobiles", "Tablets", "Mobile Accessories", "Smart Watches"];
               } else if (categoryName === "TVs" || categoryName === "تلفزيونات وريسيفرات") {
