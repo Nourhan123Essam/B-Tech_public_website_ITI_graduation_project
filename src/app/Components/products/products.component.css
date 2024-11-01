@@ -5,3 +5,13 @@
   background-color: #f8f9fa;
 }
 
+.cart-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  /* border: 1px solid #c2bcbcbc; */
+
+border-radius: 5px; /* Optional: rounded corners */
+box-shadow: 0 0 0 2px rgba(224, 230, 237, 0.5); /* Thin border-like shadow */
+}

@@ -1,1 +1,167 @@
-<p>cart works!</p>
+<!-- 
+<div class="container mt-4">
+  <h3>Your Cart</h3>
+
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Product Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Stock Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td>{{ item.productName }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price | currency }}</td>
+          <td>{{ item.totalPrice | currency }}</td>
+          <td>{{ item.stockQuantity }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #emptyCart>
+    <p class="text-center">Your cart is empty!</p>
+  </ng-template>
+</div> -->
+<!-- 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total Price</th>
+      <th>Stock Quantity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of cartItems">
+      <td>{{ item.productName }}</td>
+      <td>
+        <input type="number" [(ngModel)]="item.quantity" min="1" />
+      </td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.totalPrice }}</td>
+      <td>{{ item.stockQuantity }}</td>
+      <td>
+        <button class="btn btn-danger" (click)="updateQuantity(item.id, item.quantity)">Update Quantity</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<div class="cart-footer">
+  <p>Total: ${{ totalCost }}</p>
+  <button (click)="goToCheckout()">Proceed to Checkout</button>
+</div> -->
+
+
+<div class="container my-4 text-center" style="width: 80%;">
+  
+  <div class="row">
+    <div class="col-md-8">
+      <div class="cart-page">
+        <main class="cart-content">
+          
+          <header class="cart-header text-start">
+  
+            <h3 style="display: inline-block;">Cart</h3>
+            <p style="display: inline-block;" class="cartSize">{{ cartItems.length }}</p>
+          </header>
+
+          <div class="cart-item" *ngFor="let item of cartItems">
+            <img [src]="item.imageUrl" alt="{{ item.name }}" class="item-image" />
+            <div class="item-details col-md-9 text-start">
+              <p class="item-name">{{ item.productName }}</p>
+              <p class="item-price">{{ item.quantity }}</p>
+              <h3 class="item-price" style="font-weight: bold;">EGP {{ item.price }}</h3>
+            </div>
+
+            <div class="col-md-3 text-end" >
+              <div class="changeQuantity">
+                <select [(ngModel)]="item.quantity" (change)="updateQuantity(item.id, item.quantity)">
+                  <option *ngFor="let number of numbers" [value]="number">{{ number }}</option>
+                </select>
+              </div>
+              <div>
+                <a (click)="openRemoveModal(confirmRemoveModal, item.id)" style="color: rgb(0, 115, 255);">
+                  <i class="fa-regular fa-trash-can"></i> 
+                  Remove
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="text-center smallCart">
+        <div class="row" style="margin-top: 15px;">
+          <div class="col-md-6 text-start">Quanity:</div>
+          <div class="col-md-6 text-end">{{Quantity}} items</div>
+        </div>
+        <div class="row" style="margin-bottom: 15px; font-size: 20px;">
+          <div style="font-weight: bold;" class="col-md-6 text-start">Subtotal:</div>
+          <div style="font-weight: bold;" class="col-md-6 text-end">{{ totalCost }} EGP</div>
+        </div>
+        <button (click)="goToCheckout()"  class="checkout-btn">Checkout</button>
+      </div>
+
+      <div class="text-center smallCart2" style="margin-top: 20px;">
+        <div class="row">
+          <div class="col-md-2">
+            <p style="font-size: 20px;"><i class="fa-solid fa-wallet"></i></p>
+          </div>
+          <div class="col-md-10 text-start">
+            <p style="font-weight: bold;">Pay on delivery</p>
+            <p>For all orders</p>
+            <hr>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <p style="font-size: 20px;"><i class="fa-solid fa-rotate"></i></p>
+          </div>
+          <div class="col-md-10 text-start">
+            <p style="font-weight: bold;">Return policy</p>
+            <p>Most items can be returned withing 30 days of delivery</p>
+            <hr>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <p style="font-size: 20px;"><i class="fa-regular fa-circle-question"></i></p>
+          </div>
+          <div class="col-md-10 text-start">
+            <p style="font-weight: bold;">Have a question?</p>
+            <p style="color: rgb(0, 115, 255);">19966</p>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remove Confirmation Modal -->
+<ng-template #confirmRemoveModal let-modal>
+  <div class="modal-body" style="font-weight: bold;">
+    Remove Product from cart?
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-outline-light" (click)="modal.dismiss('cancel')">Don't Remove</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Remove')">Remove</button>
+  </div>
+</ng-template>
+

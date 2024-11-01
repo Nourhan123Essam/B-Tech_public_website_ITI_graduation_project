@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
 import { Router } from '@angular/router';
+import { OrderService } from '../../../service/Order/order.service';
+
 
 @Component({
   selector: 'app-product-list',
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 export class ProductListComponent {
 @Input() data:any={}
 @Output() item= new EventEmitter()
-constructor(private router:Router
+constructor(private router:Router, private orderService: OrderService
 ) {}
 
 openProductDetails(data: any) {
@@ -20,7 +22,17 @@ openProductDetails(data: any) {
 
 
 
-add(){
-  this.item.emit(this.data)
-}
+  add(productId: number, userId: string): void{
+    this.orderService.addToCart(productId, userId).subscribe(
+      () => {
+        console.log('Product added to cart successfully!');
+        // Optionally, trigger a notification or update UI here
+      },
+      (error) => {
+        console.error('Could not add product to cart:', error);
+        // Optionally, show an error message
+      }
+    );
+    //this.item.emit(this.data)
+  }
 }
