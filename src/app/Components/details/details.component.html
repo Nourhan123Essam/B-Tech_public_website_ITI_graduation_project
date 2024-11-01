@@ -16,14 +16,30 @@
 <div class="container my-5">
   <div class="row">
     <!-- Left Column: Image -->
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
       <img [src]="product.images[0]?.url" alt="{{ product.translations[0]?.name }}" *ngIf="product.images.length > 0" class="img-fluid">
+    </div> -->
+    <div id="carouselExample" class="carousel slide col-md-6" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner">
+        <div *ngFor="let image of product.images; let i = index" class="carousel-item" [class.active]="i === 0">
+          <img [src]="image.url" [alt]="product.translations[0]?.name" class="d-block  img-fluid">
+        </div>
+      </div>
+    
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-
+    
     <!-- Right Column: Product Details -->
     <div class="col-md-6">
       <div class="product-info">
-        <div *ngIf="product" class="product-info">
+        <div *ngIf="product" class="product-info ">
         <h1>{{ product.translations[0]?.name }}</h1>
          <br>
         <p class="price">Price: {{ product.price }}</p>

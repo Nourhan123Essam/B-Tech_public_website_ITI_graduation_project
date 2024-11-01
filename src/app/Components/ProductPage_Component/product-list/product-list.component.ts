@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 export class ProductListComponent {
 @Input() data:any={}
 @Output() item= new EventEmitter()
-constructor(private router:Router
+constructor(
+  private router:Router
 ) {}
 
 ngOnChanges() {

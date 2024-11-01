@@ -1,7 +1,7 @@
 
 <div class="card" (click)="openProductDetails(data)">
   <img [src]="(data.product?.images && data.product.images.length > 0) ? data.product.images[0].url : (data.images?.[0]?.url || 'default-image-url.png')" 
-       class="card-img-top" 
+      class="card-img-top" 
        [alt]="data.product?.translations?.[0]?.name || data.translations?.[0]?.name || 'Product Image'">
   
   <div class="card-body">

@@ -8,9 +8,9 @@
     <button class="scroll-button left" (click)="scrollCarousel(-1)">&#10094;</button>
     <div class="product-container" #productContainer>
       <div *ngFor="let product of expensiveProducts" class="product-card"> 
-        <img *ngIf="product.images && product.images.length > 0" 
+        <img *ngIf="product.images.length ==1 && product.images.length > 0" 
             [src]="product.images[0].url" 
-            [alt]="product.translations ">
+            [alt]="product.translations[0].name ">
             
         <h4 *ngIf="product.translations">
             {{ product.translations[0].name }}

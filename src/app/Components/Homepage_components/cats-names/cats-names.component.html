@@ -1,0 +1,42 @@
+
+<div class="card m-3 p-5 shadow-sm">
+
+<div class="categories-container">
+    <div 
+      *ngFor="let catname of categoryNames" 
+      class="category-item" 
+      [class.selected]="catname === selectedCategory"
+      (click)="selectCategory(catname)">
+      <label>{{ catname }}</label>
+    </div>
+  </div>
+</div>
+
+<div class="card m-3 p-5 shadow-sm">
+ <div class="categories-container"> 
+  <div>
+<p class="d-inline-flex gap-1">
+  <!-- <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Link with href
+  </a> -->
+  <button 
+  type="button" 
+  data-bs-toggle="collapse" 
+  data-bs-target="#collapseExample" 
+  aria-expanded="false"
+  aria-controls="collapseExample"
+  *ngFor="let catname of categoryNames" 
+      class="category-item" 
+      [class.selected]="catname === selectedCategory"
+      (click)="selectCategory(catname)">
+      {{catname}}
+    </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+  </div>
+</div>
+</div>
+</div>
+</div>
