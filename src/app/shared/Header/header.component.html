@@ -30,30 +30,6 @@
           <div class="collapse navbar-collapse " id="navbarNav">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <!-- Categories Dropdown -->
-<<<<<<< HEAD
-                  <li class="nav-item dropdown" [ngClass]="{ 'dropdown-ar': isArabic, 'dropdown-en': !isArabic }">
-                    <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      {{ 'nav.categories' | translate }}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                      <li *ngFor="let category of categories" class="dropdown-submenu">
-                        <!-- Main Category Item -->
-                        <a class="dropdown-item" href="#" (click)="onCategoryClick(category.name)">
-                          {{ category.name }}
-                        </a>
-                        <!-- Subcategory Dropdown -->
-                        <ul class="dropdown-menu">
-                          <li *ngFor="let subCategory of category.subCategories">
-                            <a class="dropdown-item" href="#">{{ subCategory }}</a>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-
-
-
-=======
                   <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle " href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           {{'nav.categories'|translate}}
@@ -63,7 +39,7 @@
                             <!-- <button title="c" mat-menu-item>{{ categoryName }}</button> -->
                           <a class="dropdown-item" href="#">{{ categoryName }}</a>
                         </li>
-                      </ul>             
+                      </ul>
                   </li>
 
                     <!-- testt-------------------- -->
@@ -82,8 +58,7 @@
                           </li>
                         </ul>
                       </li>
-                      
->>>>>>> menna
+
                   <!-- Daily Deals -->
                   <li class="nav-item col-md-8">
                       <a routerLink="products" class="nav-link text-danger">{{'nav.daily_deals'|translate}}</a>
