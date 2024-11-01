@@ -41,18 +41,10 @@ export class CategoryService {
   return this.http.get<CategoryB>(`${this.thisapi}/Category/GetById/${id}`)
  }
 
-<<<<<<< HEAD
- filterCategoriesbyLanguage(languageId:number) : Observable<CategoryB[]>{
-  const params = new HttpParams().set('languageId', languageId.toString());
-  return this.http.get<CategoryB[]>(`${this.thisapi}/Category/FilterByLanguage`, {params})
- }
-
-=======
  filterCategoriesbyLanguage(languageId: number): Observable<CategoryB[]> {
   const params = new HttpParams().set('languageId', languageId.toString());
   return this.http.get<CategoryB[]>(`${this.thisapi}/Category/FilterByLanguage`, { params });
 }
 
 
->>>>>>> newomar
 }
