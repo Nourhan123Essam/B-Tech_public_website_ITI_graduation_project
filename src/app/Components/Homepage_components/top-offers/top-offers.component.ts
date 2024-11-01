@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductB } from '../../../models/product-b';
 import { CommonModule } from '@angular/common';
 import { AllproductsService } from '../../../service/product/allproducts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-offers',
@@ -16,7 +17,10 @@ export class TopOffersComponent implements OnInit {
   @ViewChild('productContainer', { static: false }) productContainer!: ElementRef;
 
 
-  constructor(private productService: AllproductsService) {}
+  constructor(
+    private router:Router,
+
+    private productService: AllproductsService) {}
 
   ngOnInit(): void {
     this.fetchExpensiveProducts();
@@ -51,6 +55,15 @@ export class TopOffersComponent implements OnInit {
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   }
 
+  openProductDetails(data: any) {
+    const productId = data?.id || data.product?.id;
   
+    if (productId) {
+      console.log('Navigating to product details with ID:', productId);
+      this.router.navigate(['/details', productId]);
+    } else {
+      console.error('Product ID is undefined or data is invalid:', data);
+    }
+  }
 
 }

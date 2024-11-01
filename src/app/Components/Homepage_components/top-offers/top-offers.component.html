@@ -7,16 +7,16 @@
   <div class="product-carousel">
     <button class="scroll-button left" (click)="scrollCarousel(-1)">&#10094;</button>
     <div class="product-container" #productContainer>
-      <div *ngFor="let product of expensiveProducts" class="product-card"> 
-        <img *ngIf="product.images.length ==1 && product.images.length > 0" 
+      <div *ngFor="let product of expensiveProducts" class="product-card " (click)="openProductDetails(product)"> 
+        <img *ngIf="product.images.length  && product.images.length > 0" 
             [src]="product.images[0].url" 
             [alt]="product.translations[0].name ">
             
-        <h4 *ngIf="product.translations">
+        <h5 *ngIf="product.translations">
             {{ product.translations[0].name }}
-        </h4>
-        <h6 class="price">{{ product.price | currency }}</h6>
-        <p class="monthly-pay">or from {{ getMonthlyPayment(product) | currency }}/mo</p>
+        </h5>
+        <h6 class="price">{{ product.price }} EGP</h6>
+        <p class="monthly-pay">or from {{ getMonthlyPayment(product) }}EGP/mo</p>
     </div>
     
     </div>
