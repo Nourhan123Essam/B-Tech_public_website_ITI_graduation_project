@@ -9,6 +9,7 @@
     <div class="product-container" #productContainer>
       <div *ngFor="let product of expensiveProducts" class="product-card"> 
         <img *ngIf="product.images && product.images.length > 0" 
+<<<<<<< HEAD
              [src]="product.images[0].url" 
              [alt]="product.translations?.[0]?.Name || 'No Name'">
              
@@ -16,6 +17,18 @@
         <h6 class="price">{{ product.price | currency }}</h6>
         <p class="monthly-pay">or from {{ getMonthlyPayment(product) | currency }}/mo</p>
       </div>
+=======
+            [src]="product.images[0].url" 
+            [alt]="product.translations ">
+            
+        <h4 *ngIf="product.translations">
+            {{ product.translations[0].name }}
+        </h4>
+        <h6 class="price">{{ product.price | currency }}</h6>
+        <p class="monthly-pay">or from {{ getMonthlyPayment(product) | currency }}/mo</p>
+    </div>
+    
+>>>>>>> menna
     </div>
     <button class="scroll-button right" (click)="scrollCarousel(1)">&#10095;</button>
   </div>

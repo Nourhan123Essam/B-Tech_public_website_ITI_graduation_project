@@ -1,7 +1,11 @@
 import { ProductB } from "./product-b";
 
 export interface ProductTranslationB {
+<<<<<<< HEAD
   Name: string;
+=======
+  name: string;
+>>>>>>> menna
   BrandName?: string;
   Description?: string;
   ProductId: number;

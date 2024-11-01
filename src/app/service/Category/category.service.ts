@@ -11,10 +11,15 @@ export class CategoryService {
 
   private thisapi='https://localhost:7122/api';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> menna
   constructor(private http:HttpClient) { }
 
 
   getallcategory():Observable<CategoryB[]>{
+<<<<<<< HEAD
     var result = this.http.get<CategoryB[]>(`${this.thisapi}/Category`)
     console.log(result);
     return result;
@@ -24,6 +29,14 @@ export class CategoryService {
     var result = this.http.get<CategoryB[]>(`${this.thisapi}/Category/GetMainCategories`)
     console.log(result);
     return result;
+=======
+    return this.http.get<CategoryB[]>(`${this.thisapi}/Category`)
+   }
+
+
+  getmainCategories():Observable<CategoryB[]>{
+    return this.http.get<CategoryB[]>(`${this.thisapi}/Category/GetMainCategories`)
+>>>>>>> menna
   }
 
   getsubCategories():Observable<CategoryB[]>{
@@ -48,4 +61,8 @@ export class CategoryService {
   return this.http.get<CategoryB[]>(`${this.thisapi}/Category/FilterByLanguage`, {params})
  }
 
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> menna
 }
