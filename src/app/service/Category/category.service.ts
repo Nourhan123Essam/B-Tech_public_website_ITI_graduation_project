@@ -30,7 +30,7 @@ export class CategoryService {
     return this.http.get<CategoryB[]>(`${this.thisapi}/Category/GetSubCategories`)
   }
 
-  getebcategoriesbuMainId(id:number):Observable<CategoryB[]>{
+  getsubcategoriesbuyMainId(id:number):Observable<CategoryB[]>{
     return this.http.get<CategoryB[]>(`${this.thisapi}/Category/subcategories/${id}`)
   }
 

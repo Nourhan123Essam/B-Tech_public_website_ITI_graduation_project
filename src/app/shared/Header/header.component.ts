@@ -15,6 +15,7 @@ import { CategoryService } from '../../service/Category/category.service';
 import { CommonModule } from '@angular/common';
 import { ProductCategoryB } from '../../models/product-category-b';
 import { CategoryB } from '../../models/category-b';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -37,8 +38,12 @@ export class HeaderComponent implements AfterViewInit , OnInit{
 
   categoryNames: string[] = [];
   categories: any;
-selectedCategory: string | null = null;  // To keep track of the selected main category
-subCategories: string[] = [];  // Holds the subcategories of the selected main category
+  searchTerm: string = ''; // Holds the search term
+  searchResults: CategoryB[] = []; // Holds the search results
+  selectedCategory: string | null = null; // To keep track of the selected main category
+  subCategories: string[] = []; // Holds the subcategories of the selected main category
+
+
   constructor(
     private translate: LocalizationService,
     private router: Router,
@@ -113,6 +118,17 @@ onCategoryClick(categoryName: string) {
   const category = this.categories.find((cat: { name: string; }) => cat.name === categoryName);
   this.subCategories = category ? category.subCategories : [];
 }
+onSearch() {
+  if (this.searchTerm) {
+    // Redirect to the products page with the search term as a query parameter
+    this.router.navigate(['/products'], { queryParams: { search: this.searchTerm } });
+  }
+}
+  // New method to get the category name based on the selected language
+  getCategoryName(category: CategoryB): string {
+    const translationIndex = this.isArabic ? 1 : 0; // Determine the index based on language
+    return category.translations?.[translationIndex]?.categoryName || ''; // Return the category name or an empty string if not found
+  }
 
 
   useLanguage() {

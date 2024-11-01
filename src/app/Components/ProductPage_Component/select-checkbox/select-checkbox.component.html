@@ -1,10 +1,12 @@
+<div class="rounded bg-black">
 <h5>{{ title }}</h5>
 <ul class="list-unstyled">
   <li *ngFor="let item of dataEntity">
-    <input 
-      type="checkbox" 
-      (change)="onDataChange(item)" 
+    <input
+      type="checkbox"
+      (change)="onDataChange(item)"
       [checked]="item === selectEntity">
     <label>{{ item }}</label>
   </li>
 </ul>
+</div>
