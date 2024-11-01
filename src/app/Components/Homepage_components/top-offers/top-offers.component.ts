@@ -51,5 +51,9 @@ export class TopOffersComponent implements OnInit {
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   }
 
+<<<<<<< HEAD
+=======
+  
+>>>>>>> newomar
 
 }

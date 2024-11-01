@@ -11,19 +11,17 @@ export class CategoryService {
 
   private thisapi='https://localhost:7122/api';
 
+
   constructor(private http:HttpClient) { }
 
 
+
   getallcategory():Observable<CategoryB[]>{
-    var result = this.http.get<CategoryB[]>(`${this.thisapi}/Category`)
-    console.log(result);
-    return result;
+    return this.http.get<CategoryB[]>(`${this.thisapi}/Category`)
    }
 
-  getmainCategories():Observable<CategoryB[]>{
-    var result = this.http.get<CategoryB[]>(`${this.thisapi}/Category/GetMainCategories`)
-    console.log(result);
-    return result;
+   getmainCategories():Observable<CategoryB[]>{
+    return this.http.get<CategoryB[]>(`${this.thisapi}/Category/GetMainCategories`)
   }
 
   getsubCategories():Observable<CategoryB[]>{
@@ -43,9 +41,18 @@ export class CategoryService {
   return this.http.get<CategoryB>(`${this.thisapi}/Category/GetById/${id}`)
  }
 
+<<<<<<< HEAD
  filterCategoriesbyLanguage(languageId:number) : Observable<CategoryB[]>{
   const params = new HttpParams().set('languageId', languageId.toString());
   return this.http.get<CategoryB[]>(`${this.thisapi}/Category/FilterByLanguage`, {params})
  }
 
+=======
+ filterCategoriesbyLanguage(languageId: number): Observable<CategoryB[]> {
+  const params = new HttpParams().set('languageId', languageId.toString());
+  return this.http.get<CategoryB[]>(`${this.thisapi}/Category/FilterByLanguage`, { params });
+}
+
+
+>>>>>>> newomar
 }

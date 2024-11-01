@@ -7,6 +7,7 @@ import { SelectCheckboxComponent } from '../ProductPage_Component/select-checkbo
 import { ProductB } from '../../models/product-b';
 import { CategoryB } from '../../models/category-b';
 import { CommonModule } from '@angular/common';
+import { ProductCategoryB } from '../../models/product-category-b';
 
 @Component({
   selector: 'app-products',
@@ -19,12 +20,29 @@ export class ProductsComponent implements OnInit {
   products: ProductB[] = [];
   filteredProducts: ProductB[] = [];
   categories: CategoryB[] = [];
-  categoryNames: string[] = [];  //main 
-  brands: string[] = [];         //sub
+  categoryNames: string[] = [];
+  brands: string[] = [];
+
+
   cartProducts: any[] = [];
+  productCategories:ProductCategoryB[]=[];
 
   selectedCategory: string | null = null;
   selectedBrand: string | null = null;
+ selectedPrice: any;
+
+ isCategoryOpen: boolean = false;
+isBrandOpen: boolean = false;
+isPriceOpen: boolean = false;
+
+  priceOptions = [
+    { id: 1, name: 'Under 1000', min: 0, max: 999 },
+    { id: 2, name: '1000 - 15000', min: 1000, max: 15000 },
+    { id: 3, name: '15000 - 25000', min: 15001, max: 25000 },
+    { id: 4, name: 'Over 25000', min: 25001, max: Infinity }
+  ];
+
+  priceNames = this.priceOptions.map(option => option.name);
 
   constructor(
     private service: AllproductsService,
@@ -33,129 +51,120 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getallproducts();
-    this.getSubCategories();
-    this.getallcateory();
-  }
-  
-  
+    this.getAllProducts();
+    this.getAllCategory();
+       }
+       getAllProducts() {
+        this.service.getallproducts().subscribe(
+          (res: any) => {
+            console.log("Products API response:", res);
+            if (res.isSuccess && Array.isArray(res.entity)) {
+              this.products = res.entity;
+              this.filteredProducts = this.products;
 
-  getallproducts() {
-    this.service.getallproducts().subscribe(
-      (res: any) => {
-        console.log("Products API response:", res);
-        
-        // تأكد أن `entity` هو مصفوفة قبل تخصيصه إلى المنتجات
-        if (res.isSuccess && Array.isArray(res.entity)) {
-          this.products = res.entity; // تعيين المنتجات من `entity`
-          this.filteredProducts = res.entity;
-        } else {
-          console.error("Unexpected data format:", res);
-        }
-      },
-      error => {
-        console.error("Error fetching products:", error);
+              // استخراج أسماء البراندات بدون تكرار
+              this.getAllBrands();
+            } else {
+              console.error("Unexpected data format:", res);
+            }
+          },
+          error => {
+            console.error("Error fetching products:", error);
+          }
+        );
       }
-    );
-  }
-  
-  
-  getallcateory() {
-    
-    this.catservice.getmainCategories().subscribe((res: any[]) => {
-        console.log("Category API full response:", res);
 
-         // استخراج أسماء الفئات الرئيسية
-         this.categoryNames = res.map((item) => {
-          const categoryName = item.category?.translations?.[0]?.categoryName;
-          console.log("Extracted Category Name:", categoryName);
-          return categoryName;
-      }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
-  }, 
-  error => {
-      console.error("Error fetching main categories:", error);
+      getAllBrands(): void {
+        const brandSet = new Set<string>();
+        this.products.forEach(product => {
+          const brand = product.translations?.[0]?.brandName;
+          if (brand) {
+            brandSet.add(brand); // إضافة البراندات بدون تكرار
+          }
+        });
+        this.brands = Array.from(brandSet); // تحويل Set إلى مصفوفة
+      }
+
+  getAllCategory() {
+    this.catservice.getallcategory().subscribe((res: any) => {
+        if (res.isSuccess && Array.isArray(res.entity)) {
+            this.categories = res.entity;
+            this.categoryNames = res.entity.map((category: CategoryB) =>
+              category.translations?.[0]?.categoryName
+            ).filter(Boolean);
+        }
     });
   }
-        // if (res.isSuccess && Array.isArray(res.entity)) {
-        //     this.categories = res.entity;
-        //     console.log("Parsed Categories:", this.categories);
-        //     this.categoryNames = res.entity.map((category: CategoryB) => {
-        //         const categoryName = category.translations?.[0]?.categoryName;
-        //         console.log("Extracted Category Name:", categoryName);
-        //         return categoryName;
-        //     }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
-        // } else {
-        //     console.error("Unexpected data format:", res);
-        // }
- 
 
-getSubCategories() {
-  this.catservice.getsubCategories().subscribe((res: any[]) => {
-    console.log("Sub Categories API response:", res);
 
-    this.brands= res.map((item) => {
-      const categoryName = item.category?.translations?.[0]?.categoryName;
-      console.log("Extracted Category Name:", categoryName);
-      return categoryName;
-  }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
-}, 
-error => {
-  console.error("Error fetching main categories:", error);
-    
-  });
-}
 
-  // onCategoryChange(category: string | null): void {
-  //   this.selectedCategory = category;
-  //   this.applyFilters();
-  // }
-
-  onBrandChange(brand: string | null): void {
-    this.selectedBrand = brand;
-    this.applyFilters();
-  }
 
   onCategoryChange(categoryName: string | null): void {
     this.selectedCategory = categoryName;
-    this.applyFilters();
-}
 
-applyFilters(): void {
-    if (this.selectedCategory) {
-        // البحث عن `CategoryId` بناءً على `categoryName`
-        const selectedCategoryObj = this.categories.find(category => 
-            category.translations && category.translations[0].categoryName === this.selectedCategory
-        );
+    const selectedCategory = this.categories.find(
+      category => category.translations?.[0]?.categoryName === categoryName
+    );
 
-        if (selectedCategoryObj) {
-            const categoryId = selectedCategoryObj.id;
-            this.service.getProductsByCategoryId(categoryId).subscribe(
-                (res: any) => {
-                    if (res.isSuccess && Array.isArray(res.entity)) {
-                        this.filteredProducts = res.entity;
-                    } else {
-                        console.error("Unexpected data format:", res);
-                    }
-                },
-                error => {
-                    console.error("Error fetching filtered products:", error);
-                }
-            );
+    if (selectedCategory) {
+      this.service.getProductsByCategoryId(selectedCategory.id).subscribe(
+        (products: ProductB[]) => {
+          if (Array.isArray(products)) {
+            console.log('Product entity data:', products);
+            this.filteredProducts = products;
+            console.log('Filtered products:', this.filteredProducts); // تسجيل هنا
+          } else {
+            console.error('Unexpected data format:', products);
+          }
+        },
+        error => {
+          console.error("Error fetching products by category:", error);
         }
-    } else {
-        this.filteredProducts = this.products; // عرض كل المنتجات عند عدم اختيار تصنيف
+      );
     }
-}
+  }
+
+  onPriceChange(selectedPrice: any): void {
+    this.selectedPrice = selectedPrice;
+    this.applyFilters();
+  }
 
 
-  
-  
+
+  onBrandChange(brand: string | null): void {
+    this.selectedBrand = brand;
+    this.filteredProducts = this.products.filter(product =>
+      this.selectedBrand ? product.translations?.[0]?.brandName === this.selectedBrand : true
+    );
+  }
+
+
+
+
+  applyFilters(): void {
+    const selectedPriceOption = this.priceOptions.find(option => option.name === this.selectedPrice);
+    const minPrice = selectedPriceOption ? selectedPriceOption.min : 0;
+    const maxPrice = selectedPriceOption ? selectedPriceOption.max : Infinity;
+
+    this.filteredProducts = this.products.filter(product => {
+      product.translations?.[0]?.brandName;
+
+      const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+
+      return  matchesPrice;
+    });
+  }
 
   clearFilter(): void {
     this.selectedCategory = null;
-    this.selectedBrand = null;
+    this.selectedPrice = null;
     this.filteredProducts = this.products;
+    this.selectedBrand=null;
   }
+
+
+
+
 
   addToCart(event: any) {
     if ("card" in localStorage) {
