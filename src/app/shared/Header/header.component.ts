@@ -107,75 +107,12 @@ getallcategory() {
 }
 
 
-
 // Method to set the selected category and update the subcategories
 onCategoryClick(categoryName: string) {
   this.selectedCategory = categoryName;
   const category = this.categories.find((cat: { name: string; }) => cat.name === categoryName);
   this.subCategories = category ? category.subCategories : [];
 }
-
-// Click handler for category selection
-// onCategoryClick(categoryName: string) {
-//   console.log("Selected Category:", categoryName);
-//   // Add any additional logic you want to execute when a category is clicked
-// }
-
-
-
-  // getmainCategories() {
-  //   this.catservice.getmainCategories().subscribe(
-  //     (res: any[]) => {
-  //       console.log("Category API full response:", res);
-
-  //       // Extracting main category names and their respective subcategories
-  //       this.categoryNames = res.map((item) => ({
-  //         mainCategory: item.category?.translations?.[0]?.categoryName || '',
-  //         subCategories: item.subCategories?.map(
-  //           (sub) => sub?.translations?.[0]?.categoryName || ''
-  //         ).filter(Boolean), // Filter out any undefined values
-  //       }));
-
-  //       console.log("Main Categories with Subcategories:", this.categoryNames);
-  //     },
-  //     (error) => {
-  //       console.error("Error fetching main categories:", error);
-  //     }
-  //   );
-  // }
-
-  // getmainCategories() {
-  //   this.catservice.getmainCategories().subscribe(
-  //     (mainCategories: CategoryB[]) => { // تغيير نوع البيانات المستلمة
-  //       console.log("Main Categories:", mainCategories);
-
-  //       mainCategories.forEach((mainCategory) => {
-  //         const mainCategoryName = mainCategory.translations[0]?.categoryName || 'Unnamed'; // الوصول إلى اسم الفئة الرئيسية
-  //         const mainCategoryId = mainCategory.id; // استخدم id بدلاً من categoryId
-
-  //         // جلب الفئات الفرعية باستخدام المعرف الرئيسي
-  //         this.catservice.getebcategoriesbuMainId(mainCategoryId).subscribe(
-  //           (subCategories: CategoryB[]) => { // تغيير نوع البيانات المستلمة
-  //             console.log(`Subcategories for ${mainCategoryId}:`, subCategories);
-
-  //             const categoryData = {
-  //               mainCategory: mainCategoryName,
-  //               subCategories: subCategories.map(
-  //                 (sub) => sub.translations[0]?.categoryName || 'Unnamed' // الوصول إلى اسم الفئة الفرعية
-  //               ).filter(Boolean),
-  //             };
-
-  //             this.categoryNames.push(categoryData);
-  //           },
-  //           (error) => console.error("Error fetching subcategories:", error)
-  //         );
-  //       });
-  //     },
-  //     (error) => console.error("Error fetching main categories:", error)
-  //   );
-  // }
-
-
 
 
   useLanguage() {
