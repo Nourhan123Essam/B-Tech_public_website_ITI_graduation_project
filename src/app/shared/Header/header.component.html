@@ -42,23 +42,6 @@
                       </ul>
                   </li>
 
-                    <!-- testt-------------------- -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          {{ 'nav.categories' | translate }}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                          <li *ngFor="let category of categoryNames">
-                            <a class="dropdown-item dropdown-toggle" href="#">{{ category }}</a>
-                            <ul class="dropdown-menu">
-                              <li *ngFor="let subCategory of categoryNames">
-                                <a class="dropdown-item" href="#">{{ subCategory }}</a>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-
                   <!-- Daily Deals -->
                   <li class="nav-item col-md-8">
                       <a routerLink="products" class="nav-link text-danger">{{'nav.daily_deals'|translate}}</a>
