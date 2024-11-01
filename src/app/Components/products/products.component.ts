@@ -95,6 +95,62 @@ isPriceOpen: boolean = false;
         }
     });
   }
+
+  applyFilters(): void {
+    // أولاً، الحصول على نطاق السعر المحدد إذا كان متاحًا
+    const selectedPriceOption = this.priceOptions.find(option => option.name === this.selectedPrice);
+    const minPrice = selectedPriceOption ? selectedPriceOption.min : 0;
+    const maxPrice = selectedPriceOption ? selectedPriceOption.max : Infinity;
+  
+    // الحصول على `categoryId` الخاص بالفئة المحددة
+    const selectedCategoryId = this.categories.find(
+      cat => cat.translations?.[0]?.categoryName === this.selectedCategory
+    )?.id;
+
+    console.log(selectedCategoryId)
+  
+    // تصفية المنتجات بناءً على كل المعايير المحددة: الفئة، البراند، والسعر
+    this.filteredProducts = this.products.filter(product => {
+      // التحقق مما إذا كان المنتج يطابق الفئة المحددة
+      const matchesCategory = this.selectedCategory
+        ? product.productCategories?.some(category => category.categoryId === selectedCategoryId)
+        : true;
+  
+      // التحقق مما إذا كان المنتج يطابق البراند المحدد
+      const matchesBrand = this.selectedBrand
+        ? product.translations?.[0]?.brandName === this.selectedBrand
+        : true;
+  
+      // التحقق مما إذا كان المنتج يطابق نطاق السعر المحدد
+      const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+  
+      return matchesCategory && matchesBrand && matchesPrice;
+    });
+  }
+  
+  // Modify onCategoryChange, onBrandChange, and onPriceChange to call applyFilters instead of setting filteredProducts independently.
+  
+  // onCategoryChange(categoryName: string | null): void {
+  //   this.selectedCategory = categoryName;
+  // }
+  
+  onBrandChange(brand: string | null): void {
+    this.selectedBrand = brand;
+    this.applyFilters(); // Apply all filters whenever brand changes
+  }
+  
+  onPriceChange(selectedPrice: any): void {
+    this.selectedPrice = selectedPrice;
+    this.applyFilters(); // Apply all filters whenever price changes
+  }
+  
+  clearFilter(): void {
+    this.selectedCategory = null;
+    this.selectedPrice = null;
+    this.selectedBrand = null;
+    this.filteredProducts = this.products;
+  }
+  
   
  
 
@@ -122,47 +178,11 @@ isPriceOpen: boolean = false;
         }
       );
     }
-  }
 
-  onPriceChange(selectedPrice: any): void {
-    this.selectedPrice = selectedPrice;
-    this.applyFilters();
   }
 
 
-
-  onBrandChange(brand: string | null): void {
-    this.selectedBrand = brand;
-    this.filteredProducts = this.products.filter(product =>
-      this.selectedBrand ? product.translations?.[0]?.brandName === this.selectedBrand : true
-    );
-  }
   
-  
-  
-
-  applyFilters(): void {
-    const selectedPriceOption = this.priceOptions.find(option => option.name === this.selectedPrice);
-    const minPrice = selectedPriceOption ? selectedPriceOption.min : 0;
-    const maxPrice = selectedPriceOption ? selectedPriceOption.max : Infinity;
-
-    this.filteredProducts = this.products.filter(product => {
-      product.translations?.[0]?.brandName;
-     
-      const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
-
-      return  matchesPrice;
-    });
-  }
-
-  clearFilter(): void {
-    this.selectedCategory = null;
-    this.selectedPrice = null;
-    this.filteredProducts = this.products;
-    this.selectedBrand=null;
-  }
-  
- 
   
  
 

@@ -13,19 +13,19 @@ import { Route, Router } from '@angular/router';
 })
 export class LastViewComponent implements OnInit{
   
-  @Input() data:any={}
-    lastViewedProducts: any[] = [];
-  
-    constructor(private recentProductsService: RecentProductsService , private router:Router) {}
-  
-    ngOnInit(): void {
-      this.lastViewedProducts = this.recentProductsService.getRecentProducts();
-    }
+  @Input() data: any = {};
+  lastViewedProducts: any[] = [];
 
-    openProductDetails(data: any) {
-      this.router.navigate(['/details', data.id]);
-    }
-    
+  constructor(private recentProductsService: RecentProductsService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.lastViewedProducts = this.recentProductsService.getRecentProducts();
+  }
+
+  openProductDetails(product: any) {
+    this.recentProductsService.addProductToRecent(product); // إضافة المنتج إلى قائمة المشاهدات الأخيرة
+    this.router.navigate(['/details', product.id]);
+  }
 }
 
 

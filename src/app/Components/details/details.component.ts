@@ -19,6 +19,8 @@ export class DetailsComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private allProductsService: AllproductsService,
+    private recentProductsService: RecentProductsService // إضافة خدمة المنتجات المشاهدة
+
   ) {}
 
   ngOnInit(): void {
@@ -29,13 +31,13 @@ export class DetailsComponent implements OnInit{
       console.error('Product ID is null or undefined');
     }
   }
-  
 
   getProductDetails(id: string) {
     const productId = Number(id); // تحويل id إلى رقم
     this.allProductsService.getProductById(productId).subscribe(data => {
         if (data.isSuccess) {
             this.product = data.entity; // تخزين بيانات المنتج من الكائن entity
+            this.recentProductsService.addProductToRecent(this.product); // إضافة المنتج إلى قائمة المشاهدات الأخيرة
         } else {
             console.warn('Product not found or error occurred:', data.msg);
         }
@@ -43,17 +45,13 @@ export class DetailsComponent implements OnInit{
     }, error => {
         console.error('Error fetching product details:', error);
     });
+  }
+
+  getSpecificationDetail(spec: any, languageId: number) {
+    const translation = spec.translations.find((t: any) => t.languageId === languageId);
+    return translation ? { key: translation.translatedKey, value: translation.translatedValue } : { key: 'N/A', value: 'N/A' };
+  }
 }
-
-
-getSpecificationDetail(spec: any, languageId: number) {
-  const translation = spec.translations.find((t: any) => t.languageId === languageId);
-  return translation ? { key: translation.translatedKey, value: translation.translatedValue } : { key: 'N/A', value: 'N/A' };
-}
-
-}
-
-
 
 
 //   loadProduct(productId: string | null): void {
