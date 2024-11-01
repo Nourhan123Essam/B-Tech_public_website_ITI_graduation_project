@@ -57,19 +57,54 @@ subCategories: string[] = [];  // Holds the subcategories of the selected main c
   }
 
 
+// getallcategory() {
+//   this.catservice.getallcategory().subscribe((res: any) => {
+//       if (res.isSuccess && Array.isArray(res.entity)) {
+//           this.categories = res.entity;
+//           this.categoryNames = res.entity.map((category: CategoryB) =>
+//               category.translations?.[0]?.categoryName
+
+//         ).filter(Boolean);
+//       }
+//   });
+// }
+
 getallcategory() {
   this.catservice.getallcategory().subscribe((res: any) => {
       if (res.isSuccess && Array.isArray(res.entity)) {
-          this.categories = res.entity;
-          this.categoryNames = res.entity.map((category: CategoryB) =>
-              category.translations?.[0]?.categoryName
+          // Map categories from API and add sample subcategories if subCategories are not provided
+          this.categories = res.entity.map((category: any) => {
+              // Determine index based on isArabic flag (0 for English, 1 for Arabic)
+              const translationIndex = this.isArabic ? 1 : 0;
+              const categoryName = category.translations?.[translationIndex]?.categoryName;
 
-        ).filter(Boolean);
+              let subCategories: string[] = [];
+
+              // Assign sample subcategories based on main category name
+              if (categoryName === "Mobiles & Tablets" || categoryName === "الهواتف والأجهزة اللوحية") {
+                  subCategories = ["Mobiles", "Tablets", "Mobile Accessories", "Smart Watches"];
+              } else if (categoryName === "TVs" || categoryName === "تلفزيونات وريسيفرات") {
+                  subCategories = ["LED TVs", "Smart TVs", "4K TVs", "TV Accessories"];
+              } else if (categoryName === "Home Appliances" || categoryName === "الأجهزة المنزلية") {
+                  subCategories = ["Refrigerators", "Washing Machines", "Microwaves", "Air Conditioners"];
+              } else if (categoryName === "Electronics" || categoryName === "الإلكترونيات") {
+                  subCategories = ["Speakers", "Headphones", "Cameras", "Wearable Accessories"];
+              } else if (categoryName === "small home application" || categoryName === "أجهزة منزلية صغيرة") {
+                  subCategories = ["Laptops", "Desktops", "Tablets", "Laptop Accessories"];
+              } else if (categoryName === "samsung" || categoryName === "سامسونج") {
+                  subCategories = ["Mobiles", "Tablets", "Mobile Accessories", "Smart Watches"];
+              } else if (categoryName === "mobile and tablet" || categoryName === "لاب توب و كمبيوتر") {
+                  subCategories = ["Samsung", "Apple", "Xiaomi", "Huawei"];
+              }
+
+              return {
+                  name: categoryName,
+                  subCategories: subCategories
+              };
+          }).filter(Boolean);
       }
   });
 }
-
-
 
 
 
