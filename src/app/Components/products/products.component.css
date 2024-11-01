@@ -1,7 +1,54 @@
+/* Sidebar container styling */
 .sidebar {
   border: 1px solid #ddd;
-  padding: 15px;
+  padding: 30px;
   border-radius: 5px;
   background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
 }
 
+/* Clear all button styling */
+.clear-all {
+  color: #007bff;
+  text-decoration: underline;
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* Filter section styling */
+.filter-section {
+  margin-bottom: 30px;
+}
+
+.filter-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.app-select-checkbox input[type="checkbox"] {
+  margin-right: 10px;  
+  cursor: pointer;
+}
+
+.app-select-checkbox label {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Add borders between sections */
+.filter-section:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+/* Show More styling */
+.show-more {
+  color: #007bff;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 5px;
+}

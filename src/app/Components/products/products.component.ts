@@ -21,23 +21,28 @@ export class ProductsComponent implements OnInit {
   filteredProducts: ProductB[] = [];
   categories: CategoryB[] = [];
   categoryNames: string[] = [];
-  brands: string[] = ['Apple', 'Samsung', 'Sony', 'LG', 'Dell'];
+  brands: string[] = [];
+
+
   cartProducts: any[] = [];
   productCategories:ProductCategoryB[]=[];
 
   selectedCategory: string | null = null;
   selectedBrand: string | null = null;
+ selectedPrice: any;
 
-//price////
+ isCategoryOpen: boolean = false;
+isBrandOpen: boolean = false;
+isPriceOpen: boolean = false;
+
   priceOptions = [
-    { id: 1, name: ' Under 1000' },
-    { id: 2, name: ' 1000 - 15000' },
-    { id: 3, name: ' 15000 - 25000' },
-    { id: 4, name: ' Over 25000' }
+    { id: 1, name: 'Under 1000', min: 0, max: 999 },
+    { id: 2, name: '1000 - 15000', min: 1000, max: 15000 },
+    { id: 3, name: '15000 - 25000', min: 15001, max: 25000 },
+    { id: 4, name: 'Over 25000', min: 25001, max: Infinity }
   ];
 
   priceNames = this.priceOptions.map(option => option.name);
-  selectedPrice: any;
 
   constructor(
     private service: AllproductsService,
@@ -47,31 +52,40 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-    this.getallcateory();
-    this.getSubCategories();
-  }
-
-  getAllProducts() {
-    this.service.getallproducts().subscribe(
-      (res: any) => {
-        console.log("Products API response:", res);
-        if (res.isSuccess && Array.isArray(res.entity)) {
-          this.products = res.entity
-          
-        console.log("proooo",this.products)          
-          this.filteredProducts = this.products;
-          console.log("filter",this.filteredProducts) // Display all products initially
-        } else {
-          console.error("Unexpected data format:", res);
-        }
-      },
-      error => {
-        console.error("Error fetching products:", error);
+    this.getAllCategory();
+       }
+       getAllProducts() {
+        this.service.getallproducts().subscribe(
+          (res: any) => {
+            console.log("Products API response:", res);
+            if (res.isSuccess && Array.isArray(res.entity)) {
+              this.products = res.entity;
+              this.filteredProducts = this.products;
+      
+              // استخراج أسماء البراندات بدون تكرار
+              this.getAllBrands();
+            } else {
+              console.error("Unexpected data format:", res);
+            }
+          },
+          error => {
+            console.error("Error fetching products:", error);
+          }
+        );
       }
-    );
-  }
+      
+      getAllBrands(): void {
+        const brandSet = new Set<string>();
+        this.products.forEach(product => {
+          const brand = product.translations?.[0]?.brandName;
+          if (brand) {
+            brandSet.add(brand); // إضافة البراندات بدون تكرار
+          }
+        });
+        this.brands = Array.from(brandSet); // تحويل Set إلى مصفوفة
+      }
   
-  getallcateory() {
+  getAllCategory() {
     this.catservice.getallcategory().subscribe((res: any) => {
         if (res.isSuccess && Array.isArray(res.entity)) {
             this.categories = res.entity;
@@ -81,23 +95,10 @@ export class ProductsComponent implements OnInit {
         }
     });
   }
-
-
-  // getSubCategories() {
-  //   this.catservice.getsubCategories().subscribe((res: any[]) => {
-  //     console.log("Sub Categories API response:", res);
   
-  //     this.brands= res.map((item) => {
-  //       const categoryName = item.category?.translations?.[0]?.categoryName;
-  //       console.log("Extracted Category Name:", categoryName);
-  //       return categoryName;
-  //   }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
-  // }, 
-  // error => {
-  //   console.error("Error fetching main categories:", error);
-      
-  //   });
-  // }
+ 
+
+
   onCategoryChange(categoryName: string | null): void {
     this.selectedCategory = categoryName;
   
@@ -122,18 +123,48 @@ export class ProductsComponent implements OnInit {
       );
     }
   }
-  
-  onPriceChange(selectedPrice: any) {
+
+  onPriceChange(selectedPrice: any): void {
     this.selectedPrice = selectedPrice;
-    console.log('Selected Price:', this.selectedPrice);
-    // Apply filtering logic based on selected price range
-  }
-  
-  clearFilter(): void {
-    this.selectedCategory = null;
-    this.filteredProducts = this.products;
+    this.applyFilters();
   }
 
+
+
+  onBrandChange(brand: string | null): void {
+    this.selectedBrand = brand;
+    this.filteredProducts = this.products.filter(product =>
+      this.selectedBrand ? product.translations?.[0]?.brandName === this.selectedBrand : true
+    );
+  }
+  
+  
+  
+
+  applyFilters(): void {
+    const selectedPriceOption = this.priceOptions.find(option => option.name === this.selectedPrice);
+    const minPrice = selectedPriceOption ? selectedPriceOption.min : 0;
+    const maxPrice = selectedPriceOption ? selectedPriceOption.max : Infinity;
+
+    this.filteredProducts = this.products.filter(product => {
+      product.translations?.[0]?.brandName;
+     
+      const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+
+      return  matchesPrice;
+    });
+  }
+
+  clearFilter(): void {
+    this.selectedCategory = null;
+    this.selectedPrice = null;
+    this.filteredProducts = this.products;
+    this.selectedBrand=null;
+  }
+  
+ 
+  
+ 
 
   addToCart(event: any) {
     if ("card" in localStorage) {

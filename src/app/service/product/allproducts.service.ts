@@ -17,6 +17,7 @@ export class AllproductsService {
   getallproducts():Observable<ProductB[]> {
     return this.http.get<ProductB[]>(`${this.thisapi}/product`);
   }
+  
 
   fillterproduct():Observable<any[]> {
     return this.http.get<any[]>('https://fakestoreapi.com/products/category/jewelery');

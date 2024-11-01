@@ -1,32 +1,47 @@
 <div class="container my-4">
   <div class="row">
-    <!-- Filter Sidebar -->
     <div class="col-md-3">
-      <button class="btn btn-link" (click)="clearFilter()">Clear all</button>
+      <button class="btn btn-link clear-all" (click)="clearFilter()">Clear all</button>
       <div class="sidebar">
-        <app-select-checkbox 
-          title="Categories" 
-          [dataEntity]="categoryNames" 
-          [selectEntity]="selectedCategory" 
-          (filterValue)="onCategoryChange($event)">
-        </app-select-checkbox>
-    <div>
-    <app-select-checkbox 
-          title="Price" 
-          [dataEntity]="priceNames" 
-          [selectEntity]="selectedPrice" 
-          (filterValue)="onPriceChange($event)">
-        </app-select-checkbox>
-  </div>
- </div>
+        <div class="filter-section">
+          <h5 class="filter-title">Categories</h5>
+          <app-select-checkbox 
+            title="Categories" 
+            [dataEntity]="categoryNames" 
+            [selectEntity]="selectedCategory" 
+            (filterValue)="onCategoryChange($event)">
+          </app-select-checkbox>
+        </div>
+        <div class="filter-section">
+          <h5 class="filter-title">Brand</h5>
+          <app-select-checkbox 
+            title="Brand" 
+            [dataEntity]="brands" 
+            [selectEntity]="selectedBrand" 
+            (filterValue)="onBrandChange($event)">
+          </app-select-checkbox>
+        </div>
+
+     
+
+        <div class="filter-section">
+          <h5 class="filter-title">Price</h5>
+          <app-select-checkbox 
+            title="Price" 
+            [dataEntity]="priceNames" 
+            [selectEntity]="selectedPrice" 
+            (filterValue)="onPriceChange($event)">
+          </app-select-checkbox>
+        </div>
+      </div>
     </div>
+
     <!-- Products List -->
     <div class="col-md-9">
       <div class="row">
         <div *ngFor="let product of filteredProducts" class="col-md-4 mb-4">
           <app-product-list [data]="product" (item)="addToCart($event)"></app-product-list>
         </div>
-        
       </div>
     </div>
   </div>

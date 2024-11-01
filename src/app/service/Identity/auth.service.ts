@@ -6,12 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7223/api/Account' ; // استخدم رابط الـ API الخاص بك
+  private apiUrl = 'https://localhost:7122/api/Account' ; // استخدم رابط الـ API الخاص بك
 
   constructor(private http: HttpClient) {}
 
   checkPhoneNumber(mobileNumber: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/CheckNumber`, { PhoneNumber: mobileNumber });
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
 
   login(email: string, password: string): Observable<any> {
