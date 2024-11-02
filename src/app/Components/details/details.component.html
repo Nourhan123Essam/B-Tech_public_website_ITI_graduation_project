@@ -6,34 +6,35 @@
         class="img-fluid">
     </div>
 
-  <!-- Right Column: Product Details -->
-<div class="col-md-6">
-  <div class="product-info">
-    <div *ngIf="product" class="product-info">
-      <h1>{{ product.translations[isArabic ? 1 : 0]?.name }}</h1>
-      <br>
-      <p class="price">
-        {{ 'product.price' | translate }}: {{ getFormattedPrice(product.price) }}
-      </p><br>
-      <p><span class="text-dark fw-bold">{{ 'product.description' | translate }}: </span>{{ product.translations[isArabic ? 1 : 0]?.description }}</p>
+    <!-- Right Column: Product Details -->
+    <div class="col-md-6">
+      <div class="product-info">
+        <div *ngIf="product" class="product-info">
+          <h1>{{ product.translations[isArabic ? 1 : 0]?.name }}</h1>
+          <br>
+          <p class="price">
+            {{ 'product.price' | translate }}: {{ getFormattedPrice(product.price) }}
+          </p><br>
+          <p><span class="text-dark fw-bold">{{ 'product.description' | translate }}: </span>{{
+            product.translations[isArabic ? 1 : 0]?.description }}</p>
+        </div>
+        <button class="btn btn-primary">{{ 'product.add to cart' | translate }}</button>
+      </div>
     </div>
-    <button class="btn btn-primary">{{ 'product.add to cart' | translate }}</button>
-  </div>
-</div>
 
-<!-- Specifications Table -->
-<table class="specifications-table" *ngIf="product.specifications?.length > 0">
-  <thead>
-    <tr>
-      <th>{{ 'product.specification' | translate }}</th>
-      <th>{{ 'product.details' | translate }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let spec of product.specifications">
-      <td>{{ getSpecificationDetail(spec).key }}</td> <!-- Display the key -->
-      <td>{{ getSpecificationDetail(spec).value }}</td> <!-- Display the value -->
-    </tr>
-  </tbody>
-</table>
+    <!-- Specifications Table -->
+    <table class="specifications-table" *ngIf="product.specifications?.length > 0">
+      <thead>
+        <tr>
+          <th>{{ 'product.specification' | translate }}</th>
+          <th>{{ 'product.details' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let spec of product.specifications">
+          <td>{{ getSpecificationDetail(spec).key }}</td> <!-- Display the key -->
+          <td>{{ getSpecificationDetail(spec).value }}</td> <!-- Display the value -->
+        </tr>
+      </tbody>
+    </table>
   </div>

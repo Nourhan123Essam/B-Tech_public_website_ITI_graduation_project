@@ -69,6 +69,6 @@ add(event: Event) {
   this.item.emit(this.products);
 }
 getFormattedPrice(price: number): string {
-  return this.isArabic ? `${price} ج.م` : `$${price}`;
+  return this.isArabic ? `${price} ج.م` : `EGP ${price}`;
 }
 }

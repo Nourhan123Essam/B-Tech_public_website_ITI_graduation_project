@@ -1,27 +1,20 @@
-<div class="card" >
-    <img [src]="data.image" class="card-img-top" (click)="openProductDetails(data)" [alt]="data.name">
-    <div class="card-body">
-      <h5 class="card-title">{{ data.name }}</h5>
-      <p class="card-text">{{ data.price }} EGP</p>
-      <button class="btn btn-wrning" (click)="add(19, '10734A5F-4152-400A-8CB6-81ADF51742D2')" >Add to Cart</button>
-      <!-- <div>
-        <input type="number" class="form-control">
-      </div> -->
-
 <div class="container my-5">
   <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card" (click)="openProductDetails(data)">
     <img
       [src]="(data.product?.images && data.product.images.length > 0) ? data.product.images[0].url : (data.images?.[0]?.url || 'default-image-url.png')"
       class="card-img-top"
-      [alt]="data.product?.translations?.[0]?.name || data.translations?.[0]?.name || 'Product Image'">
-
+      [alt]="data.product?.translations?.[0]?.name || data.translations?.[0]?.name || 'Product Image'" />
     <div class="card-body text-center">
-      <h5 class="card-title fw-bold fs-5">{{ data.product?.translations?.[0]?.name || data.translations?.[0]?.name || 'Product Name' }}</h5>
+      <h5 class="card-title fw-bold fs-5">
+        {{ data.product?.translations?.[0]?.name || data.translations?.[0]?.name || 'Product Name' }}
+      </h5>
       <p class="card-text price">
         {{ getFormattedPrice(data.price) }}
       </p>
-      <hr>
-      <button class="btn btn-wrning w-75" (click)="add($event)">{{ 'product.add to cart' | translate }}</button>
+      <hr />
+      <button class="btn btn-wrning w-75" (click)="add(19, '10734A5F-4152-400A-8CB6-81ADF51742D2')">
+        {{ "product.add to cart" | translate }}
+      </button>
     </div>
   </div>
 </div>

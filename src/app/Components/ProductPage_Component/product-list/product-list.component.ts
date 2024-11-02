@@ -1,7 +1,13 @@
-import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  input,
+  Output,
+  output,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderService } from '../../../service/Order/order.service';
-
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LocalizationService } from '../../../service/localiztionService/localization.service';
@@ -10,33 +16,37 @@ import { LocalizationService } from '../../../service/localiztionService/localiz
   standalone: true,
   imports: [TranslateModule],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrl: './product-list.component.css',
 })
 export class ProductListComponent {
   isArabic!: boolean;
 
-@Input() data:any={}
-@Output() item= new EventEmitter()
-constructor(private router:Router, private orderService: OrderService
-) {}
-constructor(private router:Router,
-  private translate: LocalizationService
-) {
-  this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
-}
+  @Input() data: any = {};
+  @Output() item = new EventEmitter();
+  constructor(
+    private router: Router,
+    private orderService: OrderService,
+    private translate: LocalizationService
+  ) {
+    this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+  }
 
-ngOnChanges() {
-  console.log('Product data:', this.data);
-}
+  ngOnChanges() {
+    console.log('Product data:', this.data);
+  }
 
+  openProductDetails(data: any) {
+    const productId = data?.id || data.product?.id;
 
-openProductDetails(data: any) {
-  this.router.navigate(['/details', data.id]);
-}
+    if (productId) {
+      console.log('Navigating to product details with ID:', productId);
+      this.router.navigate(['/details', productId]);
+    } else {
+      console.error('Product ID is undefined or data is invalid:', data);
+    }
+  }
 
-
-
-  add(productId: number, userId: string): void{
+  add(productId: number, userId: string): void {
     this.orderService.addToCart(productId, userId).subscribe(
       () => {
         console.log('Product added to cart successfully!');
@@ -49,23 +59,13 @@ openProductDetails(data: any) {
     );
     //this.item.emit(this.data)
   }
-}
-  const productId = data?.id || data.product?.id;
 
-  if (productId) {
-    console.log('Navigating to product details with ID:', productId);
-    this.router.navigate(['/details', productId]);
-  } else {
-    console.error('Product ID is undefined or data is invalid:', data);
+  getFormattedPrice(price: number): string {
+    return this.isArabic ? `${price} ج.م` : `EGP ${price}`;
   }
-}
 
-add(event: Event) {
-  event.stopPropagation(); // Prevent click event from bubbling up
-  this.item.emit(this.data);
-}
-
-getFormattedPrice(price: number): string {
-  return this.isArabic ? `${price} ج.م` : `$${price}`;
-}
+  // add(event: Event) {
+  //   event.stopPropagation(); // Prevent click event from bubbling up
+  //   this.item.emit(this.data);
+  // }
 }

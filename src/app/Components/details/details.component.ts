@@ -64,7 +64,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getFormattedPrice(price: number): string {
-    return this.isArabic ? `${price} ج.م` : `$${price}`;
+    return this.isArabic ? `${price} ج.م` : `EGP ${price}`;
   }
 
 }
