@@ -1,0 +1,28 @@
+.categories-container {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  
+  .categories-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+  
+  .category-item {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  
+
+  
+  

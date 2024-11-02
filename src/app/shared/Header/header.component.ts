@@ -34,7 +34,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   url: string = 'assets/i18n/.json';
   isArabic!: boolean;
   isLoggedIn: boolean = true;
-
+  categories:any;
   categoryNames: string[] = [];
   categories: any;
   searchTerm: string = ''; // Holds the search term
