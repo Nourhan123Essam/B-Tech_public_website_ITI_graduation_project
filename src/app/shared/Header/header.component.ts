@@ -36,7 +36,6 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   isLoggedIn: boolean = true;
   categories:any;
   categoryNames: string[] = [];
-  categories: any;
   searchTerm: string = ''; // Holds the search term
   searchResults: CategoryB[] = []; // Holds the search results
   selectedCategory: string | null = null; // To keep track of the selected main category
