@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
 import { Router } from '@angular/router';
+import { OrderService } from '../../../service/Order/order.service';
+
+
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LocalizationService } from '../../../service/localiztionService/localization.service';
 @Component({
@@ -14,6 +17,8 @@ export class ProductListComponent {
 
 @Input() data:any={}
 @Output() item= new EventEmitter()
+constructor(private router:Router, private orderService: OrderService
+) {}
 constructor(private router:Router,
   private translate: LocalizationService
 ) {
@@ -26,6 +31,25 @@ ngOnChanges() {
 
 
 openProductDetails(data: any) {
+  this.router.navigate(['/details', data.id]);
+}
+
+
+
+  add(productId: number, userId: string): void{
+    this.orderService.addToCart(productId, userId).subscribe(
+      () => {
+        console.log('Product added to cart successfully!');
+        // Optionally, trigger a notification or update UI here
+      },
+      (error) => {
+        console.error('Could not add product to cart:', error);
+        // Optionally, show an error message
+      }
+    );
+    //this.item.emit(this.data)
+  }
+}
   const productId = data?.id || data.product?.id;
 
   if (productId) {
