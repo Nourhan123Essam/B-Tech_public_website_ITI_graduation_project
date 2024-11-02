@@ -3,21 +3,29 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/Identity/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LocalizationService } from '../../service/localiztionService/localization.service';
 
 @Component({
   selector: 'app-remeber-by-phoone',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,TranslateModule],
   templateUrl: './remeber-by-phoone.component.html',
   styleUrl: './remeber-by-phoone.component.css'
 })
-export class RemeberByPhooneComponent {
-  signInForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+export class RemeberByPhooneComponent {
+
+  signInForm: FormGroup;
+  isArabic!: boolean;
+
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService,private translate: LocalizationService
+  ) {
     this.signInForm = this.fb.group({
       mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]],
     });
+    this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+
   }
 
   onSubmit() {
@@ -35,11 +43,14 @@ export class RemeberByPhooneComponent {
           }
         },
         (error) => {
-          console.error('Error:', error); 
+          console.error('Error:', error);
         }
       );
     } else {
       console.log('Form is invalid:', this.signInForm.errors); // تحقق من صحة النموذج
     }
+  }
+  useLanguage() {
+    this.translate.ChangeLanguage();
   }
 }

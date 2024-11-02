@@ -15,6 +15,30 @@
     "cart": "Cart"
   },
 
+  "slider": {
+    "categories": "Categories",
+    "brands": "Bands",
+    "price": "Price",
+    "clear all": "Clear all"
+  },
+  "remember": {
+    "start": "Let's get started!",
+    "first": "Use your mobile number to sign in or sign up.",
+    "second": "Mobile Number",
+    "third": "Enter your mobile number",
+    "button": "Continue",
+    "create": "Create an Account.",
+    "error": "Please enter a valid mobile number"
+  },
+
+  "product": {
+    "price": "Price",
+    "description": "Description",
+    "specification": "Specification",
+    "details": "Details",
+    "add to cart": "Add to Cart"
+  },
+
   "footer": {
     "call_support": "Call support",
     "support_number": "19966",

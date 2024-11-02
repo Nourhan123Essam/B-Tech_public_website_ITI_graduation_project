@@ -1,10 +1,10 @@
 {
   "language": "english",
   "topbar": {
-    "My_delivery_area":"منطقة التوصيل: ",
+    "My_delivery_area": "منطقة التوصيل: ",
     "city": "القاهرة",
-    "sall_on_BTECH":"بيع على بي تك",
-    "call":"اتصل على"
+    "sall_on_BTECH": "بيع على بي تك",
+    "call": "اتصل على"
   },
   "nav": {
     "categories": "فئات",
@@ -12,6 +12,32 @@
     "search_placeholder": "بحث",
     "sign_in": "تسجيل الدخول",
     "cart": "عربة التسوق"
+  },
+
+  "slider": {
+    "categories": "الفئات",
+    "brands": "العلامات التجارية",
+    "price": "السعر",
+    "clear all": "مسح الكل"
+
+  },
+
+  "remember": {
+    "start": "لنبدأ!",
+    "first": "استخدم رقم هاتفك المحمول لتسجيل الدخول أو الاشتراك.",
+    "second": "رقم الهاتف المحمول",
+    "third": "أدخل رقم هاتفك المحمول",
+    "button": "متابعة",
+    "create": "إنشاء حساب.",
+    "error": "يرجى إدخال رقم هاتف محمول صحيح"
+  },
+
+  "product": {
+    "price": "السعر",
+    "description": "الوصف",
+    "specification": "المواصفات",
+    "details": "التفاصيل",
+    "add to cart": "أضف إلى السلة"
   },
 
   "footer": {
