@@ -37,7 +37,9 @@
     "description": "الوصف",
     "specification": "المواصفات",
     "details": "التفاصيل",
-    "add to cart": "أضف إلى السلة"
+    "add to cart": "أضف إلى السلة",
+    "No products found for": "لم يتم العثور على منتجات ل",
+    "Products for": "منتجات ل"
   },
 
   "footer": {

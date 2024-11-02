@@ -36,7 +36,9 @@
     "description": "Description",
     "specification": "Specification",
     "details": "Details",
-    "add to cart": "Add to Cart"
+    "add to cart": "Add to Cart",
+    "No products found for": "No products found for",
+    "Products for": "Products for"
   },
 
   "footer": {
