@@ -1,7 +1,9 @@
 <nav class="navbar">
   <div class="navbar-content">
     <div class="language">
-      <a href="#" class="language-link">عربي</a>
+      <a class="me-3" (click)="useLanguage()">{{
+        "language" | translate
+        }}</a>
     </div>
     <div class="logo">
       <img src="https://btech.com/media/logo/stores/1/new3.png" alt="B.TECH Logo" class="logo-image" />
@@ -9,7 +11,7 @@
   </div>
 </nav>
 
-<div class="container mt-5">
+<div [dir]="isArabic ? 'rtl' : 'ltr'" class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="circle-container">
@@ -22,28 +24,28 @@
       </div>
     </div>
       <br />
-      <h3 class="text-center">Let's get started!</h3>
+      <h3 class="text-center">{{'remember.start'| translate}}</h3>
 
       <p class="text-center">
-        Use your mobile number to sign in or sign up.
+        {{'remember.first'| translate}}
       </p>
 
       <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="mobileNumber">Mobile Number</label>
+          <label for="mobileNumber">{{'remember.second'| translate}}</label>
           <input
             type="text"
             class="form-control"
             id="mobileNumber"
             formControlName="mobileNumber"
-            placeholder="Enter your mobile number"
+            [placeholder]="'remember.third' | translate"
             required
           />
           <div
             class="invalid-feedback"
             *ngIf="signInForm.get('mobileNumber')?.invalid && signInForm.get('mobileNumber')?.touched"
           >
-            Please enter a valid mobile number
+            {{'remember.error'|translate}}
           </div>
         </div>
         <br />
@@ -52,13 +54,13 @@
           class="btn btn-primary btn-block mt-4"
           [disabled]="!signInForm.valid"
         >
-          Continue..
+          {{'remember.button'| translate}}
         </button>
       </form>
 
       <div class="text-center mt-3">
         <span> | </span>
-        <a routerLink="/create-account">Create an Account</a>
+        <a routerLink="/create-account">{{'remember.create'| translate}}</a>
       </div>
     </div>
   </div>

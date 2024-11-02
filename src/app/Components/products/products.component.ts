@@ -8,15 +8,19 @@ import { ProductB } from '../../models/product-b';
 import { CategoryB } from '../../models/category-b';
 import { CommonModule } from '@angular/common';
 import { ProductCategoryB } from '../../models/product-category-b';
+import { LocalizationService } from '../../service/localiztionService/localization.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductListComponent, SelectCheckboxComponent,CommonModule],
+  imports: [ProductListComponent, SelectCheckboxComponent,CommonModule,TranslateModule],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+  isArabic!: boolean;
+
   products: ProductB[] = [];
   filteredProducts: ProductB[] = [];
   categories: CategoryB[] = [];
@@ -34,7 +38,9 @@ export class ProductsComponent implements OnInit {
  isCategoryOpen: boolean = false;
 isBrandOpen: boolean = false;
 isPriceOpen: boolean = false;
-
+  categoryFilterOpen: boolean = false;
+  brandFilterOpen: boolean = false;
+  priceFilterOpen: boolean = false;
   priceOptions = [
     { id: 1, name: 'Under 1000', min: 0, max: 999 },
     { id: 2, name: '1000 - 15000', min: 1000, max: 15000 },
@@ -47,10 +53,15 @@ isPriceOpen: boolean = false;
   constructor(
     private service: AllproductsService,
     private catservice: CategoryService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private translate: LocalizationService
+  ) {
+     this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+  }
+
 
   ngOnInit(): void {
+    this.getAllBrands();
     this.getAllProducts();
     this.getAllCategory();
        }
@@ -76,26 +87,32 @@ isPriceOpen: boolean = false;
 
       getAllBrands(): void {
         const brandSet = new Set<string>();
+        const translationIndex = this.isArabic ? 1 : 0; // Determine the index based on the current language
+
         this.products.forEach(product => {
-          const brand = product.translations?.[0]?.brandName;
+          const brand = product.translations?.[translationIndex]?.brandName; // Use the appropriate index
           if (brand) {
-            brandSet.add(brand); // إضافة البراندات بدون تكرار
+            brandSet.add(brand); // Add brands without duplicates
           }
         });
-        this.brands = Array.from(brandSet); // تحويل Set إلى مصفوفة
+
+        this.brands = Array.from(brandSet); // Convert Set to Array
       }
 
   getAllCategory() {
     this.catservice.getallcategory().subscribe((res: any) => {
-        if (res.isSuccess && Array.isArray(res.entity)) {
-            this.categories = res.entity;
-            this.categoryNames = res.entity.map((category: CategoryB) =>
-              category.translations?.[0]?.categoryName
-            ).filter(Boolean);
-        }
+      if (res.isSuccess && Array.isArray(res.entity)) {
+        this.categories = res.entity;
+
+        // Use the translation index based on the current language
+        const translationIndex = this.isArabic ? 1 : 0;
+
+        this.categoryNames = res.entity.map((category: CategoryB) =>
+          category.translations?.[translationIndex]?.categoryName
+        ).filter(Boolean);
+      }
     });
   }
-
 
 
 
@@ -138,9 +155,6 @@ isPriceOpen: boolean = false;
     );
   }
 
-
-
-
   applyFilters(): void {
     const selectedPriceOption = this.priceOptions.find(option => option.name === this.selectedPrice);
     const minPrice = selectedPriceOption ? selectedPriceOption.min : 0;
@@ -162,10 +176,6 @@ isPriceOpen: boolean = false;
     this.selectedBrand=null;
   }
 
-
-
-
-
   addToCart(event: any) {
     if ("card" in localStorage) {
       this.cartProducts = JSON.parse(localStorage.getItem("card")!);
@@ -180,5 +190,17 @@ isPriceOpen: boolean = false;
       this.cartProducts.push(event);
       localStorage.setItem("card", JSON.stringify(this.cartProducts));
     }
+  }
+
+  toggleCategoryFilter() {
+    this.categoryFilterOpen = !this.categoryFilterOpen;
+  }
+
+  toggleBrandFilter() {
+    this.brandFilterOpen = !this.brandFilterOpen;
+  }
+
+  togglePriceFilter() {
+    this.priceFilterOpen = !this.priceFilterOpen;
   }
 }
