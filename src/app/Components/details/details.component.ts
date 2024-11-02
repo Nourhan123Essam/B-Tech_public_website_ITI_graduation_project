@@ -22,6 +22,8 @@ export class DetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private allProductsService: AllproductsService,
+    private recentProductsService: RecentProductsService // إضافة خدمة المنتجات المشاهدة
+
     private translate: LocalizationService
   ) {
     this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
@@ -41,6 +43,8 @@ export class DetailsComponent implements OnInit {
     this.allProductsService.getProductById(productId).subscribe(
       (data) => {
         if (data.isSuccess) {
+            this.product = data.entity; // تخزين بيانات المنتج من الكائن entity
+            this.recentProductsService.addProductToRecent(this.product); // إضافة المنتج إلى قائمة المشاهدات الأخيرة
           this.product = data.entity; // تخزين بيانات المنتج من الكائن entity
         } else {
           console.warn('Product not found or error occurred:', data.msg);
@@ -65,3 +69,25 @@ export class DetailsComponent implements OnInit {
   }
 
 }
+
+    });
+  }
+
+  getSpecificationDetail(spec: any, languageId: number) {
+    const translation = spec.translations.find((t: any) => t.languageId === languageId);
+    return translation ? { key: translation.translatedKey, value: translation.translatedValue } : { key: 'N/A', value: 'N/A' };
+  }
+}
+
+
+//   loadProduct(productId: string | null): void {
+//     const protId = Number(this.route.snapshot.paramMap.get('id'))
+
+//     if (productId) {
+//       this.allProductsService.getProductById(protId).subscribe((product: any) => {
+//         this.product = product;
+//         this.Recentproduct.addProductToRecent(product);
+//       });
+//     }
+
+// }
