@@ -5,6 +5,7 @@ import { ProductTranslationB } from './product-translation-b'
 import { OrderItemB } from './order-item-b';
 
 export interface ProductB {
+  product: any;
   id: number;
   price: number;
   stockQuantity: number;
