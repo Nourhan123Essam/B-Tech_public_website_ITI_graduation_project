@@ -1,18 +1,75 @@
-.card {
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
+
   .card img {
     height: 200px;
     object-fit: cover;
   }
 
   .btn-wrning{
-    border:0.5px solid black;
+    border:0.5px solid #009F29;
   }
   .btn-wrning:hover{
-    background-color: black;
+    background-color:#009F29;
     color:white;
   }
-  
+  .card {
+    transition: box-shadow 0.3s ease; /* Smooth transition for the shadow */
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Adjust the shadow values as needed */
+  }
+/* ---------------------------- change card style --------------------------- */
+
+  .card-img-wrapper {
+    position: relative;
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: auto;
+    max-height: 180px;
+    object-fit: contain;
+    background-color: #f8f8f8;
+  }
+
+  .sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ff4081;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+
+  .price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 0.3rem;
+  }
+
+  .monthly-price {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 0.5rem;
+  }
+
+  .btn-add-to-cart {
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+  }

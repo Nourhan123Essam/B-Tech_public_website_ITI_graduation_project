@@ -1,33 +1,52 @@
-<div class="container my-4">
+<div [dir]="isArabic ? 'rtl' : 'ltr'" class="container my-4">
   <div class="row">
-    <!-- Filter Sidebar -->
     <div class="col-md-3">
-      <button class="btn btn-link" (click)="clearFilter()">Clear all</button>
+      <button class="btn btn-link clear-all" (click)="clearFilter()">{{ 'slider.clear all' | translate }}</button>
       <div class="sidebar">
-        <app-select-checkbox 
-          title="Categories" 
-          [dataEntity]="categoryNames" 
-          [selectEntity]="selectedCategory" 
-          (filterValue)="onCategoryChange($event)">
-        </app-select-checkbox>
-        
-        <app-select-checkbox 
-          title="Brand" 
-          [dataEntity]="brands" 
-          [selectEntity]="selectedBrand" 
-          (filterValue)="onBrandChange($event)">
-        </app-select-checkbox>
 
-     <app-select-checkbox 
-          title="Price" 
-          [dataEntity]="priceNames" 
-          [selectEntity]="selectedPrice" 
-          (filterValue)="onPriceChange($event)">
-        </app-select-checkbox>
+        <!-- Categories Filter Section -->
+        <div class="filter-section">
+          <h5 class="filter-title fs-5" (click)="toggleCategoryFilter()">
+            {{ 'slider.categories' | translate }} <span class="toggle-icon">{{ categoryFilterOpen ? '-' : '+' }}</span>
+          </h5>
+          <div class="filter-content" [ngClass]="{ 'd-none': !categoryFilterOpen }">
+            <app-select-checkbox class="select-checkbox" title="Categories" [dataEntity]="categoryNames"
+              [selectEntity]="selectedCategory" (filterValue)="onCategoryChange($event)">
+            </app-select-checkbox>
+          </div>
+        </div>
+
+        <!-- Brands Filter Section -->
+        <div class="filter-section">
+          <h5 class="filter-title fs-5" (click)="toggleBrandFilter()">
+            {{ 'slider.brands' | translate }} <span class="toggle-icon">{{ brandFilterOpen ? '-' : '+' }}</span>
+          </h5>
+          <div class="filter-content" [ngClass]="{ 'd-none': !brandFilterOpen }">
+            <app-select-checkbox class="select-checkbox " title="Brand" [dataEntity]="brands"
+              [selectEntity]="selectedBrand" (filterValue)="onBrandChange($event)">
+            </app-select-checkbox>
+          </div>
+        </div>
+
+        <!-- Price Filter Section -->
+        <div class="filter-section">
+          <h5 class="filter-title fs-5" (click)="togglePriceFilter()">
+            {{ 'slider.price' | translate }} <span class="toggle-icon">{{ priceFilterOpen ? '-' : '+' }}</span>
+          </h5>
+          <div class="filter-content" [ngClass]="{ 'd-none': !priceFilterOpen }">
+            <app-select-checkbox class="select-checkbox" title="Price" [dataEntity]="priceNames"
+              [selectEntity]="selectedPrice" (filterValue)="onPriceChange($event)">
+            </app-select-checkbox>
+          </div>
+        </div>
+
       </div>
+
+
     </div>
+
     <!-- Products List -->
-    <div class="col-md-9">
+    <div class="col-md-9 shadow-sm rounded">
       <div class="row">
         <div *ngFor="let product of filteredProducts" class="col-md-4 mb-4">
           <app-product-list [data]="product" (item)="addToCart($event)"></app-product-list>

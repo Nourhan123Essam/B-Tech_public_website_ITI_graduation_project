@@ -8,127 +8,127 @@ import { ProductB } from '../../models/product-b';
 import { CategoryB } from '../../models/category-b';
 import { CommonModule } from '@angular/common';
 import { ProductCategoryB } from '../../models/product-category-b';
+import { LocalizationService } from '../../service/localiztionService/localization.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductListComponent, SelectCheckboxComponent,CommonModule],
+  imports: [ProductListComponent, SelectCheckboxComponent,CommonModule,TranslateModule],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+  isArabic!: boolean;
+
   products: ProductB[] = [];
   filteredProducts: ProductB[] = [];
   categories: CategoryB[] = [];
-  categoryNames: string[] = [];  //main 
-  brands: string[] = [];         //sub
-  cartProducts: any[] = [];
+  categoryNames: string[] = [];
+  brands: string[] = [];
 
+
+  cartProducts: any[] = [];
   productCategories:ProductCategoryB[]=[];
-//price////
-priceOptions = [
-  { id: 1, name: ' Under 1000' },
-  { id: 2, name: ' 1000 - 15000' },
-  { id: 3, name: ' 15000 - 25000' },
-  { id: 4, name: ' Over 25000' }
-];
-  priceNames = this.priceOptions.map(option => option.name);
-  selectedPrice: any;
+
   selectedCategory: string | null = null;
   selectedBrand: string | null = null;
+ selectedPrice: any;
 
+ isCategoryOpen: boolean = false;
+isBrandOpen: boolean = false;
+isPriceOpen: boolean = false;
+  categoryFilterOpen: boolean = false;
+  brandFilterOpen: boolean = false;
+  priceFilterOpen: boolean = false;
+  priceOptions = [
+    { id: 1, name: 'Under 1000', min: 0, max: 999 },
+    { id: 2, name: '1000 - 15000', min: 1000, max: 15000 },
+    { id: 3, name: '15000 - 25000', min: 15001, max: 25000 },
+    { id: 4, name: 'Over 25000', min: 25001, max: Infinity }
+  ];
 
+  priceNames = this.priceOptions.map(option => option.name);
 
- 
   constructor(
     private service: AllproductsService,
     private catservice: CategoryService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private translate: LocalizationService
+  ) {
+     this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+  }
+
 
   ngOnInit(): void {
+    this.getAllBrands();
     this.getAllProducts();
-    this.getSubCategories();
-    this.getAllProducts();
-    this.getallcateory();
+    this.getAllCategory();
+       }
+       getAllProducts() {
+        this.service.getallproducts().subscribe(
+          (res: any) => {
+            console.log("Products API response:", res);
+            if (res.isSuccess && Array.isArray(res.entity)) {
+              this.products = res.entity;
+              this.filteredProducts = this.products;
 
-  }
-  
-  getAllProducts() {
-    this.service.getallproducts().subscribe(
-      (res: any) => {
-        console.log("Products API response:", res);
-        if (res.isSuccess && Array.isArray(res.entity)) {
-          this.products = res.entity
-          
-        console.log("proooo",this.products)          
-          this.filteredProducts = this.products;
-          console.log("filter",this.filteredProducts) // Display all products initially
-        } else {
-          console.error("Unexpected data format:", res);
-        }
-      },
-      error => {
-        console.error("Error fetching products:", error);
+              // استخراج أسماء البراندات بدون تكرار
+              this.getAllBrands();
+            } else {
+              console.error("Unexpected data format:", res);
+            }
+          },
+          error => {
+            console.error("Error fetching products:", error);
+          }
+        );
       }
-    );
-  }
 
+      getAllBrands(): void {
+        const brandSet = new Set<string>();
+        const translationIndex = this.isArabic ? 1 : 0; // Determine the index based on the current language
 
-  getallcateory() {
+        this.products.forEach(product => {
+          const brand = product.translations?.[translationIndex]?.brandName; // Use the appropriate index
+          if (brand) {
+            brandSet.add(brand); // Add brands without duplicates
+          }
+        });
+
+        this.brands = Array.from(brandSet); // Convert Set to Array
+      }
+
+  getAllCategory() {
     this.catservice.getallcategory().subscribe((res: any) => {
-        if (res.isSuccess && Array.isArray(res.entity)) {
-            this.categories = res.entity;
-            this.categoryNames = res.entity.map((category: CategoryB) => 
-              category.translations?.[0]?.categoryName
-            ).filter(Boolean);
-        }
+      if (res.isSuccess && Array.isArray(res.entity)) {
+        this.categories = res.entity;
+
+        // Use the translation index based on the current language
+        const translationIndex = this.isArabic ? 1 : 0;
+
+        this.categoryNames = res.entity.map((category: CategoryB) =>
+          category.translations?.[translationIndex]?.categoryName
+        ).filter(Boolean);
+      }
     });
   }
-      
- 
-
-getSubCategories() {
-  this.catservice.getsubCategories().subscribe((res: any[]) => {
-    console.log("Sub Categories API response:", res);
-
-    this.brands= res.map((item) => {
-      const categoryName = item.category?.translations?.[0]?.categoryName;
-      console.log("Extracted Category Name:", categoryName);
-      return categoryName;
-  }).filter(Boolean); // فلتر للتأكد من عدم وجود قيم undefined
-}, 
-error => {
-  console.error("Error fetching sub categories:", error);
-    
-  });
-}
-
-  // onCategoryChange(category: string | null): void {
-  //   this.selectedCategory = category;
-  //   this.applyFilters();
-  // }
-
-  onBrandChange(brand: string | null): void {
-    this.selectedBrand = brand;
-    // this.applyFilters();
-  }
 
 
-  
+
   onCategoryChange(categoryName: string | null): void {
     this.selectedCategory = categoryName;
-  
+
     const selectedCategory = this.categories.find(
       category => category.translations?.[0]?.categoryName === categoryName
     );
-  
+
     if (selectedCategory) {
       this.service.getProductsByCategoryId(selectedCategory.id).subscribe(
         (products: ProductB[]) => {
           if (Array.isArray(products)) {
-            console.log('Product entity data:', products); 
-            this.filteredProducts = products; 
+            console.log('Product entity data:', products);
+            this.filteredProducts = products;
             console.log('Filtered products:', this.filteredProducts); // تسجيل هنا
           } else {
             console.error('Unexpected data format:', products);
@@ -140,18 +140,41 @@ error => {
       );
     }
   }
-  
-  onPriceChange(selectedPrice: any) {
+
+  onPriceChange(selectedPrice: any): void {
     this.selectedPrice = selectedPrice;
-    console.log('Selected Price:', this.selectedPrice);
-    // Apply filtering logic based on selected price range
-  }
-  
-  clearFilter(): void {
-    this.selectedCategory = null;
-    this.filteredProducts = this.products;
+    this.applyFilters();
   }
 
+
+
+  onBrandChange(brand: string | null): void {
+    this.selectedBrand = brand;
+    this.filteredProducts = this.products.filter(product =>
+      this.selectedBrand ? product.translations?.[0]?.brandName === this.selectedBrand : true
+    );
+  }
+
+  applyFilters(): void {
+    const selectedPriceOption = this.priceOptions.find(option => option.name === this.selectedPrice);
+    const minPrice = selectedPriceOption ? selectedPriceOption.min : 0;
+    const maxPrice = selectedPriceOption ? selectedPriceOption.max : Infinity;
+
+    this.filteredProducts = this.products.filter(product => {
+      product.translations?.[0]?.brandName;
+
+      const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+
+      return  matchesPrice;
+    });
+  }
+
+  clearFilter(): void {
+    this.selectedCategory = null;
+    this.selectedPrice = null;
+    this.filteredProducts = this.products;
+    this.selectedBrand=null;
+  }
 
   addToCart(event: any) {
     if ("card" in localStorage) {
@@ -167,5 +190,17 @@ error => {
       this.cartProducts.push(event);
       localStorage.setItem("card", JSON.stringify(this.cartProducts));
     }
+  }
+
+  toggleCategoryFilter() {
+    this.categoryFilterOpen = !this.categoryFilterOpen;
+  }
+
+  toggleBrandFilter() {
+    this.brandFilterOpen = !this.brandFilterOpen;
+  }
+
+  togglePriceFilter() {
+    this.priceFilterOpen = !this.priceFilterOpen;
   }
 }

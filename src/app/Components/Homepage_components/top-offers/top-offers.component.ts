@@ -29,7 +29,7 @@ export class TopOffersComponent implements OnInit {
   fetchExpensiveProducts(): void {
     this.productService.getallproducts().subscribe((response: any) => {
       console.log('Fetched Response:', response); // Verify response structure in console
-      
+
       // Check if response contains entity array
       if (response.isSuccess && Array.isArray(response.entity)) {
         this.products = response.entity;
@@ -44,7 +44,7 @@ export class TopOffersComponent implements OnInit {
       }
     });
   }
-  
+
   getMonthlyPayment(product: ProductB): number {
     return Math.round(product.price / 12); // Assume a 12-month payment plan
   }
@@ -57,7 +57,7 @@ export class TopOffersComponent implements OnInit {
 
   openProductDetails(data: any) {
     const productId = data?.id || data.product?.id;
-  
+
     if (productId) {
       console.log('Navigating to product details with ID:', productId);
       this.router.navigate(['/details', productId]);

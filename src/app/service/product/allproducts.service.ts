@@ -13,17 +13,19 @@ export class AllproductsService {
 
   private thisapi='https://localhost:7122/api';
 
- 
+
+
   getallproducts():Observable<ProductB[]> {
     return this.http.get<ProductB[]>(`${this.thisapi}/product`);
   }
 
+
   fillterproduct():Observable<ProductB[]> {
     return this.http.get<ProductB[]>('https://fakestoreapi.com/products/category/jewelery');
   }
-  
 
- 
+
+
   getProductById(id: Number): Observable<any> {
     return this.http.get(`${this.thisapi}/Product/${id}`);
 
@@ -33,9 +35,12 @@ export class AllproductsService {
     return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryId/${categoryId}`);
   }
 
- 
-  
- 
+
+
+
+
+
+
   getProductsByCategoryName(categoryName: string): Observable<ProductB[]> {
     return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryName/${categoryName}`);
   }

@@ -27,6 +27,7 @@ export class SignInComponent {
     });
   }
 
+
   onSubmit() {
     if (this.signInForm.valid) {
       const email = this.signInForm.get('email')?.value;
@@ -45,9 +46,23 @@ export class SignInComponent {
         (error) => {
           console.error('Login failed:', error);
         }
+
       );
+             this.saveUserInfo;
+
     }
   }
+
+saveUserInfo(){
+  this.authService.getCurrentUser().subscribe({
+    next: (data) => {
+      console.log('User Claims:', data); // عرض البيانات في الـ console
+    },
+    error: (error) => {
+      console.error('Error fetching user claims:', error);
+    }
+  });
+}
 }  
   
 

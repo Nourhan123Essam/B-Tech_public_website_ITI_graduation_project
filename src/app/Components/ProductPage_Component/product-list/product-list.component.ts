@@ -1,19 +1,24 @@
 import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LocalizationService } from '../../../service/localiztionService/localization.service';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent {
+  isArabic!: boolean;
+
 @Input() data:any={}
 @Output() item= new EventEmitter()
-constructor(
-  private router:Router
-) {}
+constructor(private router:Router,
+  private translate: LocalizationService
+) {
+  this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+}
 
 ngOnChanges() {
   console.log('Product data:', this.data);
@@ -31,36 +36,12 @@ openProductDetails(data: any) {
   }
 }
 
-
-
-
 add(event: Event) {
   event.stopPropagation(); // Prevent click event from bubbling up
   this.item.emit(this.data);
 }
 
+getFormattedPrice(price: number): string {
+  return this.isArabic ? `${price} ج.م` : `$${price}`;
 }
-
-
-// openProductDetails(data: any) {
-//   if (data && data.product && data.product.id) {
-//     const productId = data.product.id; // استخدم المعرف من كائن المنتج
-//     console.log('Navigating to product details with ID:', productId);
-//     this.router.navigate(['/details', productId]);
-//   } else {
-//     console.error('Product ID is undefined or data is invalid:', data);
-//   }
-// }
-// add(){
-//   this.item.emit(this.data)
-// }
-
-
-// openProductDetails(data: any) {
-//   if (data && data.id) {
-//     console.log('Navigating to product details with ID:', data.id);
-//     this.router.navigate(['/details', data.id]);
-//   } else {
-//     console.error('Product ID is undefined or data is invalid:', data);
-//   }
-// }
+}
