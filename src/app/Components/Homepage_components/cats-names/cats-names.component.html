@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="card m-3 p-5 shadow-sm">
 
 <div class="categories-container">
@@ -10,15 +10,12 @@
       <label>{{ catname }}</label>
     </div>
   </div>
-</div>
-
+</div> -->
+<!-- 
 <div class="card m-3 p-5 shadow-sm">
  <div class="categories-container"> 
   <div>
 <p class="d-inline-flex gap-1">
-  <!-- <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a> -->
   <button 
   type="button" 
   data-bs-toggle="collapse" 
@@ -39,4 +36,72 @@
 </div>
 </div>
 </div>
+</div> -->
+
+
+
+<!-- <div class="card m-3 p-5 shadow-sm">
+  <div class="categories-container">
+    <div>
+    <p class="d-inline-flex gap-1">
+      <button
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapseExample"
+      aria-expanded="false"
+      aria-controls="collapseExample"
+      *ngFor="let category of categories"
+      class="category-item"
+      [class.selected]="category.id === selectedCategoryId"
+      (click)="selectCategory(category.id)">
+      {{ category.categoryName }}
+    </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+      </div>
+    </div>
+  </div>
+ </div>
+</div> -->
+
+
+
+<div class="card m-3 p-5 shadow-sm">
+  <div class="categories-container">
+    <div>
+      <p class="d-inline-flex gap-1">
+        <button
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseExample"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+          *ngFor="let category of categories"
+          class="category-item"
+          [class.selected]="category.id === selectedCategoryId"
+          (click)="selectCategory(category.id)">
+          {{ category.categoryName }}
+        </button>
+      </p>
+
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <div *ngIf="products.length > 0; else noProducts">
+            <div *ngFor="let product of products" class="product-card">
+              <h3>{{ product.translations.length > 0 ? product.translations[0].name : 'No name available' }}</h3>
+              <p>{{ product.translations.length > 0 ? product.translations[0].description : 'No description available' }}</p>
+              <p>Price: {{ product.price }} EGP</p>
+              <img *ngIf="product.images.length > 0" [src]="product.images[0].url" alt="{{ product.translations.length > 0 ? product.translations[0].name : 'Product Image' }}" />
+            </div>
+          </div>
+      
+          <ng-template #noProducts>
+            <p>No products found for the selected category.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

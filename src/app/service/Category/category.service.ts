@@ -27,17 +27,6 @@ export class CategoryService {
   getsubCategories():Observable<CategoryB[]>{
     return this.http.get<CategoryB[]>(`${this.thisapi}/Category/GetSubCategories`)
   }
-  // getSubCategories(): Observable<CategoryB[]> {
-  //   return this.http.get<{ isSuccess: boolean; entity: CategoryB[] }>(`${this.thisapi}/Category/GetSubCategories`)
-  //     .pipe(
-  //       map((response: { isSuccess: any; entity: any; }) => {
-  //         if (response.isSuccess && response.entity) {
-  //           return response.entity;
-  //         }
-  //         return []; // Return an empty array if there's an issue
-  //       })
-  //     );
-  // }
   
   getebcategoriesbuMainId(id:number):Observable<CategoryB[]>{
     return this.http.get<CategoryB[]>(`${this.thisapi}/Category/subcategories/${id}`)

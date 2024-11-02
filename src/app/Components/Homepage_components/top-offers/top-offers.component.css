@@ -53,6 +53,8 @@
   scroll-snap-type: x mandatory;
   padding-right: 10rem;
   padding-left: 10rem;
+  scrollbar-width: none; /* Firefox */
+
 }
 
 .product-card {

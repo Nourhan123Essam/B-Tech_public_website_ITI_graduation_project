@@ -22,10 +22,7 @@ export class AllproductsService {
     return this.http.get<ProductB[]>('https://fakestoreapi.com/products/category/jewelery');
   }
   
-// <<<<<<< HEAD
-//   getProductById(id: number): Observable<ProductB> {
-//     return this.http.get<ProductB>(`${this.thisapi}/product/${id}`);
-// =======
+
  
   getProductById(id: Number): Observable<any> {
     return this.http.get(`${this.thisapi}/Product/${id}`);
