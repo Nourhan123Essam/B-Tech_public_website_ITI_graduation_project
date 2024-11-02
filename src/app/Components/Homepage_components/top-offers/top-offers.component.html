@@ -15,9 +15,6 @@
         <h5 *ngIf="product.translations">
             {{ product.translations[0].name }}
         </h5>
-        <h6 class="price">{{ product.price }} EGP</h6>
-        <p class="monthly-pay">or from {{ getMonthlyPayment(product) }}EGP/mo</p>
-        </h4>
         <h6 class="price">{{ product.price }}EGP</h6>
         <p class="monthly-pay">or from {{ getMonthlyPayment(product) | currency }}/mo</p>
     </div>

@@ -152,22 +152,22 @@ isPriceOpen: boolean = false;
   //   this.selectedCategory = categoryName;
   // }
 
-  onBrandChange(brand: string | null): void {
-    this.selectedBrand = brand;
-    this.applyFilters(); // Apply all filters whenever brand changes
-  }
+  // onBrandChange(brand: string | null): void {
+  //   this.selectedBrand = brand;
+  //   this.applyFilters(); // Apply all filters whenever brand changes
+  // }
 
-  onPriceChange(selectedPrice: any): void {
-    this.selectedPrice = selectedPrice;
-    this.applyFilters(); // Apply all filters whenever price changes
-  }
+  // onPriceChange(selectedPrice: any): void {
+  //   this.selectedPrice = selectedPrice;
+  //   this.applyFilters(); // Apply all filters whenever price changes
+  // }
 
-  clearFilter(): void {
-    this.selectedCategory = null;
-    this.selectedPrice = null;
-    this.selectedBrand = null;
-    this.filteredProducts = this.products;
-  }
+  // clearFilter(): void {
+  //   this.selectedCategory = null;
+  //   this.selectedPrice = null;
+  //   this.selectedBrand = null;
+  //   this.filteredProducts = this.products;
+  // }
 
 
 
@@ -218,19 +218,19 @@ isPriceOpen: boolean = false;
     );
   }
 
-  applyFilters(): void {
-    const selectedPriceOption = this.priceOptions.find(option => option.name === this.selectedPrice);
-    const minPrice = selectedPriceOption ? selectedPriceOption.min : 0;
-    const maxPrice = selectedPriceOption ? selectedPriceOption.max : Infinity;
+  // applyFilters(): void {
+  //   const selectedPriceOption = this.priceOptions.find(option => option.name === this.selectedPrice);
+  //   const minPrice = selectedPriceOption ? selectedPriceOption.min : 0;
+  //   const maxPrice = selectedPriceOption ? selectedPriceOption.max : Infinity;
 
-    this.filteredProducts = this.products.filter(product => {
-      product.translations?.[0]?.brandName;
+  //   this.filteredProducts = this.products.filter(product => {
+  //     product.translations?.[0]?.brandName;
 
-      const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+  //     const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
 
-      return  matchesPrice;
-    });
-  }
+  //     return  matchesPrice;
+  //   });
+  // }
 
   clearFilter(): void {
     this.selectedCategory = null;
