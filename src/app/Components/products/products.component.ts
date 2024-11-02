@@ -38,9 +38,11 @@ export class ProductsComponent implements OnInit {
  isCategoryOpen: boolean = false;
 isBrandOpen: boolean = false;
 isPriceOpen: boolean = false;
+
   categoryFilterOpen: boolean = false;
   brandFilterOpen: boolean = false;
   priceFilterOpen: boolean = false;
+
   priceOptions = [
     { id: 1, name: 'Under 1000', min: 0, max: 999 },
     { id: 2, name: '1000 - 15000', min: 1000, max: 15000 },
@@ -152,27 +154,22 @@ isPriceOpen: boolean = false;
   //   this.selectedCategory = categoryName;
   // }
 
-  // onBrandChange(brand: string | null): void {
-  //   this.selectedBrand = brand;
-  //   this.applyFilters(); // Apply all filters whenever brand changes
-  // }
+  onBrandChange(brand: string | null): void {
+    this.selectedBrand = brand;
+    this.applyFilters(); // Apply all filters whenever brand changes
+  }
 
-  // onPriceChange(selectedPrice: any): void {
-  //   this.selectedPrice = selectedPrice;
-  //   this.applyFilters(); // Apply all filters whenever price changes
-  // }
+  onPriceChange(selectedPrice: any): void {
+    this.selectedPrice = selectedPrice;
+    this.applyFilters(); // Apply all filters whenever price changes
+  }
 
-  // clearFilter(): void {
-  //   this.selectedCategory = null;
-  //   this.selectedPrice = null;
-  //   this.selectedBrand = null;
-  //   this.filteredProducts = this.products;
-  // }
-
-
-
-
-
+  clearFilter(): void {
+    this.selectedCategory = null;
+    this.selectedPrice = null;
+    this.selectedBrand = null;
+    this.filteredProducts = this.products;
+  }
 
   onCategoryChange(categoryName: string | null): void {
     this.selectedCategory = categoryName;
@@ -197,46 +194,6 @@ isPriceOpen: boolean = false;
         }
       );
     }
-
-  }
-
-
-
-
-
-  onPriceChange(selectedPrice: any): void {
-    this.selectedPrice = selectedPrice;
-    this.applyFilters();
-  }
-
-
-
-  onBrandChange(brand: string | null): void {
-    this.selectedBrand = brand;
-    this.filteredProducts = this.products.filter(product =>
-      this.selectedBrand ? product.translations?.[0]?.brandName === this.selectedBrand : true
-    );
-  }
-
-  // applyFilters(): void {
-  //   const selectedPriceOption = this.priceOptions.find(option => option.name === this.selectedPrice);
-  //   const minPrice = selectedPriceOption ? selectedPriceOption.min : 0;
-  //   const maxPrice = selectedPriceOption ? selectedPriceOption.max : Infinity;
-
-  //   this.filteredProducts = this.products.filter(product => {
-  //     product.translations?.[0]?.brandName;
-
-  //     const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
-
-  //     return  matchesPrice;
-  //   });
-  // }
-
-  clearFilter(): void {
-    this.selectedCategory = null;
-    this.selectedPrice = null;
-    this.filteredProducts = this.products;
-    this.selectedBrand=null;
   }
 
   addToCart(event: any) {
