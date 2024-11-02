@@ -48,12 +48,19 @@ isPriceOpen: boolean = false;
     private service: AllproductsService,
     private catservice: CategoryService,
     private router: Router
-  ) {}
+  ) {
+ 
+
+  }
 
   ngOnInit(): void {
     this.getAllProducts();
     this.getAllCategory();
        }
+
+   
+
+
        getAllProducts() {
         this.service.getallproducts().subscribe(
           (res: any) => {

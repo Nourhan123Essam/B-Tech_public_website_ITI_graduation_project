@@ -7,6 +7,7 @@ import { RemeberByPhooneComponent } from './Components/remeber-by-phoone/remeber
 import { NgModule } from '@angular/core';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { SearchresultComponent } from './Components/searchresult/searchresult.component';
 
 export const routes: Routes = [
 
@@ -18,6 +19,8 @@ export const routes: Routes = [
     {path:'details/:id',component:DetailsComponent, title:'Details'},
     { path: 'sign-in', component: SignInComponent, data: { hideHeaderFooter: true } },
     { path: 'sign-up', component: SignUpComponent },
+    { path: 'searchresult', component: SearchresultComponent },
+
 
     {path:'remember-by-phoone',component:RemeberByPhooneComponent,title:'remember-me', data: { hideHeaderFooter: true } },
 

@@ -48,13 +48,12 @@
               </ul>
 
               <!-- Search Bar -->
-              <form class="d-flex mx-auto w-50 ">
-                  <input class="form-control me-2 mx-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-secondary" type="submit">
-                      <i class="fas fa-search"></i>
-                  </button>
+              <form (ngSubmit)="onSearch($event)" class="d-flex mx-auto w-50">
+                <input [(ngModel)]="searchQuery" name="searchQuery" class="form-control me-2 mx-2" type="search" placeholder="Search by Category" aria-label="Search">
+                <button class="btn btn-outline-secondary" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
               </form>
-
               <!-- Sign In and Cart -->
               <ul class="navbar-nav ms-auto d-flex align-items-center ">
                   <li class="nav-item  col-md-7">

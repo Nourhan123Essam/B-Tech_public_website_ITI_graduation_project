@@ -46,5 +46,8 @@ export class CategoryService {
   return this.http.get<CategoryB[]>(`${this.thisapi}/Category/FilterByLanguage`, { params });
 }
 
+getProductsByCategoryName(categoryName: string): Observable<any> {
+  return this.http.get<any>(`${this.thisapi}/Category/GetProductsByCategoryName/${categoryName}`);
+}
  
 }
