@@ -58,6 +58,13 @@ export class BrandsComponent implements OnInit{
       }
     );
   }
+  selectCategory(catId: number) {
+    this.selectedCategoryId = catId;
+    console.log("Selected Category ID:", this.selectedCategoryId); 
+
+    this.router.navigate(['/product-by-category', this.selectedCategoryId]);
+
+  }
   
   scrollLeft() {
     this.brandContainer.nativeElement.scrollBy({ left: -200, behavior: 'smooth' });

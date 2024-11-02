@@ -16,13 +16,37 @@
     position: relative;
   }
   
-  .btn-outline-dark {
-    z-index: 10; /* Ensure buttons are on top */
-  }
-  
+
   .overflow-hidden {
     overflow-x: hidden;
   }
   .small-text {
     font-size: 0.8rem;
   }
+
+  
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  background-color: white;
+  color: gray;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-button.left {
+  left: -20px;
+  left: -20px;
+}
+
+.scroll-button.right {
+  right: -20px;
+}
+

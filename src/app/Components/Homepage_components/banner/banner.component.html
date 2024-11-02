@@ -1,7 +1,7 @@
 <div class="container mt-5 mb-4">
   <div id="carouselExampleControls" class="carousel slide custom-rounded" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div *ngFor="let image of images; let i = index" [class]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+      <div *ngFor="let image of images; let i = index" [class]="i === 0 ? 'carousel-item active' : 'carousel-item'"  >
         <img [src]="image.url" class="d-block w-100" [alt]="'Slide ' + (i + 1)">
       </div>
     </div>
