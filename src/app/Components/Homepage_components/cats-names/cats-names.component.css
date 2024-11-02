@@ -34,9 +34,9 @@
   }
 
   .product-card {
-    background-color: #2b2b2b;
-    color: #e0e0e0;
-    border-radius: 12px;
+    /* background-color: #2b2b2b; */
+    /* color: #e0e0e0; */
+    /* border-radius: 12px; */
     width: 180px;
     min-width: 180px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
@@ -62,14 +62,14 @@
   .product-card h5 {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #ffffff;
+    color: black;
     margin: 0.75rem 0 0.5rem;
   }
   
   .price {
     font-size: 1rem;
     font-weight: 600;
-    color: #f8b400;
+    color:#333;
     margin: 0.25rem 0;
   }
   
