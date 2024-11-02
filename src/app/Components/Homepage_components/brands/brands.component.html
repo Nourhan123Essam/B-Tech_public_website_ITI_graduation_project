@@ -5,9 +5,9 @@
     </button>
 
     <div class="d-flex align-items-center overflow-hidden" #brandContainer>
-      <div *ngFor="let brand of brands" class="brand-item text-center mx-3">
-        <img [src]="brand.icon" class="brand-icon" [alt]="brand.name">
-        <p class="small-text">{{ brand.name }}</p>
+      <div *ngFor="let catitem of categories" class="brand-item text-center mx-3">
+        <img [src]="catitem.categoryImage" class="brand-icon" [alt]="catitem.categoryName">
+        <p class="small-text">{{ catitem.categoryName }}</p>
       </div>
     </div>
 
