@@ -22,6 +22,7 @@ export class DetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private allProductsService: AllproductsService,
+    private recentProductsService: RecentProductsService, // إضافة خدمة المنتجات المشاهدة
     private translate: LocalizationService
   ) {
     this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
@@ -41,6 +42,8 @@ export class DetailsComponent implements OnInit {
     this.allProductsService.getProductById(productId).subscribe(
       (data) => {
         if (data.isSuccess) {
+            this.product = data.entity; // تخزين بيانات المنتج من الكائن entity
+            this.recentProductsService.addProductToRecent(this.product); // إضافة المنتج إلى قائمة المشاهدات الأخيرة
           this.product = data.entity; // تخزين بيانات المنتج من الكائن entity
         } else {
           console.warn('Product not found or error occurred:', data.msg);
@@ -65,3 +68,5 @@ export class DetailsComponent implements OnInit {
   }
 
 }
+
+
