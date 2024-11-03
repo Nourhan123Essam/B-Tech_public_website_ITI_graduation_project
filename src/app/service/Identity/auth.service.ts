@@ -47,4 +47,15 @@ export class AuthService {
       }
     );
   }
+
+  getTokenClaims(token: string): any {
+    try {
+      const payload = token.split('.')[1];  // الحصول على الجزء الثاني من التوكن
+      const decodedPayload = JSON.parse(atob(payload));  // فك الترميز وتحويله إلى كائن JSON
+      return decodedPayload;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
 }
