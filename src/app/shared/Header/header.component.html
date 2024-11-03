@@ -58,21 +58,21 @@
 
 
           <!-- Daily Deals -->
-          <li class="nav-item col-md-8">
+          <!-- <li class="nav-item col-md-8">
             <a routerLink="products" class="nav-link text-danger">{{
               "nav.daily_deals" | translate
               }}</a>
-          </li>
-        </ul>
+          </li>-->
+        </ul> 
 
         <!-- Search Bar -->
-        <form class="d-flex mx-auto w-50" (ngSubmit)="onSearch()">
+        <!-- <form class="d-flex mx-auto w-50" (ngSubmit)="onSearch()">
           <input class="form-control me-2 mx-2" type="search" placeholder="Search" aria-label="Search"
             [(ngModel)]="searchTerm" name="search" />
           <button title="Search" class="btn btn-outline-secondary" type="submit">
             <i class="fas fa-search"></i>
           </button>
-        </form>
+        </form> -->
 
 
         <!-- Sign In and Cart -->
@@ -88,6 +88,32 @@
             </a>
           </li>
           <!-- <li class="nav-item col-md-7" >
+                  <!-- Daily Deals -->
+                  <li class="nav-item col-md-8">
+                      <a routerLink="products" class="nav-link text-danger">{{'nav.daily_deals'|translate}}</a>
+                  </li>
+              </ul>
+
+              <!-- Search Bar -->
+              <form (ngSubmit)="onSearch($event)" class="d-flex mx-auto w-50">
+                <input [(ngModel)]="searchQuery" name="searchQuery" class="form-control me-2 mx-2" type="search" placeholder="Search by Category" aria-label="Search">
+                <button title="." class="btn btn-outline-secondary" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
+              <!-- Sign In and Cart -->
+              <ul class="navbar-nav ms-auto d-flex align-items-center ">
+                  <li class="nav-item  col-md-7">
+                    <a class="nav-link" (click)="opensignin()">
+                        <i class="fas fa-user"></i> {{'nav.sign_in'|translate}}
+                      </a>
+                  </li>
+                  <li class="nav-item col-md-7">
+                      <a class="nav-link" href="#">
+                          <i class="fas fa-shopping-cart"></i> {{'nav.cart'|translate}}
+                      </a>
+                  </li>
+                  <!-- <li class="nav-item col-md-7" >
                     <a class="nav-link" (click)="signOut()">
                       <i class="fas fa-sign-out-alt"></i>
                     </a>

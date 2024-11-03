@@ -17,6 +17,7 @@ import { ProductCategoryB } from '../../models/product-category-b';
 import { CategoryB } from '../../models/category-b';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -35,6 +36,8 @@ export class HeaderComponent implements AfterViewInit , OnInit{
   url: string = 'assets/i18n/.json';
   isArabic!: boolean;
   isLoggedIn: boolean = true;
+  searchQuery: string = '';
+
 
   categoryNames: string[] = [];
   categories: any;
@@ -51,6 +54,7 @@ export class HeaderComponent implements AfterViewInit , OnInit{
     private auth:AuthService,
     private catservice: CategoryService,
 
+    // private catservice:CategoryService
   ) {
     this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
   }
@@ -118,12 +122,12 @@ onCategoryClick(categoryName: string) {
   const category = this.categories.find((cat: { name: string; }) => cat.name === categoryName);
   this.subCategories = category ? category.subCategories : [];
 }
-onSearch() {
-  if (this.searchTerm) {
-    // Redirect to the products page with the search term as a query parameter
-    this.router.navigate(['/products'], { queryParams: { search: this.searchTerm } });
-  }
-}
+// onSearch() {
+//   if (this.searchTerm) {
+//     // Redirect to the products page with the search term as a query parameter
+//     this.router.navigate(['/products'], { queryParams: { search: this.searchTerm } });
+//   }
+// }
   // New method to get the category name based on the selected language
   getCategoryName(category: CategoryB): string {
     const translationIndex = this.isArabic ? 1 : 0; // Determine the index based on language
@@ -150,4 +154,40 @@ onSearch() {
     );
   }
 
-}
+onSearch(event: Event) {
+    event.preventDefault(); // منع إعادة تحميل الصفحة
+    if (this.searchQuery) {
+      this.catservice.getProductsByCategoryName(this.searchQuery).subscribe(
+        (res) => {
+          if (res && res.length) {
+            // تصفية المنتجات بحيث تتطابق فقط مع اسم الكاتيجوري المطلوب
+            const filteredProducts = res.filter((product: any) =>
+              product.category.translations.some(
+                (translation: any) => translation.categoryName.toLowerCase() === this.searchQuery.toLowerCase()
+              )
+            );
+  
+            if (filteredProducts.length) {
+              // التنقل إلى صفحة نتائج البحث وتمرير المنتجات كـ state
+              this.router.navigate(['/searchresult'], {
+                state: { products: filteredProducts }
+              });
+            } else {
+              console.log("No matching products found for this category");
+            }
+          } else {
+            console.log("No products found for this category");
+          }
+        },
+        error => {
+          console.error("Error fetching products:", error);
+        }
+      );
+    }
+  }
+  
+  
+  
+  
+  }
+

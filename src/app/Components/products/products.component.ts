@@ -62,11 +62,16 @@ isPriceOpen: boolean = false;
   }
 
 
+
   ngOnInit(): void {
     this.getAllBrands();
     this.getAllProducts();
     this.getAllCategory();
        }
+
+   
+
+
        getAllProducts() {
         this.service.getallproducts().subscribe(
           (res: any) => {

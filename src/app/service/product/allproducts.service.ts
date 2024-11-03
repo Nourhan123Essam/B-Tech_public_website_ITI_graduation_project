@@ -37,12 +37,14 @@ export class AllproductsService {
 
 
 
+  // getProductsByCategoryName(categoryName: string): Observable<ProductB[]> {
+  //   return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryName/${categoryName}`);
+  // }
 
-
-
-
-  getProductsByCategoryName(categoryName: string): Observable<ProductB[]> {
-    return this.http.get<ProductB[]>(`${this.thisapi}/Category/GetProductsByCategoryName/${categoryName}`);
+ 
+  getProductsByCategoryName(categoryName: string): Observable<any> {
+    return this.http.get<any>(`${this.thisapi}/Category/GetProductsByCategoryName/${categoryName}`);
   }
-
+   
+ 
 }
