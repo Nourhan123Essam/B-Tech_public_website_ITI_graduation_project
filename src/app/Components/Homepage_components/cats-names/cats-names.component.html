@@ -23,7 +23,6 @@
           <div class="d-inline-flex gap-1" *ngIf="products && products.length > 0; else noProducts">
             <div *ngFor="let productItem of products" class="card product-card" (click)="openProductDetails(productItem)">
               <h5 class="card-title">{{ productItem.product.translations?.length > 0 ? productItem.product.translations[0].name : 'No name available' }}</h5>
-              <!-- <p>{{ productItem.product.translations?.length > 0 ? productItem.product.translations[0].description : 'No description available' }}</p> -->
               <p class="price">Price: {{ productItem.product.price }} EGP</p>
               <img *ngIf="productItem.product.images?.length > 0" [src]="productItem.product.images[0].url" alt="{{ productItem.product.translations?.length > 0 ? productItem.product.translations[0].name : 'Product Image' }}" />
             </div>

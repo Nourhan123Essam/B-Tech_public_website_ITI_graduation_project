@@ -29,4 +29,22 @@ export class AuthService {
   signOut(): Observable<any> {
     return this.http.post(`${this.apiUrl}/signout`, {});
   }
+  getUserId(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/UserId?id=${id}`);
+  }
+
+  loginUser(id: number): void {
+    this.getUserId(id).subscribe(
+      (response) => {
+        if (response && response.userId) {
+          // تخزين userId في localStorage
+          localStorage.setItem('userId', response.userId);
+          console.log('User ID saved:', response.userId);
+        }
+      },
+      (error) => {
+        console.error('Error fetching user ID:', error);
+      }
+    );
+  }
 }

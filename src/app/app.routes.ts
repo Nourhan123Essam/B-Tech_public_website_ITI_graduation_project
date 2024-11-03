@@ -11,6 +11,8 @@ import { NgModule } from '@angular/core';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { ProductsByBrandComponent } from './Components/products-by-brand/products-by-brand.component';
+import { ProductsByCategoryComponent } from './Components/products-by-category/products-by-category.component';
+import { SearchresultComponent } from './Components/searchresult/searchresult.component';
 
 export const routes: Routes = [
 
@@ -27,6 +29,9 @@ export const routes: Routes = [
     { path: 'sign-in', component: SignInComponent, data: { hideHeaderFooter: true } },
     { path: 'sign-up', component: SignUpComponent },
     { path: 'products-by-brand/:brandName', component: ProductsByBrandComponent },
+    {path: 'product-by-category/:categoryId', component:ProductsByCategoryComponent},
+    { path: 'searchresult', component: SearchresultComponent },
+
 
     {path:'remember-by-phoone',component:RemeberByPhooneComponent,title:'remember-me', data: { hideHeaderFooter: true } },
 
