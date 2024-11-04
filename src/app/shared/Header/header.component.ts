@@ -79,14 +79,24 @@ export class HeaderComponent implements AfterViewInit , OnInit{
 // }
 
 getallcategory() {
+  //get main not all
   this.catservice.getallcategory().subscribe((res: any) => {
+    //comment or change if condition res object
       if (res.isSuccess && Array.isArray(res.entity)) {
           // Map categories from API and add sample subcategories if subCategories are not provided
+
+        //res without entity
           this.categories = res.entity.map((category: any) => {
               // Determine index based on isArabic flag (0 for English, 1 for Arabic)
+
+            //0:1 in database Arabic first
               const translationIndex = this.isArabic ? 1 : 0;
+
+            //Correct:  const categoryName = category.category.translations?.[translationIndex]?.categoryName;
+            //for Id : category.category.id
               const categoryName = category.translations?.[translationIndex]?.categoryName;
 
+            //fill with catService get sub with main id
               let subCategories: string[] = [];
 
               // Assign sample subcategories based on main category name
