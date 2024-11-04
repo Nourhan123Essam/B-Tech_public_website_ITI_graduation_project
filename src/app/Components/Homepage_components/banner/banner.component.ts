@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Route, Router } from '@angular/router';
 
 interface Image {
   url: string;
@@ -17,7 +18,9 @@ interface Image {
 export class BannerComponent implements OnInit {
   images: Image[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadImages();
@@ -29,5 +32,8 @@ export class BannerComponent implements OnInit {
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         .slice(0, 5);
     });
+  }
+  productPage(){
+    this.router.navigate(['/products'])
   }
 }

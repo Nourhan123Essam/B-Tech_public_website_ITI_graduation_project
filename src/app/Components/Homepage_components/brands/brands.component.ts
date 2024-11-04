@@ -79,4 +79,6 @@ export class BrandsComponent implements OnInit{
   scrollRight() {
     this.brandContainer.nativeElement.scrollBy({ left: 200, behavior: 'smooth' });
   }
+
+  
 }

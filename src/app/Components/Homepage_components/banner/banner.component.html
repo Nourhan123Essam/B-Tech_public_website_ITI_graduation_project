@@ -2,7 +2,7 @@
   <div id="carouselExampleControls" class="carousel slide custom-rounded" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div *ngFor="let image of images; let i = index" [class]="i === 0 ? 'carousel-item active' : 'carousel-item'"  >
-        <img [src]="image.url" class="d-block w-100" [alt]="'Slide ' + (i + 1)">
+        <img [src]="image.url" class="d-block w-100" [alt]="'Slide ' + (i + 1)" (click)="productPage()">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

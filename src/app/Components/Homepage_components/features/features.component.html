@@ -1,13 +1,17 @@
-<div class="container py-5">
-  <h2>Featured Categories</h2>
-  <!-- <div class="row">
-    <div class="col-md-4" *ngFor="let category of categories">
-      <div class="card">
-        <img src="{{ category.imageUrl }}" class="card-img-top" alt="{{ category.name }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ category.name }}</h5>
-        </div>
-      </div>
+<div class="card m-3 p-3 shadow-sm container py-5">
+  <h4>Why B.TECH</h4>
+  <div class="d-flex mt-3 justify-content-around categories-container ">
+    <div (click)="productPage()">
+      <img src="https://btech.com/media/homecontent/exclusive/b/f/bf24_generic_bottom_banners__12_en.png" alt="">
     </div>
-  </div> -->
+    <div (click)="productPage()">
+      <img src="https://btech.com/media/homecontent/exclusive/b/f/bf24_generic_bottom_banners__11_en.png" alt="">
+    </div>
+    <div (click)="productPage()">
+      <img src="https://btech.com/media/homecontent/exclusive/b/f/bf24_generic_bottom_banners__3_en.png" alt="">
+    </div>
+    <div (click)="productPage()">
+      <img src="https://btech.com/media/homecontent/exclusive/b/f/bf24_generic_bottom_banners__10_en.png" alt="">
+    </div>
+  </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component , OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-features',
@@ -8,15 +9,15 @@ import { Component , OnInit } from '@angular/core';
   styleUrl: './features.component.css'
 })
 export class FeaturesComponent  implements OnInit {
-  // categories = [
-  //   { name: 'Mobiles', imageUrl: 'assets/images/mobile.jpg' },
-  //   { name: 'Appliances', imageUrl: 'assets/images/appliances.jpg' },
-  //   { name: 'Electronics', imageUrl: 'assets/images/electronics.jpg' }
-  // ];
 
-  constructor() {}
+  constructor(
+   private router: Router
+  ) {}
 
   ngOnInit(): void {}
+  productPage(){
+    this.router.navigate(['/products'])
+  }
 }
 
 
