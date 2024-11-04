@@ -70,7 +70,7 @@
         </form>
         <!-- Sign In and Cart -->
         <ul class="navbar-nav ms-auto d-flex align-items-center">
-          <li class="nav-item col-md-7">
+          <li class="nav-item col-md-7" *ngIf="!isUserLoggedIn">
             <a class="nav-link" (click)="opensignin()">
               <i class="fas fa-user"></i> {{ "nav.sign_in" | translate }}
             </a>
@@ -80,11 +80,11 @@
               <i class="fas fa-shopping-cart"></i> {{ "nav.cart" | translate }}
             </a>
           </li>
-          <!-- <li class="nav-item col-md-7" >
-                    <a class="nav-link" (click)="signOut()">
-                      <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                  </li> -->
+          <li class="nav-item col-md-7" *ngIf="isUserLoggedIn" >
+            <a class="nav-link" (click)="onSignOut()">
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

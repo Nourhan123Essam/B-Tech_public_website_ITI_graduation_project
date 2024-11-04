@@ -35,8 +35,9 @@ import { Observable } from 'rxjs';
 export class HeaderComponent implements AfterViewInit , OnInit{
   url: string = 'assets/i18n/.json';
   isArabic!: boolean;
-  isLoggedIn: boolean = true;
+  // isLoggedIn: boolean = true;
   searchQuery: string = '';
+  isUserLoggedIn: boolean = false;
 
 
   categoryNames: string[] = [];
@@ -63,6 +64,8 @@ export class HeaderComponent implements AfterViewInit , OnInit{
   }
   ngOnInit(): void {
     this.getallcategory();
+    this.isUserLoggedIn = this.auth.isLoggedIn();
+
   }
 
 
@@ -142,17 +145,21 @@ onCategoryClick(categoryName: string) {
   opensignin() {
     this.router.navigate(['remember-by-phoone']);
   }
-
-  signOut() {
-    this.auth.signOut().subscribe(
-      () => {
-        localStorage.removeItem('authToken'); // مسح التوكن من التخزين المحلي
-        this.isLoggedIn = false; // تحديث حالة تسجيل الدخول
-        this.router.navigate(['/']); // إعادة توجيه المستخدم للصفحة الرئيسية
-      },
-      (error) => console.error('Logout failed:', error)
-    );
+  onSignOut() {
+    this.auth.signOut();
+    this.isUserLoggedIn = false;
+    this.router.navigate(['/']);  // توجيه المستخدم إلى صفحة تسجيل الدخول
   }
+  // signOut() {
+  //   this.auth.signOut().subscribe(
+  //     () => {
+  //       localStorage.removeItem('authToken'); // مسح التوكن من التخزين المحلي
+  //       this.isLoggedIn = false; // تحديث حالة تسجيل الدخول
+  //       this.router.navigate(['/sign-in']); // إعادة توجيه المستخدم للصفحة الرئيسية
+  //     },
+  //     (error) => console.error('Logout failed:', error)
+  //   );
+  // }
 
 onSearch(event: Event) {
     event.preventDefault(); // منع إعادة تحميل الصفحة
