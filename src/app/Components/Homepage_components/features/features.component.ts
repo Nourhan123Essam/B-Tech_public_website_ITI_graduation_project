@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -18,10 +19,16 @@ export class FeaturesComponent implements OnInit {
   //   { name: 'Appliances', imageUrl: 'assets/images/appliances.jpg' },
   //   { name: 'Electronics', imageUrl: 'assets/images/electronics.jpg' }
   // ];
+export class FeaturesComponent  implements OnInit {
 
-  constructor(private translate: LocalizationService) {
+  constructor(
+   private router: Router,
+  private translate: LocalizationService) {
     this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
   }
 
   ngOnInit(): void {}
+  productPage(){
+    this.router.navigate(['/products'])
+  }
 }

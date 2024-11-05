@@ -78,7 +78,7 @@ export class CatsNamesComponent implements OnInit{
       (products: ProductB[]) => {
         console.log('API Response:', products);
         if (Array.isArray(products) && products.length > 0) {
-          this.products = products.map(productItem => ({
+          this.products = products.slice(0, 6).map(productItem => ({
             ...productItem,
             product: {
               ...productItem.product,

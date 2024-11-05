@@ -1,0 +1,43 @@
+/* img{
+    height: 300px;
+} */
+.card {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .card img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .categories-container div {
+    flex: 1 1 calc(25% - 15px); /* عرض كل صورة يكون 25% مع فرق المسافة */
+    cursor: pointer;
+  }
+
+  /* لجعل التصميم متجاوبًا على الشاشات الصغيرة */
+  @media (max-width: 992px) {
+    .card img {
+      height: 250px;
+    }
+    .categories-container div {
+      flex: 1 1 calc(50% - 15px); /* عرض كل صورة يكون 50% */
+    }
+  }
+
+  @media (max-width: 576px) {
+    .card img {
+      height: 200px;
+    }
+    .categories-container div {
+      flex: 1 1 100%; /* عرض كل صورة يكون 100% على الشاشات الصغيرة */
+    }
+  }

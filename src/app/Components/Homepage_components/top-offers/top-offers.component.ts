@@ -115,4 +115,7 @@ export class TopOffersComponent implements OnInit {
       console.error('Product ID is undefined or data is invalid:', data);
     }
   }
+  productPage(){
+    this.router.navigate(['/products'])
+  }
 }

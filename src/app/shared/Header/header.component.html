@@ -34,6 +34,7 @@
       <!-- Navbar Links -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
           <!-- Categories Dropdown -->
           <li class="nav-item dropdown" [ngClass]="{ 'dropdown-ar': isArabic, 'dropdown-en': !isArabic }">
             <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown"
@@ -41,20 +42,23 @@
               {{ "nav.categories" | translate }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-              <li *ngFor="let category of categories" class="dropdown-submenu">
+              <li *ngFor="let categoryItem of categories" class="dropdown-submenu">
                 <!-- Main Category Item -->
-                <a class="dropdown-item" href="#" (click)="onCategoryClick(category)">
-                  {{ category.name }}
+                <a class="dropdown-item" 
+                (mouseenter)="onCategoryHover(categoryItem.id)">
+                  {{ categoryItem.categoryName }}
                 </a>
                 <!-- Subcategory Dropdown -->
-                <ul *ngIf="category.subCategories.length > 0" class="dropdown-menu">
-                  <li *ngFor="let subCategory of category.subCategories">
-                    <a class="dropdown-item" href="#">{{ subCategory }}</a>
+                <ul *ngIf="selectedCategoryId === categoryItem.id && subCategories.length > 0" class="dropdown-menu">
+                  <li *ngFor="let subCategory of subCategories" >
+                    <a class="dropdown-item"  [routerLink]="['/product-by-category', subCategory.id]">
+                      {{ subCategory.categoryName }}</a>
                   </li>
                 </ul>
               </li>
             </ul>
           </li>
+      
               <!-- Daily Deals -->
               <li class="nav-item col-md-8">
                 <a routerLink="products" class="nav-link text-danger">{{'nav.daily_deals'|translate}}</a>
@@ -70,7 +74,7 @@
         </form>
         <!-- Sign In and Cart -->
         <ul class="navbar-nav ms-auto d-flex align-items-center">
-          <li class="nav-item col-md-7">
+          <li class="nav-item col-md-7" *ngIf="!isUserLoggedIn">
             <a class="nav-link" (click)="opensignin()">
               <i class="fas fa-user"></i> {{ "nav.sign_in" | translate }}
             </a>
@@ -80,11 +84,11 @@
               <i class="fas fa-shopping-cart"></i> {{ "nav.cart" | translate }}
             </a>
           </li>
-          <!-- <li class="nav-item col-md-7" >
-                    <a class="nav-link" (click)="signOut()">
-                      <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                  </li> -->
+          <li class="nav-item col-md-7" *ngIf="isUserLoggedIn" >
+            <a class="nav-link" (click)="onSignOut()">
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

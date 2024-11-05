@@ -20,15 +20,24 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/Login`, { Email: email, Password: password });
+
   }
 
   register(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, userData);
   }
 
-  signOut(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/signout`, {});
+  // signOut(): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/signout`, {});
+  // }
+  
+  signOut(): void {
+    localStorage.removeItem('authToken');  // إزالة التوكن من localStorage
+    localStorage.removeItem('userId');     // إزالة userId (إن وجد)
+    console.log('User signed out successfully.');
   }
+  
+
   getUserId(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/UserId?id=${id}`);
   }
@@ -57,5 +66,9 @@ export class AuthService {
       console.error('Error decoding token:', error);
       return null;
     }
+  }
+  
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('authToken');
   }
 }
