@@ -40,6 +40,14 @@
     "No products found for": "No products found for",
     "Products for": "Products for"
   },
+  "home":{
+    "featured categories": "Featured Categories",
+    "last view products": "Last Viewed Products",
+    "popular brands": "Popular Brands",
+    "B.TECH promo codes": "B.TECH Promo Codes",
+    "top offers": "Top Offers",
+    "shop now": "Shop Now"
+  },
 
   "footer": {
     "call_support": "Call support",

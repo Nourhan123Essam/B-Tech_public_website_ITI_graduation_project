@@ -1,7 +1,7 @@
 <div class="top-offers mt-5">
   <div class="top-offers-header">
-    <h2>Top Offers</h2>
-    <button class="shop-now-btn">Shop now</button>
+    <h2>{{'home.top offers'|translate}}</h2>
+    <button class="shop-now-btn">{{'home.shop now'|translate}}</button>
   </div>
 
   <div class="product-carousel">
@@ -15,7 +15,10 @@
         <h5 *ngIf="product.translations">
             {{ product.translations[0].name }}
         </h5>
-        <h6 class="price">{{ product.price }}EGP</h6>
+        <p class="price">
+          {{ "product.price" | translate }}:
+          {{ getFormattedPrice(product.price) }}
+        </p>
         <p class="monthly-pay">or from {{ getMonthlyPayment(product) | currency }}/mo</p>
     </div>
 
@@ -23,4 +26,3 @@
     <button class="scroll-button right" (click)="scrollCarousel(1)">&#10095;</button>
   </div>
 </div>
-
