@@ -4,15 +4,18 @@ import { CategoryB } from '../../../models/category-b';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LocalizationService } from '../../../service/localiztionService/localization.service';
 
 @Component({
   selector: 'app-top-brands',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule],
   templateUrl: './top-brands.component.html',
   styleUrl: './top-brands.component.css'
 })
 export class TopBrandsComponent  {
+  isArabic!: boolean;
 
   topBrands=[
     {id:1 , name:'Samsung', image:'https://btech.com/media/homecontent/brand/cache/56x56/s/a/samsung.png'},
@@ -34,9 +37,11 @@ export class TopBrandsComponent  {
 brandImage = this.topBrands.map(op=>op.image)
 selectedBrand:any;
 constructor(
-  private router: Router
-
-){}
+  private router: Router,
+  private translate: LocalizationService
+){
+   this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+}
 
 navigateToBrandProducts(brandName: string): void {
   this.router.navigate(['/products-by-brand', brandName]);

@@ -11,7 +11,8 @@
     "daily_deals": "عروض كل اليوم",
     "search_placeholder": "بحث",
     "sign_in": "تسجيل الدخول",
-    "cart": "عربة التسوق"
+    "cart": "عربة التسوق",
+    "search by category": "بحث حسب الفئة"
   },
 
   "slider": {
@@ -19,7 +20,6 @@
     "brands": "العلامات التجارية",
     "price": "السعر",
     "clear all": "مسح الكل"
-
   },
 
   "remember": {
@@ -40,6 +40,15 @@
     "add to cart": "أضف إلى السلة",
     "No products found for": "لم يتم العثور على منتجات ل",
     "Products for": "منتجات ل"
+  },
+  "home": {
+    "featured categories": "الفئات المميزة",
+    "last view products": "المنتجات التي تم عرضها مؤخرًا",
+    "popular brands": "العلامات التجارية الشهيرة",
+    "B.TECH promo codes": "خصومات من بي تك",
+    "top offers": "أفضل العروض",
+    "shop now": "تسوق الآن",
+    "why B.TECH": "لماذا B.TECH"
   },
 
   "footer": {
