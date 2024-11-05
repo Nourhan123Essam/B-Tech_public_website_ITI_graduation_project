@@ -6,5 +6,5 @@
   .custom-rounded {
     border-radius: 15px; /* Adjust the value to your preference */
     overflow: hidden; /* Ensures the images stay within the rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  

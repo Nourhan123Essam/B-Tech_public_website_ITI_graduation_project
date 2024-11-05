@@ -10,16 +10,17 @@
       <div *ngFor="let product of expensiveProducts" class="product-card " (click)="openProductDetails(product)">
         <img *ngIf="product.images.length  && product.images.length > 0"
             [src]="product.images[0].url"
-            [alt]="product.translations[0].name ">
-
+            [alt]="product.translations[isArabic ? 1 : 0]?.name ">
         <h5 *ngIf="product.translations">
-            {{ product.translations[0].name }}
+          {{ product.translations[isArabic ? 1 : 0]?.name }}
         </h5>
         <p class="price">
           {{ "product.price" | translate }}:
           {{ getFormattedPrice(product.price) }}
         </p>
-        <p class="monthly-pay">or from {{ getMonthlyPayment(product) | currency }}/mo</p>
+        <p class="monthly-pay">
+          {{ 'home.monthly pay' | translate: { amount: getMonthlyPayment(product) | currency } }}
+        </p>
     </div>
 
     </div>
