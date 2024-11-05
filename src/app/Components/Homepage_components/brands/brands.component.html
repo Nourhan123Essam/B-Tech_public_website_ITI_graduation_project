@@ -1,18 +1,27 @@
-<div class="container my-4 position-relative">
-  
-    <button class="scroll-button left" (click)="scrollLeft()">&#10094;</button>
+<div class="container my-4 position-relative" [dir]="isArabic ? 'rtl' : 'ltr'">
 
-    <div class="d-flex align-items-center overflow-hidden" #brandContainer>
-      <div *ngFor="let catitem of categories"
-       class="brand-item text-center mx-3"
-       [class.selected]="catitem.id === selectedCategoryId"
-       (click)="selectCategory(catitem.id)">
-        <img [src]="catitem.categoryImage" class="brand-icon" [alt]="catitem.categoryName">
-        <p class="small-text">{{ catitem.categoryName }}</p>
-      </div>
+  <!-- Scroll Left Button -->
+  <button class="scroll-button left" (click)="scrollLeft()">
+    <!-- Change arrow direction based on RTL or LTR -->
+    <span *ngIf="isArabic">&#10095;</span>
+    <span *ngIf="!isArabic">&#10094;</span>
+  </button>
+
+  <!-- Scrolling Brand Container -->
+  <div class="d-flex align-items-center overflow-hidden" #brandContainer>
+    <div *ngFor="let catitem of categories"
+         class="brand-item text-center mx-3"
+         [class.selected]="catitem.id === selectedCategoryId"
+         (click)="selectCategory(catitem.id)">
+      <img [src]="catitem.categoryImage" class="brand-icon" [alt]="catitem.categoryName">
+      <p class="small-text">{{ catitem.categoryName }}</p>
     </div>
-    <button class="scroll-button right" (click)="scrollRight()">&#10095;</button>
-
-   
   </div>
 
+  <!-- Scroll Right Button -->
+  <button class="scroll-button right" (click)="scrollRight()">
+    <!-- Change arrow direction based on RTL or LTR -->
+    <span *ngIf="isArabic">&#10094;</span>
+    <span *ngIf="!isArabic">&#10095;</span>
+  </button>
+</div>
