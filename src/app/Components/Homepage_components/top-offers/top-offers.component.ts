@@ -36,7 +36,7 @@ export class TopOffersComponent implements OnInit {
         this.expensiveProducts = this.products
           .filter(product => typeof product.price === 'number') // Ensure each product has a price
           .sort((a, b) => b.price - a.price)
-          .slice(0, 5);
+          .slice(0, 5)
       } else {
         console.error('Entity is not an array or request failed:', response);
         this.products = [];
