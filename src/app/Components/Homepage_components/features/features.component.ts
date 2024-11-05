@@ -13,22 +13,12 @@ import { LocalizationService } from '../../../service/localiztionService/localiz
 })
 export class FeaturesComponent implements OnInit {
   isArabic!: boolean;
-
-  // categories = [
-  //   { name: 'Mobiles', imageUrl: 'assets/images/mobile.jpg' },
-  //   { name: 'Appliances', imageUrl: 'assets/images/appliances.jpg' },
-  //   { name: 'Electronics', imageUrl: 'assets/images/electronics.jpg' }
-  // ];
-export class FeaturesComponent  implements OnInit {
-
-  constructor(
-   private router: Router,
-  private translate: LocalizationService) {
+  constructor(private router: Router, private translate: LocalizationService) {
     this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
   }
 
   ngOnInit(): void {}
-  productPage(){
-    this.router.navigate(['/products'])
+  productPage() {
+    this.router.navigate(['/products']);
   }
 }
