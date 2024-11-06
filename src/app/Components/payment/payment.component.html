@@ -1,122 +1,145 @@
-<!-- 
-<div class="container my-4 text-center" style="width: 80%;">
+
   
+<div class="container my-4 text-center" style="width: 80%;">
     <div class="row">
-      <div class="col-md-8">
-        <div class="cart-page">
-
-        </div>
-       </div>
-        <div class="col-md-4">
-            <div class="text-center smallCart">
-                <h4 class="text-start">Order summary</h4><br>
-
-                <div class="row" style="margin-top: 15px;">
-                <div class="col-md-6 text-start">Quanity:</div>
-                <div class="col-md-6 text-end">{{Quantity}} items</div>
-                </div><br>
-                <div class="row" style="margin-bottom: 15px; font-size: 20px;">
-                <h5  class="col-md-6 text-start">Total:</h5>
-                <h5  class="col-md-6 text-end">{{ totalCost }} EGP</h5>
-                </div><br>
-                <button (click)="goToCheckout()" class="checkout-btn">Place order</button>
+      <div class="col-md-7 cart-page text-start">
+        <p class="hint">
+          <i class="fa-solid fa-box"></i>
+          Products from different warehouses will be delivered as separate orders
+        </p>
+  
+        <!-- Accordion for Delivery Details and Payment Info -->
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+          
+          <!-- Delivery Details Section -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button id="delivery" class="accordion-button section-parts" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                <div style="font-weight: bold; font-size: 20px;">
+                  <div class="section-number">1</div> 
+                  <div style="display: inline-block;">&nbsp;Delivery details</div>
+                </div>
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" *ngIf="currentStep == 1">
+              <div class="accordion-body">
+                <div class="form-group">
+                  <label for="city" style="font-size: 18px; font-weight: bold; margin-top: 33px; display: block;">Delivery area</label>
+                  <br>
+                  <select id="city" [(ngModel)]="deliveryDetails.city" (change)="nextStep()" style="width: 100%; border-radius: 10px; padding: 15px; border-color: rgb(194, 194, 188);">
+                    <option value="">Select city</option>
+                    <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                  </select>
+                </div>
+              </div>
             </div>
-        </div>
-  </div>
-</div>
-   -->
-
-   <div class="container my-4 text-center"  style=" width: 80%;">
-        <div class="row">
-            <div class="col-md-7 cart-page text-start">
-                <p class="hint">
-                    <i class="fa-solid fa-box"></i>
-                    Products from different warehouses will be delivered as serparate orders
-                </p>
-                <!-- Delivery Details Section -->
-                <div *ngIf="currentStep >= 1" class="section"></div>         
-                <!-- Payment Info Section -->
-                <div *ngIf="currentStep >= 2" class="section">
-                    <div class="form-group">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" id="cardNumber" [(ngModel)]="paymentInfo.cardNumber" (input)="validateStep(2)">
-                    </div>
+          </div>
+  
+          <!-- Payment Info Section -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button style="color: gray;" id="pay" disabled class="accordion-button collapsed section-parts" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                <div style="font-weight: bold; font-size: 20px;">
+                  <div class="section-number-disable" id="payp">2</div> 
+                  <div style="display: inline-block;">&nbsp;Payment info</div>
+                </div>
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo"  *ngIf="currentStep == 2">
+              <div class="accordion-body" style="font-size: 15px;">
+            
+                <label>Select Payment Method:</label>
+                <div class="row" style="margin: 15px 0;">
+                  <div class="col-md-6 text-start">
+                    <input (click)="chashPayment()" type="radio" id="cash" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="cash">
+                    <label [ngClass]="{'selected-label': selectedPaymentMethod === 'cash'}" for="cash">Cash on delivery</label>
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <i [ngClass]="{'selected-label': selectedPaymentMethod === 'cash'}" class="fa-solid fa-wallet"></i>
+                  </div>
                 </div>
 
-                <div class="accordion" id="accordionPanelsStayOpenExample">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button section-parts"  type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                            <div style="font-weight: bold; font-size: 20px;">
-                                <div class="section-number">1</div> 
-                                <div style="display: inline-block; ">&nbsp;Delivery details</div>
-                            </div>
-                        </button>
-                      </h2>
-                      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                            <div class="form-group">
-                                <label for="city" style="font-size: 18px; font-weight: bold; margin-top: 33px; display: block;">Delivery area</label>
-                                <br>
-                                <select id="city" [(ngModel)]="deliveryDetails.city" (change)="nextStep()" style="width: 100%;border-radius: 10px; padding: 15px; border-color: rgb(194, 194, 188);">
-                                    <option value="">Select city</option>
-                                    <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
-                                </select>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header">
-                        <button style="color: gray;" disabled class="accordion-button collapsed section-parts" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                            <div style="font-weight: bold; font-size: 20px;">
-                                <div class="section-number-disable">2</div> 
-                                <div style="display: inline-block; ">&nbsp;Payment info</div>
-                            </div>
-                        </button>
-                      </h2>
-                      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                      </div>
-                    </div>
-                    
+                <div class="row" style="margin: 15px 0;">
+                  <div class="col-md-6 text-start" >
+                    <input type="radio" id="paypal" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="paypal">
+                    <label [ngClass]="{'selected-label': selectedPaymentMethod === 'paypal'}" for="paypal">PayPal</label>
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <i [ngClass]="{'selected-label': selectedPaymentMethod === 'paypal'}" class="fa-regular fa-credit-card"></i>
+                  </div>
                 </div>
-            </div>
-        
-            <!-- <div class="col-md-1"></div> -->
-            <div class="col-md-4 smallCart">
-                <h5 style="font-weight: bold; margin-top: 10px;" class="text-start">Order summary</h5>
-                <div *ngFor="let order of cartItems; let i = index" style="width: 100%;">
-                    <br>
-                    <div style="border-bottom: 2px solid rgb(205, 201, 201); width: 100%;">
-                        <p class="text-start" style="font-weight: bold;">Order {{i + 1}}</p>
-                        <div class="row" >
-                            <img [src]="order.imageUrl" alt="Product Image" class="col-md-2">
-                            <p class="col-md-6 text-start">{{ order.productName }} product</p>
-                            <p class="col-md-4 text-end">{{ order.price *  order.quantity}} EGP</p>
-                        </div><hr>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-md-6 text-start">Quanity:</div>
-                            <div class="col-md-6 text-end">{{order.quantity}} items</div>
-                        </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-md-6 text-start">Item value:</div>
-                            <div class="col-md-6 text-end">{{ order.price }} EGP</div>
-                        </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-md-6 text-start">Delivery fee:</div>
-                            <div class="col-md-6 text-end">{{ fee }} EGP</div>
-                        </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-md-6 text-start">Total:</div>
-                            <div class="col-md-6 text-end">{{ order.price *  order.quantity + fee}} EGP</div>
-                        </div>
-                        <br>
-                    </div>
+                
+                <div *ngIf="selectedPaymentMethod === 'paypal'">
+                  <app-paypal-button [amount]="totalAmount"></app-paypal-button>
                 </div>
+
+              </div>
+
+              <!-- continue to payment -->
+              <div class="text-center" style="margin: 15px 0;">
+                <button (click)="placeOrder()" id="continuePayment" disabled class="btn btn-dark text-center orderButton" style="width: 95%; border-radius: 10px; padding: 10px"> Continue</button>
+              </div>
+
             </div>
+          </div>
+  
         </div>
+      </div>
+  
+      <!-- Order Summary Section -->
+      <div class="col-md-4 smallCart">
+        <h5 style="font-weight: bold; margin-top: 10px;" class="text-start">Order summary</h5>
+        <div *ngFor="let order of cartItems; let i = index" style="width: 100%;">
+          <br>
+          <div style="border-bottom: 2px solid rgb(205, 201, 201); width: 100%;">
+            <p class="text-start" style="font-weight: bold;">Order {{i + 1}}</p>
+            <div class="row">
+              <img [src]="order.imageUrl" alt="Product Image" class="col-md-2">
+              <p class="col-md-6 text-start">{{ order.productName }}</p>
+              <p class="col-md-4 text-end">{{ order.totalPrice.toFixed(2)}} EGP</p>
+            </div>
+            <hr>
+            <div class="row" style="margin-top: 15px;">
+              <div class="col-md-6 text-start">Quantity:</div>
+              <div class="col-md-6 text-end">{{order.quantity}} items</div>
+            </div>
+            <div class="row" style="margin-top: 15px;">
+              <div class="col-md-6 text-start">Item value:</div>
+              <div class="col-md-6 text-end">{{ order.productPrice.toFixed(2) }} EGP</div>
+            </div>
+            <div class="row" style="margin-top: 15px;">
+              <div class="col-md-6 text-start">Delivery fee:</div>
+              <div class="col-md-6 text-end">{{ fee }} EGP</div>
+            </div>
+            <div class="row" style="margin-top: 15px;">
+              <div class="col-md-6 text-start">Total:</div>
+              <div class="col-md-6 text-end">{{ (order.totalPrice + fee).toFixed(2)}} EGP</div>
+            </div>
+            <br>
+          </div>
+        </div>
+  
+        <!-- Promo Code Section -->
+        <div class="text-start" style="margin-top: 15px;">
+          <a style="text-decoration: none; color: rgb(62, 62, 222);" (click)="discount()">
+            I have a promo code
+          </a>
+          <div class="row" style="margin-top: 15px; display: none;" id="discountPromo">
+            <div class="col-md-8">
+              <input type="text" style="border: 1px solid rgb(191, 190, 190);" placeholder="Enter promo code" id="promo" (keypress)="enableButton()">
+            </div>
+            <div class="col-md-4">
+              <button disabled id="promoButton" class="btn btn-dark" (click)="applyDiscount()">Apply</button>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Place Order Button -->
+        <div class="text-center" style="margin-top: 15px;">
+          <button (click)="completePayment()" id="finish" disabled class="btn btn-dark text-center orderButton" style="width: 100%; border-radius: 10px; padding: 10px"> Place Order</button>
+        </div>
+  
+      </div>
+    </div>
   </div>
   

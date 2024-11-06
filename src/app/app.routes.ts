@@ -23,7 +23,7 @@ export const routes: Routes = [
     {path:'products',component:ProductsComponent,title:'Product-List'},
     {path:'details/:id',component:DetailsComponent, title:'Details'},
 
-    { path: 'payment', component: PaymentComponent },
+    { path: 'payment/:orderId', component: PaymentComponent },
     { path: 'cart', component: CartComponent },
 
     { path: 'sign-in', component: SignInComponent, data: { hideHeaderFooter: true } },

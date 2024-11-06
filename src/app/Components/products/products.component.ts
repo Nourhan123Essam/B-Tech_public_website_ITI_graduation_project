@@ -10,6 +10,10 @@ import { CommonModule } from '@angular/common';
 import { ProductCategoryB } from '../../models/product-category-b';
 import { LocalizationService } from '../../service/localiztionService/localization.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../service/Identity/auth.service';
+import { OrderService } from '../../service/Order/order.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-products',
@@ -19,6 +23,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+  userId: string = "e2366e30-de44-4708-af0d-c14f50335ba5";
+
   isArabic!: boolean;
 
   products: ProductB[] = [];
@@ -56,7 +62,10 @@ isPriceOpen: boolean = false;
     private service: AllproductsService,
     private catservice: CategoryService,
     private router: Router,
-    private translate: LocalizationService
+    private translate: LocalizationService,
+    private orderService: OrderService,
+    private autherService:AuthService,
+    private modalService: NgbModal
   ) {
      this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
   }
@@ -201,21 +210,47 @@ isPriceOpen: boolean = false;
     }
   }
 
+  //========== order related functions ============ 
+  @ViewChild('confirmRemoveModal') confirmRemoveModal: any; 
+  ProductImgUrl:string = "";
+  productName:string = "";
+
   addToCart(event: any) {
-    if ("card" in localStorage) {
-      this.cartProducts = JSON.parse(localStorage.getItem("card")!);
-      let exist = this.cartProducts.find(item => item.id == event.id);
-      if (exist) {
-        alert("This product is already in the cart");
-      } else {
-        this.cartProducts.push(event);
-        localStorage.setItem("card", JSON.stringify(this.cartProducts));
-      }
-    } else {
-      this.cartProducts.push(event);
-      localStorage.setItem("card", JSON.stringify(this.cartProducts));
+    const userId = this.autherService.getUserIdNourhan();
+    if(userId != null){
+      console.log(event);
+      this.productName = event.name;
+      this.ProductImgUrl = event.img;
+      this.orderService.addToCart(event.id, this.userId).subscribe(
+        () => {
+          this.openRemoveModal();
+          console.log('Product added to cart successfully!');
+        },
+        (error) => {
+          console.error('Could not add product to cart:', error);
+        }
+      );
     }
   }
+
+  openRemoveModal() {
+    this.modalService.open(this.confirmRemoveModal).result.then((result) => {
+      if (result === 'Remove') {
+        this.goToHome();
+      }
+      else this.goToCart();
+    });
+  }
+
+  goToHome():void{
+    this.router.navigate(['/']); 
+  }
+
+  goToCart():void{
+    this.router.navigate(['/cart']); 
+  }
+
+  //=======================================
 
   toggleCategoryFilter() {
     this.categoryFilterOpen = !this.categoryFilterOpen;

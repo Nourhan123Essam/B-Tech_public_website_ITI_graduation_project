@@ -6,16 +6,33 @@ import { FeaturesComponent } from '../Homepage_components/features/features.comp
 import { LastViewComponent } from '../Homepage_components/last-view/last-view.component';
 import { TopOffersComponent } from '../Homepage_components/top-offers/top-offers.component';
 import { PromoCodesComponent } from '../Homepage_components/promo-codes/promo-codes.component';
-import { CatsNamesComponent } from "../Homepage_components/cats-names/cats-names.component";
-import { TopBrandsComponent } from "../Homepage_components/top-brands/top-brands.component";
+import { CatsNamesComponent } from '../Homepage_components/cats-names/cats-names.component';
+import { TopBrandsComponent } from '../Homepage_components/top-brands/top-brands.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LocalizationService } from '../../service/localiztionService/localization.service';
 
 @Component({
   selector: 'app-promotion',
   standalone: true,
-  imports: [BannerComponent, BrandsComponent, FeaturesComponent, ProductListComponent, LastViewComponent, TopOffersComponent, PromoCodesComponent, CatsNamesComponent, TopBrandsComponent],
+  imports: [
+    TranslateModule,
+    BannerComponent,
+    BrandsComponent,
+    FeaturesComponent,
+    ProductListComponent,
+    LastViewComponent,
+    TopOffersComponent,
+    PromoCodesComponent,
+    CatsNamesComponent,
+    TopBrandsComponent,
+  ],
   templateUrl: './promotion.component.html',
-  styleUrl: './promotion.component.css'
+  styleUrl: './promotion.component.css',
 })
 export class PromotionComponent {
+  isArabic!: boolean;
 
+  constructor(private translate: LocalizationService) {
+    this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+  }
 }

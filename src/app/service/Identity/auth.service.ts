@@ -15,7 +15,11 @@ export class AuthService {
   }
 
   getCurrentUser(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    var url = `${this.apiUrl}/GetCurrentUser`;
+    console.log(url);
+    
+   // alert(url);
+    return this.http.get<any>(url);
   }
 
   login(email: string, password: string): Observable<any> {
@@ -33,6 +37,15 @@ export class AuthService {
     return this.http.get<any>(`${this.apiUrl}/UserId?id=${id}`);
   }
 
+  getUserIdNourhan(): string | null {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const claims = this.getTokenClaims(token);
+      return claims?.['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || null;
+    }
+    return null;
+  }
+
   loginUser(id: number): void {
     this.getUserId(id).subscribe(
       (response) => {
@@ -46,5 +59,17 @@ export class AuthService {
         console.error('Error fetching user ID:', error);
       }
     );
+  }
+
+
+  getTokenClaims(token: string): any {
+    try {
+      const payload = token.split('.')[1];  // الحصول على الجزء الثاني من التوكن
+      const decodedPayload = JSON.parse(atob(payload));  // فك الترميز وتحويله إلى كائن JSON
+      return decodedPayload;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
   }
 }

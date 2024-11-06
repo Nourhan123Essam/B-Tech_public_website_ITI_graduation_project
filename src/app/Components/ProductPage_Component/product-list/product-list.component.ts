@@ -8,9 +8,15 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderService } from '../../../service/Order/order.service';
+import {AuthService} from '../../../service/Identity/auth.service';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LocalizationService } from '../../../service/localiztionService/localization.service';
+import { ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
+
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -23,12 +29,16 @@ export class ProductListComponent {
 
   @Input() data: any = {};
   @Output() item = new EventEmitter();
+
   constructor(
     private router: Router,
     private orderService: OrderService,
-    private translate: LocalizationService
+    private translate: LocalizationService,
+    private autherService:AuthService,
+    private modalService: NgbModal
   ) {
     this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+    
   }
 
   ngOnChanges() {
@@ -46,19 +56,44 @@ export class ProductListComponent {
     }
   }
 
-  add(productId: number, userId: string): void {
-    this.orderService.addToCart(productId, userId).subscribe(
-      () => {
-        console.log('Product added to cart successfully!');
-        // Optionally, trigger a notification or update UI here
-      },
-      (error) => {
-        console.error('Could not add product to cart:', error);
-        // Optionally, show an error message
+  //=========== order related functions ==========
+  @ViewChild('confirmRemoveModal') confirmRemoveModal: any;
+
+  add(data:any): void {
+    const userId = this.autherService.getUserIdNourhan();
+    if(userId != null){
+      var productInfo = {
+        id: data.id,
+        img: (data.product?.images && data.product.images.length > 0) ? data.product.images[0].url : (data.images?.[0]?.url || 'default-image-url.png'),
+        name: data.product?.translations?.[0]?.name || data.translations?.[0]?.name || 'Product Name' 
       }
-    );
-    //this.item.emit(this.data)
+      this.item.emit(productInfo);
+    }
+    else{
+      this.openRemoveModal();
+    }
+    
   }
+
+  openRemoveModal() {
+    this.modalService.open(this.confirmRemoveModal).result.then((result) => {
+      if (result === 'Remove') {
+        this.goToHome();
+      }
+      else this.goToCart();
+    });
+  }
+
+  goToHome():void{
+    this.router.navigate(['/']); 
+  }
+
+  goToCart():void{
+    this.router.navigate(['/sign-in']); 
+  }
+
+
+  //====================================
 
   getFormattedPrice(price: number): string {
     return this.isArabic ? `${price} ج.م` : `EGP ${price}`;

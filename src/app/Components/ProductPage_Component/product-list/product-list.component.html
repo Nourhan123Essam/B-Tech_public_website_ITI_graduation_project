@@ -1,5 +1,6 @@
 <div class="container my-5">
-  <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card" (click)="openProductDetails(data)">
+  <!-- <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card" (click)="openProductDetails(data)"> -->
+    <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card">
     <img
       [src]="(data.product?.images && data.product.images.length > 0) ? data.product.images[0].url : (data.images?.[0]?.url || 'default-image-url.png')"
       class="card-img-top"
@@ -12,12 +13,28 @@
         {{ getFormattedPrice(data.price) }}
       </p>
       <hr />
-      <button class="btn btn-wrning w-75" (click)="add(19, '10734A5F-4152-400A-8CB6-81ADF51742D2')">
+      <button class="btn btn-wrning w-75" (click)="add(data)">
         {{ "product.add to cart" | translate }}
       </button>
     </div>
   </div>
 </div>
+
+<!-- pop-up modal for add to cart if the user not logged in -->
+
+
+<ng-template #confirmRemoveModal let-modal>
+  <div class="modal-body" style="font-weight: bold; background-color: rgb(244, 220, 175);">
+    <div class="row">
+      You need to log in first to add to your cart!
+    </div> 
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-warning" (click)="modal.close('Remove')">Continue exploring products</button>
+    <button type="button" class="btn btn-dark" (click)="modal.close('cancel')">Go to log in</button>
+  </div>
+</ng-template>
+
 
 
 

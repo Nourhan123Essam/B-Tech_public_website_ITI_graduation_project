@@ -16,6 +16,9 @@ import { CommonModule } from '@angular/common';
 import { ProductCategoryB } from '../../models/product-category-b';
 import { CategoryB } from '../../models/category-b';
 import { Observable } from 'rxjs';
+import { ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -53,6 +56,7 @@ export class HeaderComponent implements AfterViewInit , OnInit{
     private activatedRoute: ActivatedRoute,
     private auth:AuthService,
     private catservice: CategoryService,
+    private modalService: NgbModal
 
     // private catservice:CategoryService
   ) {
@@ -79,32 +83,52 @@ export class HeaderComponent implements AfterViewInit , OnInit{
 // }
 
 getallcategory() {
-  this.catservice.getallcategory().subscribe((res: any) => {
-      if (res.isSuccess && Array.isArray(res.entity)) {
+  this.catservice.getmainCategories().subscribe((res: any) => {
+    console.log(res);
+      // if (res.isSuccess && Array.isArray(res.entity)) {
           // Map categories from API and add sample subcategories if subCategories are not provided
-          this.categories = res.entity.map((category: any) => {
+
+          this.categories = res.map((category: any) => {
               // Determine index based on isArabic flag (0 for English, 1 for Arabic)
+
               const translationIndex = this.isArabic ? 1 : 0;
-              const categoryName = category.translations?.[translationIndex]?.categoryName;
+
+              const categoryName = category.category.translations?.[translationIndex]?.categoryName;
+            this.subCategories =category.category.id;
+
+
 
               let subCategories: string[] = [];
 
+              // this.catservice.getsubcategoriesbuyMainId(category.category.id).subscribe({
+              //       next: (res) => {
+              //         console.log(res);
+              //         this.subCategories = res.map((category: any) => {
+              //           const translationIndex = this.isArabic ? 0 : 1;
+              //           return category.category.translations?.[translationIndex]?.categoryName;
+              //         });
+              //       },
+              //       error: (err) => console.error('Error loading subcategories:', err)
+              //     });
+
+
+
               // Assign sample subcategories based on main category name
-              if (categoryName === "Mobiles & Tablets" || categoryName === "الهواتف والأجهزة اللوحية") {
-                  subCategories = ["Mobiles", "Tablets", "Mobile Accessories", "Smart Watches"];
-              } else if (categoryName === "TVs" || categoryName === "تلفزيونات وريسيفرات") {
-                  subCategories = ["LED TVs", "Smart TVs", "4K TVs", "TV Accessories"];
-              } else if (categoryName === "Home Appliances" || categoryName === "الأجهزة المنزلية") {
-                  subCategories = ["Refrigerators", "Washing Machines", "Microwaves", "Air Conditioners"];
-              } else if (categoryName === "Electronics" || categoryName === "الإلكترونيات") {
-                  subCategories = ["Speakers", "Headphones", "Cameras", "Wearable Accessories"];
-              } else if (categoryName === "small home application" || categoryName === "أجهزة منزلية صغيرة") {
-                  subCategories = ["Laptops", "Desktops", "Tablets", "Laptop Accessories"];
-              } else if (categoryName === "samsung" || categoryName === "سامسونج") {
-                  subCategories = ["Mobiles", "Tablets", "Mobile Accessories", "Smart Watches"];
-              } else if (categoryName === "mobile and tablet" || categoryName === "لاب توب و كمبيوتر") {
-                  subCategories = ["Samsung", "Apple", "Xiaomi", "Huawei"];
-              }
+              // if (categoryName === "Mobiles & Tablets" || categoryName === "الهواتف والأجهزة اللوحية") {
+              //     subCategories = ["Mobiles", "Tablets", "Mobile Accessories", "Smart Watches"];
+              // } else if (categoryName === "TVs" || categoryName === "تلفزيونات وريسيفرات") {
+              //     subCategories = ["LED TVs", "Smart TVs", "4K TVs", "TV Accessories"];
+              // } else if (categoryName === "Home Appliances" || categoryName === "الأجهزة المنزلية") {
+              //     subCategories = ["Refrigerators", "Washing Machines", "Microwaves", "Air Conditioners"];
+              // } else if (categoryName === "Electronics" || categoryName === "الإلكترونيات") {
+              //     subCategories = ["Speakers", "Headphones", "Cameras", "Wearable Accessories"];
+              // } else if (categoryName === "small home application" || categoryName === "أجهزة منزلية صغيرة") {
+              //     subCategories = ["Laptops", "Desktops", "Tablets", "Laptop Accessories"];
+              // } else if (categoryName === "samsung" || categoryName === "سامسونج") {
+              //     subCategories = ["Mobiles", "Tablets", "Mobile Accessories", "Smart Watches"];
+              // } else if (categoryName === "mobile and tablet" || categoryName === "لاب توب و كمبيوتر") {
+              //     subCategories = ["Samsung", "Apple", "Xiaomi", "Huawei"];
+              // }
 
               return {
                   name: categoryName,
@@ -112,7 +136,7 @@ getallcategory() {
               };
           }).filter(Boolean);
       }
-  });
+  );
 }
 
 
@@ -166,7 +190,7 @@ onSearch(event: Event) {
                 (translation: any) => translation.categoryName.toLowerCase() === this.searchQuery.toLowerCase()
               )
             );
-  
+
             if (filteredProducts.length) {
               // التنقل إلى صفحة نتائج البحث وتمرير المنتجات كـ state
               this.router.navigate(['/searchresult'], {
@@ -185,9 +209,36 @@ onSearch(event: Event) {
       );
     }
   }
-  
-  
-  
-  
+
+  //=============== order related functions ==========
+  @ViewChild('logFirstModal') confirmRemoveModal: any;
+
+  confirmLogModal() {
+    this.modalService.open(this.confirmRemoveModal).result.then((result) => {
+      if (result === 'Remove') {
+        this.goToHome();
+      }
+      else this.goToLogin();
+    });
+  }
+
+  goToHome():void{
+    this.router.navigate(['/']); 
+  }
+
+  goToLogin():void{
+    this.router.navigate(['/sign-in']); 
+  }
+
+  goToCart(){
+    const userId = this.auth.getUserIdNourhan();
+    if(userId == null){
+        this.confirmLogModal();                  
+    }
+    else this.router.navigate(['/cart']);
+  }
+
+
+
   }
 

@@ -37,6 +37,10 @@ export class SignInComponent {
         (response) => {
           console.log('Login successful:', response);
           if (response && response.token) {
+            const claims = this.authService.getTokenClaims(response.token);
+            console.log('Claims from token:', claims);  // طباعة كل الكليمات لمعرفة الأسماء المتاحة
+            const userId = claims?.['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+            console.log('User ID from token:', userId);
             localStorage.setItem('authToken', response.token);
             this.router.navigate(['/promotion']);
           } else {

@@ -1,73 +1,26 @@
-<!-- 
-<div class="container mt-4">
-  <h3>Your Cart</h3>
-
-  <div *ngIf="cartItems.length > 0; else emptyCart">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Product Name</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Price</th>
-          <th scope="col">Total Price</th>
-          <th scope="col">Stock Quantity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of cartItems">
-          <td>{{ item.productName }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>{{ item.price | currency }}</td>
-          <td>{{ item.totalPrice | currency }}</td>
-          <td>{{ item.stockQuantity }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <ng-template #emptyCart>
-    <p class="text-center">Your cart is empty!</p>
-  </ng-template>
-</div> -->
-<!-- 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Product Name</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Total Price</th>
-      <th>Stock Quantity</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of cartItems">
-      <td>{{ item.productName }}</td>
-      <td>
-        <input type="number" [(ngModel)]="item.quantity" min="1" />
-      </td>
-      <td>{{ item.price }}</td>
-      <td>{{ item.totalPrice }}</td>
-      <td>{{ item.stockQuantity }}</td>
-      <td>
-        <button class="btn btn-danger" (click)="updateQuantity(item.id, item.quantity)">Update Quantity</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-<div class="cart-footer">
-  <p>Total: ${{ totalCost }}</p>
-  <button (click)="goToCheckout()">Proceed to Checkout</button>
-</div> -->
-
 
 <div class="container my-4 text-center" style="width: 80%;">
   
-  <div class="row">
+  <!-- <ng-container  class="text-center" > -->
+    <div *ngIf="cartItems.length === 0;"  class="row text-center">
+      <div class="text-center">
+        <p> 
+          <span style="font-weight: bold; font-size: 20px;">Your shopping cart is empty!</span>
+          <br><span class="empty-cart">B.TECH is the #1 place for all you needs, explore
+          <br>our wide range of products, flexible payments &
+          <br><span class="text-center">offers!</span></span>
+        </p>
+        
+        <button (click)="navigateToHome()" class="shop-button"
+          style="width: 35%; border-radius: 10px; padding: 15px 0; border: 1px solid rgb(191, 190, 190); background-color: white;">
+          <span style="font-weight: bold; font-size: 16px;">Shop now!</span>
+        </button>
+      
+      </div>
+    </div>
+  <!-- </ng-container> -->
+
+  <div class="row" *ngIf="cartItems.length > 0">
     <div class="col-md-8">
       <div class="cart-page">
         <main class="cart-content">
@@ -82,8 +35,8 @@
             <img [src]="item.imageUrl" alt="{{ item.name }}" class="item-image" />
             <div class="item-details col-md-9 text-start">
               <p class="item-name">{{ item.productName }}</p>
-              <p class="item-price">{{ item.quantity }}</p>
-              <h3 class="item-price" style="font-weight: bold;">EGP {{ item.price }}</h3>
+              <!-- <p class="item-price">{{ item.quantity }}</p> -->
+              <h3 class="item-price" style="font-weight: bold;">EGP {{ item.productPrice }}</h3>
             </div>
 
             <div class="col-md-3 text-end" >
@@ -111,7 +64,7 @@
         </div>
         <div class="row" style="margin-bottom: 15px; font-size: 20px;">
           <div style="font-weight: bold;" class="col-md-6 text-start">Subtotal:</div>
-          <div style="font-weight: bold;" class="col-md-6 text-end">{{ totalCost }} EGP</div>
+          <div style="font-weight: bold;" class="col-md-6 text-end">{{ totalCost.toFixed(2) }} EGP</div>
         </div>
         <button (click)="goToCheckout()"  class="checkout-btn">Checkout</button>
       </div>
@@ -152,6 +105,8 @@
       </div>
     </div>
   </div>
+
+
 </div>
 
 <!-- Remove Confirmation Modal -->
@@ -160,8 +115,24 @@
     Remove Product from cart?
   </div>
   <div class="modal-footer text-center">
-    <button type="button" class="btn btn-outline-light" (click)="modal.dismiss('cancel')">Don't Remove</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')">Don't Remove</button>
     <button type="button" class="btn btn-outline-danger" (click)="modal.close('Remove')">Remove</button>
   </div>
 </ng-template>
+
+<!-- pop-up modal for go to cart if the user not logged in -->
+
+
+<ng-template #logFirstModal let-modal>
+  <div class="modal-body" style="font-weight: bold; background-color: rgb(244, 220, 175);">
+    <div class="row">
+      You need to log in first to go to your cart!
+    </div> 
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-warning" (click)="modal.close('Remove')">Continue exploring products</button>
+    <button type="button" class="btn btn-dark" (click)="modal.close('cancel')">Go to log in</button>
+  </div>
+</ng-template>
+
 

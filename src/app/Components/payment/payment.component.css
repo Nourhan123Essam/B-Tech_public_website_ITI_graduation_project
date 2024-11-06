@@ -65,3 +65,28 @@
   }
 
  
+
+  /* /////////////////////////////////// */
+
+  #promo{
+    padding: 5px;
+    border-color: gainsboro;
+    border-radius: 10px;
+  }
+
+  #promoButton{
+    padding: 10px 15px;
+  }
+  #promoButton:disabled, .orderButton:disabled{
+    background-color: gainsboro;
+    color: grey;
+    border-color: gainsboro;
+  }
+
+  .selected-label{
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  
+ 
