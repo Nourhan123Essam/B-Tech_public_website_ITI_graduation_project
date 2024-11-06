@@ -80,9 +80,6 @@ export class HeaderComponent implements AfterViewInit , OnInit{
   }
 
 
-
-
-
 getallcategory() {
   this.catservice.getmainCategories().subscribe(
     (res: any[]) => {
