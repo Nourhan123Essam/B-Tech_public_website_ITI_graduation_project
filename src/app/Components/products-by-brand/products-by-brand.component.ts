@@ -5,18 +5,20 @@ import { ProductB } from '../../models/product-b';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LocalizationService } from '../../service/localiztionService/localization.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-products-by-brand',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, NgxPaginationModule],
   templateUrl: './products-by-brand.component.html',
   styleUrl: './products-by-brand.component.css'
 })
 export class ProductsByBrandComponent implements OnInit {
   isArabic!: boolean;
 
-
+  p:number=1;
+  ItemsPerPage : number = 6;
   brandName: string = '';
   products: any[] = [];
   item: any;

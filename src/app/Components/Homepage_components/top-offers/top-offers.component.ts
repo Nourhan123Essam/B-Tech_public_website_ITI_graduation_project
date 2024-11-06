@@ -15,7 +15,6 @@ import { LocalizationService } from '../../../service/localiztionService/localiz
 })
 export class TopOffersComponent implements OnInit {
   isArabic!: boolean;
-
   products: ProductB[] = [];
   expensiveProducts: ProductB[] = [];
   @ViewChild('productContainer', { static: false })
@@ -23,7 +22,6 @@ export class TopOffersComponent implements OnInit {
 
   constructor(
     private router: Router,
-
     private productService: AllproductsService,
     private translate: LocalizationService
   ) {
@@ -35,24 +33,25 @@ export class TopOffersComponent implements OnInit {
   }
 
 
-  fetchExpensiveProducts(): void {
-    this.productService.getallproducts().subscribe((response: any) => {
-      console.log('Fetched Response:', response); // Verify response structure in console
+  // fetchExpensiveProducts(): void {
+  //   this.productService.getallproducts().subscribe((response: any) => {
+  //     console.log('Fetched Response:', response); // Verify response structure in console
 
-      // Check if response contains entity array
-      if (response.isSuccess && Array.isArray(response.entity)) {
-        this.products = response.entity;
-        this.expensiveProducts = this.products
-          .filter((product) => typeof product.price === 'number') // Ensure each product has a price
-          .sort((a, b) => b.price - a.price)
-          .slice(0, 5)
-      } else {
-        console.error('Entity is not an array or request failed:', response);
-        this.products = [];
-        this.expensiveProducts = [];
-      }
-    });
-  }
+  //     // Check if response contains entity array
+  //     if (response.isSuccess && Array.isArray(response.entity)) {
+  //       this.products = response.entity;
+  //       this.expensiveProducts = this.products
+  //         .filter((product) => typeof product.price === 'number') // Ensure each product has a price
+  //         .sort((a, b) => b.price - a.price)
+  //         .slice(0, 5)
+  //     } else {
+  //       console.error('Entity is not an array or request failed:', response);
+  //       this.products = [];
+  //       this.expensiveProducts = [];
+  //     }
+  //   });
+  // }
+
   // getallproducts(): void {
   //   this.productService.getallproducts().subscribe(
   //     (products: ProductB[]) => {
@@ -91,7 +90,33 @@ export class TopOffersComponent implements OnInit {
   //   );
   // }
 
-
+  fetchExpensiveProducts(): void {
+    this.productService.getallproducts().subscribe((response: any) => {
+      console.log('Fetched Response:', response); // Verify response structure in console
+  
+      // Check if response contains entity array
+      if (response.isSuccess && Array.isArray(response.entity)) {
+        this.products = response.entity;
+        this.expensiveProducts = this.products
+          .filter((product) => typeof product.price === 'number') // Ensure each product has a price
+          .sort((a, b) => b.price - a.price)
+          .slice(0, 5)
+          .map((product) => {
+            // Set the product name based on the current language
+            const translation = this.isArabic ? product.translations[1] : product.translations[0];
+            return {
+              ...product,
+              displayName: translation ? translation.name : 'Name not available',
+            };
+          });
+      } else {
+        console.error('Entity is not an array or request failed:', response);
+        this.products = [];
+        this.expensiveProducts = [];
+      }
+    });
+  }
+  
   getMonthlyPayment(product: ProductB): number {
     return Math.round(product.price / 12); // Assume a 12-month payment plan
   }

@@ -53,7 +53,7 @@ onSubmit() {
       );
              this.saveUserInfo;
     }
-  }
+ }
 
 
 saveUserInfo(){
