@@ -12,7 +12,8 @@
     "daily_deals": "Daily Deals",
     "search_placeholder": "Search",
     "sign_in": "Sign in",
-    "cart": "Cart"
+    "cart": "Cart",
+    "search by category": "Search by category"
   },
 
   "slider": {
@@ -39,6 +40,16 @@
     "add to cart": "Add to Cart",
     "No products found for": "No products found for",
     "Products for": "Products for"
+  },
+  "home":{
+    "featured categories": "Featured Categories",
+    "last view products": "Last Viewed Products",
+    "popular brands": "Popular Brands",
+    "B.TECH promo codes": "B.TECH Promo Codes",
+    "top offers": "Top Offers",
+    "shop now": "Shop Now",
+    "why B.TECH": "Why B.TECH",
+    "monthly pay": "or from {{amount}}/mo"
   },
 
   "footer": {

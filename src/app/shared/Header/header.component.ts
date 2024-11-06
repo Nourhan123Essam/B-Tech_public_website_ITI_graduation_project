@@ -36,23 +36,32 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements AfterViewInit , OnInit{
+  public get router(): Router {
+    return this._router;
+  }
+  public set router(value: Router) {
+    this._router = value;
+  }
   url: string = 'assets/i18n/.json';
   isArabic!: boolean;
-  isLoggedIn: boolean = true;
+  // isLoggedIn: boolean = true;
   searchQuery: string = '';
+  isUserLoggedIn: boolean = false;
 
 
-  categoryNames: string[] = [];
-  categories: any;
+  // categoryNames: string[] = [];
+  // categories: any;
+  categories: { id: number; categoryName: string }[] = [];
+
   searchTerm: string = ''; // Holds the search term
   searchResults: CategoryB[] = []; // Holds the search results
-  selectedCategory: string | null = null; // To keep track of the selected main category
-  subCategories: string[] = []; // Holds the subcategories of the selected main category
+  selectedCategoryId: number | null = null;
+  subCategories: { id: number; categoryName: string }[] = []; // Holds the subcategories of the selected main category
 
 
   constructor(
     private translate: LocalizationService,
-    private router: Router,
+    private _router: Router,
     private activatedRoute: ActivatedRoute,
     private auth:AuthService,
     private catservice: CategoryService,
@@ -67,96 +76,73 @@ export class HeaderComponent implements AfterViewInit , OnInit{
   }
   ngOnInit(): void {
     this.getallcategory();
+    this.isUserLoggedIn = this.auth.isLoggedIn();
   }
 
 
-// getallcategory() {
-//   this.catservice.getallcategory().subscribe((res: any) => {
-//       if (res.isSuccess && Array.isArray(res.entity)) {
-//           this.categories = res.entity;
-//           this.categoryNames = res.entity.map((category: CategoryB) =>
-//               category.translations?.[0]?.categoryName
 
-//         ).filter(Boolean);
-//       }
-//   });
-// }
+
 
 getallcategory() {
-  this.catservice.getmainCategories().subscribe((res: any) => {
-    console.log(res);
-      // if (res.isSuccess && Array.isArray(res.entity)) {
-          // Map categories from API and add sample subcategories if subCategories are not provided
+  this.catservice.getmainCategories().subscribe(
+    (res: any[]) => {
+      console.log("main Categories API response:", res);
 
-          this.categories = res.map((category: any) => {
-              // Determine index based on isArabic flag (0 for English, 1 for Arabic)
+      // Use reduce to create a unique list directly
+      this.categories = res.reduce((uniqueCategories, item) => {
+        const translationIndex = this.isArabic ? 1 : 0;
+        const categoryId = item.category?.id;
+        const categoryName = item.category?.translations?.[translationIndex]?.categoryName;
 
-              const translationIndex = this.isArabic ? 1 : 0;
+        if (categoryId && categoryName && !uniqueCategories.some((cat: { id: any; }) => cat.id === categoryId)) {
+          uniqueCategories.push({ id: categoryId, categoryName });
+        }
+        return uniqueCategories;
+      }, []);
 
-              const categoryName = category.category.translations?.[translationIndex]?.categoryName;
-            this.subCategories =category.category.id;
-
-
-
-              let subCategories: string[] = [];
-
-              // this.catservice.getsubcategoriesbuyMainId(category.category.id).subscribe({
-              //       next: (res) => {
-              //         console.log(res);
-              //         this.subCategories = res.map((category: any) => {
-              //           const translationIndex = this.isArabic ? 0 : 1;
-              //           return category.category.translations?.[translationIndex]?.categoryName;
-              //         });
-              //       },
-              //       error: (err) => console.error('Error loading subcategories:', err)
-              //     });
-
-
-
-              // Assign sample subcategories based on main category name
-              // if (categoryName === "Mobiles & Tablets" || categoryName === "الهواتف والأجهزة اللوحية") {
-              //     subCategories = ["Mobiles", "Tablets", "Mobile Accessories", "Smart Watches"];
-              // } else if (categoryName === "TVs" || categoryName === "تلفزيونات وريسيفرات") {
-              //     subCategories = ["LED TVs", "Smart TVs", "4K TVs", "TV Accessories"];
-              // } else if (categoryName === "Home Appliances" || categoryName === "الأجهزة المنزلية") {
-              //     subCategories = ["Refrigerators", "Washing Machines", "Microwaves", "Air Conditioners"];
-              // } else if (categoryName === "Electronics" || categoryName === "الإلكترونيات") {
-              //     subCategories = ["Speakers", "Headphones", "Cameras", "Wearable Accessories"];
-              // } else if (categoryName === "small home application" || categoryName === "أجهزة منزلية صغيرة") {
-              //     subCategories = ["Laptops", "Desktops", "Tablets", "Laptop Accessories"];
-              // } else if (categoryName === "samsung" || categoryName === "سامسونج") {
-              //     subCategories = ["Mobiles", "Tablets", "Mobile Accessories", "Smart Watches"];
-              // } else if (categoryName === "mobile and tablet" || categoryName === "لاب توب و كمبيوتر") {
-              //     subCategories = ["Samsung", "Apple", "Xiaomi", "Huawei"];
-              // }
-
-              return {
-                  name: categoryName,
-                  subCategories: subCategories
-              };
-          }).filter(Boolean);
-      }
+      console.log("Extracted Unique Categories:", this.categories);
+    },
+    (error) => {
+      console.error("Error fetching main categories:", error);
+    }
   );
 }
 
+onCategoryHover(categoryId: number) {
 
-// Method to set the selected category and update the subcategories
-onCategoryClick(categoryName: string) {
-  this.selectedCategory = categoryName;
-  const category = this.categories.find((cat: { name: string; }) => cat.name === categoryName);
-  this.subCategories = category ? category.subCategories : [];
-}
-// onSearch() {
-//   if (this.searchTerm) {
-//     // Redirect to the products page with the search term as a query parameter
-//     this.router.navigate(['/products'], { queryParams: { search: this.searchTerm } });
-//   }
-// }
-  // New method to get the category name based on the selected language
-  getCategoryName(category: CategoryB): string {
-    const translationIndex = this.isArabic ? 1 : 0; // Determine the index based on language
-    return category.translations?.[translationIndex]?.categoryName || ''; // Return the category name or an empty string if not found
+   if (this.selectedCategoryId !== categoryId) {
+    this.subCategories = []; // Clear previous subcategories
+    this.selectedCategoryId = categoryId;
+    console.log("Hovered Category ID:", this.selectedCategoryId);
+    this.getSubCategories(this.selectedCategoryId); // Load new subcategories
   }
+}
+
+getSubCategories(categoryId: number) {
+  this.catservice.getsubcategoriesbuyMainId(categoryId).subscribe(
+    (res: CategoryB[]) => {
+      console.log("Subcategories API response:", res);
+      this.subCategories = res.map(subCategory => ({
+        id: subCategory.id, // Ensure you extract the ID
+        categoryName: subCategory.translations?.[this.isArabic ? 1 : 0]?.categoryName || ''
+      })).filter(Boolean);
+      console.log("Fetched Subcategories:", this.subCategories);
+    },
+    (error) => {
+      console.error("Error fetching subcategories:", error);
+    }
+  );
+}
+
+onSubCategorySelect(subCategoryId: number) {
+  this.selectedCategoryId = subCategoryId; // Store the selected subcategory ID
+  console.log("Selected Subcategory ID:", subCategoryId);
+  // this.router.navigate(['/product-by-category', subCategoryId]); // Navigate to the product page
+  this.router.navigate(['/product-by-category', this.selectedCategoryId]).then(() => {
+    // إعادة ضبط selectedCategoryId بعد التنقل لضمان استقبال اختيارات جديدة
+    this.selectedCategoryId = null;
+  });
+}
 
 
   useLanguage() {
@@ -166,17 +152,21 @@ onCategoryClick(categoryName: string) {
   opensignin() {
     this.router.navigate(['remember-by-phoone']);
   }
-
-  signOut() {
-    this.auth.signOut().subscribe(
-      () => {
-        localStorage.removeItem('authToken'); // مسح التوكن من التخزين المحلي
-        this.isLoggedIn = false; // تحديث حالة تسجيل الدخول
-        this.router.navigate(['/']); // إعادة توجيه المستخدم للصفحة الرئيسية
-      },
-      (error) => console.error('Logout failed:', error)
-    );
+  onSignOut() {
+    this.auth.signOut();
+    this.isUserLoggedIn = false;
+    this.router.navigate(['/']);  // توجيه المستخدم إلى صفحة تسجيل الدخول
   }
+  // signOut() {
+  //   this.auth.signOut().subscribe(
+  //     () => {
+  //       localStorage.removeItem('authToken'); // مسح التوكن من التخزين المحلي
+  //       this.isLoggedIn = false; // تحديث حالة تسجيل الدخول
+  //       this.router.navigate(['/sign-in']); // إعادة توجيه المستخدم للصفحة الرئيسية
+  //     },
+  //     (error) => console.error('Logout failed:', error)
+  //   );
+  // }
 
 onSearch(event: Event) {
     event.preventDefault(); // منع إعادة تحميل الصفحة
@@ -223,17 +213,17 @@ onSearch(event: Event) {
   }
 
   goToHome():void{
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
 
   goToLogin():void{
-    this.router.navigate(['/sign-in']); 
+    this.router.navigate(['/sign-in']);
   }
 
   goToCart(){
     const userId = this.auth.getUserIdNourhan();
     if(userId == null){
-        this.confirmLogModal();                  
+        this.confirmLogModal();
     }
     else this.router.navigate(['/cart']);
   }
