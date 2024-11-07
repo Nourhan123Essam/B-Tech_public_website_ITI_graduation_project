@@ -98,15 +98,18 @@
 
 <!-- pop-up modal for go to cart if the user not logged in -->
 
-
 <ng-template #logFirstModal let-modal>
-  <div class="modal-body" style="font-weight: bold; background-color: rgb(244, 220, 175);">
-    <div class="row">
-      You need to log in first to go to your cart!
-    </div> 
+  <div class="modal-header justify-content-center" style="font-weight: bold; background-color: rgb(244, 220, 175)">
+    <h5 class="modal-title text-center">
+      {{ "nav.login to cart" | translate }}
+    </h5>
   </div>
   <div class="modal-footer text-center">
-    <button type="button" class="btn btn-warning" (click)="modal.close('Remove')">Continue exploring products</button>
-    <button type="button" class="btn btn-dark" (click)="modal.close('cancel')">Go to log in</button>
+    <button type="button" class="btn btn-warning" (click)="modal.close('Remove')">
+      {{ "alert.continue exploring" | translate }}
+    </button>
+    <button type="button" class="btn btn-dark" (click)="modal.close('cancel')">
+      {{ "alert.go to login" | translate }}
+    </button>
   </div>
 </ng-template>

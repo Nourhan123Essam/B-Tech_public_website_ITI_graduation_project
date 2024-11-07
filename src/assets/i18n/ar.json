@@ -12,7 +12,8 @@
     "search_placeholder": "بحث",
     "sign_in": "تسجيل الدخول",
     "cart": "عربة التسوق",
-    "search by category": "بحث حسب الفئة"
+    "search by category": "بحث حسب الفئة",
+    "login to cart": "تحتاج إلى تسجيل الدخول أولاً للوصول إلى سلة التسوق!"
   },
 
   "slider": {
