@@ -16,111 +16,80 @@
     <div class="col-md-6">
       <div class="circle-container">
         <div class="circle">
-          <img
-            src="https://cdn.pixabay.com/animation/2022/08/06/11/56/11-56-56-209_512.gif"
-            alt="Hi Animation"
-            class="animated-image mb-4"
-          />
+          <img src="https://cdn.pixabay.com/animation/2022/08/06/11/56/11-56-56-209_512.gif" alt="Hi Animation"
+            class="animated-image mb-4" />
         </div>
       </div>
       <br />
-            <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
-              <!-- Full Name -->
-              <div class="form-group">
-                <!-- <label for="fullName">Full Name</label> -->
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fullName"
-                  formControlName="fullName"
-                  [placeholder]="'signup.enterFullName' | translate"                  required
-                />
-                <div class="invalid-feedback" *ngIf="signUpForm.get('fullName')?.invalid && signUpForm.get('fullName')?.touched">
-                 {{'signup.fullNameRequired'|translate}}
-                </div>
-              </div>
-
-              <!-- Email -->
-              <div class="form-group mt-3">
-                <!-- <label for="email">Email Address</label> -->
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  formControlName="email"
-                  [placeholder]="'signup.enterEmail' | translate"
-                  required
-                />
-                <div class="invalid-feedback" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
-                  {{'signup.validEmailRequired'|translate}}
-                </div>
-              </div>
-
-              <!-- Mobile Number -->
-              <div class="form-group mt-3">
-                <!-- <label for="mobileNumber">Mobile Number</label> -->
-                <input
-                  type="text"
-                  class="form-control"
-                  id="mobileNumber"
-                  formControlName="mobileNumber"
-                  [placeholder]="'signup.enterMobileNumber' | translate"
-                  required
-                />
-                <div class="invalid-feedback" *ngIf="signUpForm.get('mobileNumber')?.invalid && signUpForm.get('mobileNumber')?.touched">
-                  {{'signup.validMobileRequired'|translate}}
-                </div>
-              </div>
-
-              <!-- Password -->
-              <div class="form-group mt-3">
-                <!-- <label for="password">Password</label> -->
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  formControlName="password"
-                  [placeholder]="'signup.createPassword' | translate"
-                  required
-                />
-                <div class="invalid-feedback" *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
-                  {{'signup.passwordLength'|translate}}
-                </div>
-              </div>
-
-              <!-- Confirm Password -->
-              <div class="form-group mt-3">
-                <!-- <label for="confirmPassword">Confirm Password</label> -->
-                <input
-                  type="password"
-                  class="form-control"
-                  id="confirmPassword"
-                  formControlName="confirmPassword"
-                  [placeholder]="'signup.confirmPassword' | translate"
-                  required
-                />
-                <div class="invalid-feedback" *ngIf="signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched">
-                 {{'signup.passwordsMatch'|translate}}
-                </div>
-              </div>
-
-              <!-- Submit Button -->
-              <button
-              type="submit"
-              class="btn btn-primary btn-block mt-4"
-              [disabled]="!signUpForm.valid"
-            >
-              {{'signup.signin'|translate}}
-            </button>
-            </form>
-
-            <div class="text-center mt-3">
-              <small>{{'signup.already have an account'|translate}}<a routerLink="/sign-in"></a> {{'signup.signin'|translate}}</small>
-            </div>
+        <!-- Full Name -->
+        <div class="form-group">
+          <!-- <label for="fullName">Full Name</label> -->
+          <input type="text" class="form-control" id="fullName" formControlName="fullName"
+            [placeholder]="'signup.enterFullName' | translate" required />
+          <div class="invalid-feedback"
+            *ngIf="signUpForm.get('fullName')?.invalid && signUpForm.get('fullName')?.touched">
+            {{'signup.fullNameRequired'|translate}}
           </div>
         </div>
+
+        <!-- Email -->
+        <div class="form-group mt-3">
+          <!-- <label for="email">Email Address</label> -->
+          <input type="email" class="form-control" id="email" formControlName="email"
+            [placeholder]="'signup.enterEmail' | translate" required />
+          <div class="invalid-feedback" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+            {{'signup.validEmailRequired'|translate}}
+          </div>
+        </div>
+
+        <!-- Mobile Number -->
+        <div class="form-group mt-3">
+          <!-- <label for="mobileNumber">Mobile Number</label> -->
+          <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNumber"
+            [placeholder]="'signup.enterMobileNumber' | translate" required />
+          <div class="invalid-feedback"
+            *ngIf="signUpForm.get('mobileNumber')?.invalid && signUpForm.get('mobileNumber')?.touched">
+            {{'signup.validMobileRequired'|translate}}
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group mt-3">
+          <!-- <label for="password">Password</label> -->
+          <input type="password" class="form-control" id="password" formControlName="password"
+            [placeholder]="'signup.createPassword' | translate" required />
+          <div class="invalid-feedback"
+            *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+            {{'signup.passwordLength'|translate}}
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group mt-3">
+          <!-- <label for="confirmPassword">Confirm Password</label> -->
+          <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+            [placeholder]="'signup.confirmPassword' | translate" required />
+          <div class="invalid-feedback"
+            *ngIf="signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched">
+            {{'signup.passwordsMatch'|translate}}
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!signUpForm.valid">
+          {{'signup.signin'|translate}}
+        </button>
+      </form>
+
+      <div class="text-center mt-3">
+        <small>{{'signup.already have an account'|translate}}<a routerLink="/sign-in"></a>
+          {{'signup.signin'|translate}}</small>
       </div>
+    </div>
+  </div>
+</div>
 
 
 
