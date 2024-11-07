@@ -33,7 +33,7 @@
 
             required />
           <div class="invalid-feedback" *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched">
-            Please enter a valid email
+            {{'signin.please enter a valid email'|translate}}
           </div>
         </div>
 
@@ -44,7 +44,7 @@
           required />
           <div class="invalid-feedback"
             *ngIf="signInForm.get('password')?.invalid && signInForm.get('password')?.touched">
-            Password is required
+            {{'signin.password is required'|translate}}
           </div>
         </div>
         <br />
