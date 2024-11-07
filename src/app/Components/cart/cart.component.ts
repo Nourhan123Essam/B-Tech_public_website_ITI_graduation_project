@@ -8,6 +8,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../service/Identity/auth.service';
 import { ViewChild } from '@angular/core';
+import { LocalizationService } from '../../service/localiztionService/localization.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 
@@ -15,13 +17,15 @@ import { ViewChild } from '@angular/core';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,TranslateModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cartItems: any[] = []; 
-  message: string = '';  
+  isArabic!: boolean;
+
+  cartItems: any[] = [];
+  message: string = '';
   totalCost: number = 0;
   n = 10; // Change this to set the maximum number
   numbers: number[] = [];
@@ -30,16 +34,19 @@ export class CartComponent implements OnInit {
   userId:string | null = null;
   @ViewChild('logFirstModal') confirmRemoveModal: any;
 
-  
+
   constructor(private orderService: OrderService, private router:Router, private modalService: NgbModal,
-    private authService: AuthService
+    private authService: AuthService,private translate: LocalizationService,
+
   ) {
     this.generateNumbers(this.n);
     this.userId = this.authService.getUserIdNourhan();
     console.log('User ID:', this.userId);
+    this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+
 
   }
-  
+
   ngOnInit(): void {
     if(this.userId == null){
       this.confirmLogModal();
@@ -59,11 +66,11 @@ export class CartComponent implements OnInit {
   }
 
   goToHome():void{
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
 
   goToCart():void{
-    this.router.navigate(['/sign-in']); 
+    this.router.navigate(['/sign-in']);
   }
 
   //////////////////////////////////////
@@ -72,7 +79,7 @@ export class CartComponent implements OnInit {
     this.numbers = Array.from({ length: n }, (_, i) => i + 1);
   }
 
-  
+
   calculateTotalCost() {
     this.totalCost = this.cartItems.reduce((sum, item) => sum + item.productPrice * item.quantity, 0);
   }
@@ -82,7 +89,7 @@ export class CartComponent implements OnInit {
 
   // Load items in the cart based on userId
   loadCartItems(): void {
-    // const userId = 'e2366e30-de44-4708-af0d-c14f50335ba5'; 
+    // const userId = 'e2366e30-de44-4708-af0d-c14f50335ba5';
     if(this.userId){
       this.orderService.viewCart(this.userId).subscribe(
         (data) => {
@@ -101,7 +108,7 @@ export class CartComponent implements OnInit {
 
   // Add product to the cart
   // addToCart(productId: number): void {
-  //   const userId = '10734A5F-4152-400A-8CB6-81ADF51742D2'; 
+  //   const userId = '10734A5F-4152-400A-8CB6-81ADF51742D2';
 
   //   this.orderService.addToCart(productId, userId).subscribe(
   //     () => {
@@ -118,7 +125,7 @@ export class CartComponent implements OnInit {
   // Update the Quantity of item in the cart
   updateQuantity(orderItemId: number, newQuantity: number): void {
     console.log(orderItemId, newQuantity);
-    
+
     this.orderService.updateOrderItemQuantity(orderItemId, newQuantity).subscribe(
       (response) => {
         console.log('Quantity updated successfully', response);
@@ -134,7 +141,7 @@ export class CartComponent implements OnInit {
   deleteOrderItem(id: number) {
     if(id >= 0){
       this.orderService.deleteOrderItem(id).subscribe({
-        next: () => {          
+        next: () => {
           this.cartItems = this.cartItems.filter(item => item.orderItemId !== id);
           this.calculateTotalCost();
           this.loadCartItems();
@@ -166,10 +173,10 @@ export class CartComponent implements OnInit {
   }
 
   navigateToHome():void{
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
 
-  
 
-  
+
+
 }
