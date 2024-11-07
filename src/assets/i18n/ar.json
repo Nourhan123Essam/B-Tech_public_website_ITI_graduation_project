@@ -57,6 +57,18 @@
     "continue exploring": "تابع استكشاف المنتجات",
     "go to login": "اذهب إلى تسجيل الدخول"
   },
+  "signin": {
+    "welcome message": "هيا لنبدأ!",
+    "instruction": "استخدم بريدك الإلكتروني وكلمة المرور لتسجيل الدخول.",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "sign in button": "تسجيل الدخول",
+     "forgot password": "هل نسيت كلمة المرور؟",
+    "create account": "إنشاء حساب",
+    "enter email": "أدخل بريدك الإلكتروني",
+    "enter password": "أدخل كلمة المرور"
+  },
+
   "footer": {
     "call_support": "اتصل بالدعم",
     "support_number": "19966",

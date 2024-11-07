@@ -57,6 +57,17 @@
     "continue exploring": "Continue exploring products",
     "go to login": "Go to log in"
   },
+  "signin": {
+    "welcome message": "Let's get started!",
+    "instruction": "Use your email and password to sign in.",
+    "email": "Email",
+    "password": "Password",
+    "sign in button": "Sign In",
+     "forgot password": "Forgot Password?",
+    "create account": "Create an Account",
+    "enter email": "Enter your email",
+    "enter password": "Enter your password"
+  },
 
   "footer": {
     "call_support": "Call support",
