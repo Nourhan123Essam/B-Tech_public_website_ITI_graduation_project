@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ProductB } from '../../models/product-b';
@@ -46,5 +46,13 @@ export class AllproductsService {
     return this.http.get<any>(`${this.thisapi}/Category/GetProductsByCategoryName/${categoryName}`);
   }
    
+  getPaginatedProducts(pageNumber: number, pageSize: number): Observable<ProductB[]> {
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.get<ProductB[]>(`${this.thisapi}/product/GetPaginated`, { params });
+  }
+  
  
 }

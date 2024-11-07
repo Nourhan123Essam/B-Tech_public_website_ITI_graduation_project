@@ -3,12 +3,14 @@ import { AllproductsService } from '../../service/product/allproducts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductB } from '../../models/product-b';
 import { CommonModule } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LocalizationService } from '../../service/localiztionService/localization.service';
 
 @Component({
   selector: 'app-products-by-category',
   standalone: true,
+  imports: [CommonModule,NgxPaginationModule],
   imports: [CommonModule,TranslateModule],
   templateUrl: './products-by-category.component.html',
   styleUrl: './products-by-category.component.css'
@@ -18,6 +20,8 @@ export class ProductsByCategoryComponent implements OnInit {
   products: ProductB[] = [];
   item: any;
   isArabic!: boolean;
+  p:number=1;
+  ItemsPerPage : number = 6;
 
   constructor(
     private router: Router,

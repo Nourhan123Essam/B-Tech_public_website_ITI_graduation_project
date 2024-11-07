@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ProductCategoryB } from '../../models/product-category-b';
 import { LocalizationService } from '../../service/localiztionService/localization.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { AuthService } from '../../service/Identity/auth.service';
 import { OrderService } from '../../service/Order/order.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,22 +19,22 @@ import { ViewChild } from '@angular/core';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductListComponent, SelectCheckboxComponent,CommonModule,TranslateModule],
+  imports: [ProductListComponent, SelectCheckboxComponent,CommonModule,TranslateModule,NgxPaginationModule],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
+
 export class ProductsComponent implements OnInit {
   userId: string = "e2366e30-de44-4708-af0d-c14f50335ba5";
 
   isArabic!: boolean;
-
   products: ProductB[] = [];
   filteredProducts: ProductB[] = [];
   categories: CategoryB[] = [];
   categoryNames: string[] = [];
   brands: string[] = [];
-
-
+  p:number=1;
+  ItemsPerPage : number = 6;
   cartProducts: any[] = [];
   productCategories:ProductCategoryB[]=[];
 
@@ -78,7 +79,7 @@ isPriceOpen: boolean = false;
     this.getAllCategory();
        }
 
-   
+
 
 
        getAllProducts() {
@@ -138,6 +139,7 @@ isPriceOpen: boolean = false;
 
     // الحصول على `categoryId` الخاص بالفئة المحددة
     const selectedCategoryId = this.categories.find(
+
       cat => cat.translations?.[0]?.categoryName === this.selectedCategory
     )?.id;
 
@@ -210,8 +212,8 @@ isPriceOpen: boolean = false;
     }
   }
 
-  //========== order related functions ============ 
-  @ViewChild('confirmRemoveModal') confirmRemoveModal: any; 
+  //========== order related functions ============
+  @ViewChild('confirmRemoveModal') confirmRemoveModal: any;
   ProductImgUrl:string = "";
   productName:string = "";
 
@@ -243,11 +245,11 @@ isPriceOpen: boolean = false;
   }
 
   goToHome():void{
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
 
   goToCart():void{
-    this.router.navigate(['/cart']); 
+    this.router.navigate(['/cart']);
   }
 
   //=======================================

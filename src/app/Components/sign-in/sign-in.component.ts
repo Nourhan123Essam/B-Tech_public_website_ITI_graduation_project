@@ -28,7 +28,7 @@ export class SignInComponent {
   }
 
 
-  onSubmit() {
+onSubmit() {
     if (this.signInForm.valid) {
       const email = this.signInForm.get('email')?.value;
       const password = this.signInForm.get('password')?.value;
@@ -50,12 +50,10 @@ export class SignInComponent {
         (error) => {
           console.error('Login failed:', error);
         }
-
       );
              this.saveUserInfo;
-
     }
-  }
+ }
 
 
 saveUserInfo(){

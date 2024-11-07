@@ -40,6 +40,8 @@
           </div>
         </div>
 
+
+        
       </div>
 
 
@@ -48,12 +50,14 @@
     <!-- Products List -->
     <div class="col-md-9 shadow-sm rounded">
       <div class="row">
-        <div *ngFor="let product of filteredProducts" class="col-md-4 mb-4">
+        <div *ngFor="let product of filteredProducts | paginate: { itemsPerPage: ItemsPerPage, currentPage: p }" class="col-md-4 mb-4">
           <app-product-list [data]="product" (item)="addToCart($event)"></app-product-list>
         </div>
       </div>
     </div>
-
+    <div class="mt-8 py-5 d-flex justify-content-center "> 
+         <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   </div>
 </div>
 
