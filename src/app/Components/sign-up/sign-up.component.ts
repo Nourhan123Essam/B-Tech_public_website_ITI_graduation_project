@@ -3,22 +3,29 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/Identity/auth.service';
-
+import { LocalizationService } from '../../service/localiztionService/localization.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   standalone:true,
-  imports:[CommonModule,ReactiveFormsModule],
+  imports:[CommonModule,ReactiveFormsModule,TranslateModule],
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
   signUpForm: FormGroup;
+  isArabic!: boolean;
+
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private translate: LocalizationService
+
   ) {
+    this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
+
     this.signUpForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -40,11 +47,11 @@ export class SignUpComponent {
         PhoneNumber: this.signUpForm.get('mobileNumber')?.value,
         Password: this.signUpForm.get('password')?.value,
 
-        UserType: 'User',       
+        UserType: 'User',
         Address: 'Default Address',
-        City: 'Default City',       
-        Country: 'Egypt',          
-        PostalCode: '12345'        
+        City: 'Default City',
+        Country: 'Egypt',
+        PostalCode: '12345'
       };
 
       this.authService.register(userData).subscribe(
@@ -57,5 +64,8 @@ export class SignUpComponent {
         }
       );
     }
+  }
+  useLanguage() {
+    this.translate.ChangeLanguage();
   }
 }

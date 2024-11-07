@@ -1,7 +1,9 @@
 <nav class="navbar">
   <div class="navbar-content">
     <div class="language">
-      <a href="#" class="language-link">عربي</a>
+      <a class="me-3" (click)="useLanguage()">{{
+        "language" | translate
+        }}</a>
     </div>
     <div class="logo">
       <img src="https://btech.com/media/logo/stores/1/new3.png" alt="B.TECH Logo" class="logo-image" />
@@ -9,7 +11,7 @@
   </div>
 </nav>
 
-<div class="container mt-5">
+<div [dir]="isArabic ? 'rtl' : 'ltr'" class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="circle-container">
@@ -32,11 +34,10 @@
                   class="form-control"
                   id="fullName"
                   formControlName="fullName"
-                  placeholder="Enter your full name"
-                  required
+                  [placeholder]="'signup.enterFullName' | translate"                  required
                 />
                 <div class="invalid-feedback" *ngIf="signUpForm.get('fullName')?.invalid && signUpForm.get('fullName')?.touched">
-                  Full name is required.
+                 {{'signup.fullNameRequired'|translate}}
                 </div>
               </div>
 
@@ -48,11 +49,11 @@
                   class="form-control"
                   id="email"
                   formControlName="email"
-                  placeholder="Enter your email"
+                  [placeholder]="'signup.enterEmail' | translate"
                   required
                 />
                 <div class="invalid-feedback" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
-                  Please enter a valid email address.
+                  {{'signup.validEmailRequired'|translate}}
                 </div>
               </div>
 
@@ -64,11 +65,11 @@
                   class="form-control"
                   id="mobileNumber"
                   formControlName="mobileNumber"
-                  placeholder="Enter your mobile number"
+                  [placeholder]="'signup.enterMobileNumber' | translate"
                   required
                 />
                 <div class="invalid-feedback" *ngIf="signUpForm.get('mobileNumber')?.invalid && signUpForm.get('mobileNumber')?.touched">
-                  Please enter a valid mobile number.
+                  {{'signup.validMobileRequired'|translate}}
                 </div>
               </div>
 
@@ -80,11 +81,11 @@
                   class="form-control"
                   id="password"
                   formControlName="password"
-                  placeholder="Create a password"
+                  [placeholder]="'signup.createPassword' | translate"
                   required
                 />
                 <div class="invalid-feedback" *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
-                  Password must be at least 6 characters.
+                  {{'signup.passwordLength'|translate}}
                 </div>
               </div>
 
@@ -96,11 +97,11 @@
                   class="form-control"
                   id="confirmPassword"
                   formControlName="confirmPassword"
-                  placeholder="Confirm your password"
+                  [placeholder]="'signup.confirmPassword' | translate"
                   required
                 />
                 <div class="invalid-feedback" *ngIf="signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched">
-                  Passwords must match.
+                 {{'signup.passwordsMatch'|translate}}
                 </div>
               </div>
 
@@ -110,12 +111,12 @@
               class="btn btn-primary btn-block mt-4"
               [disabled]="!signUpForm.valid"
             >
-              Sign In
+              {{'signup.signin'|translate}}
             </button>
             </form>
 
             <div class="text-center mt-3">
-              <small>Already have an account? <a routerLink="/sign-in">Sign In</a></small>
+              <small>{{'signup.already have an account'|translate}}<a routerLink="/sign-in"></a> {{'signup.signin'|translate}}</small>
             </div>
           </div>
         </div>

@@ -63,12 +63,26 @@
     "email": "Email",
     "password": "Password",
     "sign in button": "Sign In",
-     "forgot password": "Forgot Password?",
+    "forgot password": "Forgot Password?",
     "create account": "Create an Account",
     "enter email": "Enter your email",
     "enter password": "Enter your password"
   },
+  "signup": {
+    "enterFullName": "Enter your full name",
+    "enterEmail": "Enter your email",
+    "enterMobileNumber": "Enter your mobile number",
+    "createPassword": "Create password",
+    "confirmPassword": "Confirm your password",
+    "fullNameRequired": "Full name is required",
+    "validEmailRequired": "Please enter a valid email address",
+    "validMobileRequired": "Please enter a valid mobile number",
+    "passwordLength": "Password must be at least 6 characters",
+    "passwordsMatch": "Passwords must match",
+    "signin": "Sign In",
+    "already have an account": "Already have an account?"
 
+  },
   "footer": {
     "call_support": "Call support",
     "support_number": "19966",
