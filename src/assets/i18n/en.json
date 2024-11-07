@@ -41,7 +41,7 @@
     "No products found for": "No products found for",
     "Products for": "Products for"
   },
-  "home":{
+  "home": {
     "featured categories": "Featured Categories",
     "last view products": "Last Viewed Products",
     "popular brands": "Popular Brands",
@@ -50,6 +50,11 @@
     "shop now": "Shop Now",
     "why B.TECH": "Why B.TECH",
     "monthly pay": "or from {{amount}}/mo"
+  },
+  "alert": {
+    "login prompt": "You need to log in first to add to your cart!",
+    "continue exploring": "Continue exploring products",
+    "go to login": "Go to log in"
   },
 
   "footer": {

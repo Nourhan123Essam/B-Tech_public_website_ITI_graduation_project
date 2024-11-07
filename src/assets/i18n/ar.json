@@ -51,7 +51,11 @@
     "why B.TECH": "لماذا B.TECH",
     "monthly pay": "أو من {{amount}}/شهر"
   },
-
+  "alert": {
+    "login prompt": "تحتاج إلى تسجيل الدخول أولاً لإضافة منتجات إلى سلة التسوق!",
+    "continue exploring": "تابع استكشاف المنتجات",
+    "go to login": "اذهب إلى تسجيل الدخول"
+  },
   "footer": {
     "call_support": "اتصل بالدعم",
     "support_number": "19966",

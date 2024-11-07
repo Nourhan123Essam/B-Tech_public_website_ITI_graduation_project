@@ -1,13 +1,14 @@
 <div class="container my-5">
   <!-- <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card" (click)="openProductDetails(data)"> -->
-    <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card">
+  <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card">
     <img
       [src]="(data.product?.images && data.product.images.length > 0) ? data.product.images[0].url : (data.images?.[0]?.url || 'default-image-url.png')"
       class="card-img-top"
       [alt]="data.product?.translations?.[isArabic ? 1 : 0]?.name || data.translations?.[isArabic ? 1 : 0]?.name || 'Product Image'" />
     <div class="card-body text-center">
       <h5 class="card-title fw-bold fs-5">
-        {{ data.product?.translations?.[isArabic ? 1 : 0]?.name || data.translations?.[isArabic ? 1 : 0]?.name || 'Product Name' }}
+        {{ data.product?.translations?.[isArabic ? 1 : 0]?.name || data.translations?.[isArabic ? 1 : 0]?.name ||
+        'Product Name' }}
       </h5>
       <p class="card-text price">
         {{ getFormattedPrice(data.price) }}
@@ -22,21 +23,21 @@
 
 <!-- pop-up modal for add to cart if the user not logged in -->
 
-
 <ng-template #confirmRemoveModal let-modal>
-  <div class="modal-body" style="font-weight: bold; background-color: rgb(244, 220, 175);">
-    <div class="row">
-      You need to log in first to add to your cart!
-    </div> 
+  <div class="modal-header justify-content-center" style="font-weight: bold; background-color: rgb(244, 220, 175)">
+    <h5 class="modal-title text-center">
+      {{ "alert.login prompt" | translate }}
+    </h5>
   </div>
   <div class="modal-footer text-center">
-    <button type="button" class="btn btn-warning" (click)="modal.close('Remove')">Continue exploring products</button>
-    <button type="button" class="btn btn-dark" (click)="modal.close('cancel')">Go to log in</button>
+    <button type="button" class="btn btn-warning" (click)="modal.close('Remove')">
+      {{ "alert.continue exploring" | translate }}
+    </button>
+    <button type="button" class="btn btn-dark" (click)="modal.close('cancel')">
+      {{ "alert.go to login" | translate }}
+    </button>
   </div>
 </ng-template>
-
-
-
 
 <!--
 <div class="card"(click)="openProductDetails(data)" >
