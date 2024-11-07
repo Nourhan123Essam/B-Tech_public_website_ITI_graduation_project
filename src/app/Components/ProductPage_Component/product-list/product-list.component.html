@@ -1,6 +1,6 @@
 <div class="container my-5">
   <!-- <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card" (click)="openProductDetails(data)"> -->
-  <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card">
+  <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card" (click)="openProductDetails(data)">
     <img
       [src]="(data.product?.images && data.product.images.length > 0) ? data.product.images[0].url : (data.images?.[0]?.url || 'default-image-url.png')"
       class="card-img-top"
@@ -38,6 +38,7 @@
     </button>
   </div>
 </ng-template>
+
 
 <!--
 <div class="card"(click)="openProductDetails(data)" >

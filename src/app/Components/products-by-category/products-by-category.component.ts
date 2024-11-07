@@ -10,8 +10,7 @@ import { LocalizationService } from '../../service/localiztionService/localizati
 @Component({
   selector: 'app-products-by-category',
   standalone: true,
-  imports: [CommonModule,NgxPaginationModule],
-  imports: [CommonModule,TranslateModule],
+  imports: [CommonModule,NgxPaginationModule,TranslateModule],
   templateUrl: './products-by-category.component.html',
   styleUrl: './products-by-category.component.css'
 })
