@@ -3,11 +3,13 @@ import { AllproductsService } from '../../service/product/allproducts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductB } from '../../models/product-b';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LocalizationService } from '../../service/localiztionService/localization.service';
 
 @Component({
   selector: 'app-products-by-category',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule],
   templateUrl: './products-by-category.component.html',
   styleUrl: './products-by-category.component.css'
 })
@@ -20,8 +22,10 @@ export class ProductsByCategoryComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private productService: AllproductsService
-  ) {}
+    private productService: AllproductsService,
+    private translate: LocalizationService
+  ) {
+    this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));}
 
   ngOnInit(): void {
     // الاشتراك في تغييرات categoryId لمتابعة التحديثات في الرابط
@@ -73,6 +77,6 @@ export class ProductsByCategoryComponent implements OnInit {
   }
 
   getFormattedPrice(price: number): string {
-    return this.isArabic ? `${price} ج.م` : `$${price}`;
+    return this.isArabic ? `${price} ج.م` : `EGP ${price}`;
   }
 }
