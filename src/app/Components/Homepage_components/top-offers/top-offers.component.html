@@ -4,7 +4,7 @@
     <button class="shop-now-btn">{{'home.shop now'|translate}}</button>
   </div>
 
-  <div class="product-carousel">
+  <div class="product-carousel" >
     <button class="scroll-button left" (click)="scrollCarousel(-1)">&#10094;</button>
     <div class="product-container" #productContainer>
       <div *ngFor="let product of expensiveProducts" class="product-card " (click)="openProductDetails(product)">
