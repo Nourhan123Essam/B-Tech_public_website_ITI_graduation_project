@@ -1,0 +1,98 @@
+{
+  "language": "english",
+  "topbar": {
+    "My_delivery_area": "منطقة التوصيل: ",
+    "city": "القاهرة",
+    "sall_on_BTECH": "بيع على بي تك",
+    "call": "اتصل على"
+  },
+  "nav": {
+    "categories": "فئات",
+    "daily_deals": "عروض كل اليوم",
+    "search_placeholder": "بحث",
+    "sign_in": "تسجيل الدخول",
+    "cart": "عربة التسوق",
+    "search by category": "بحث حسب الفئة",
+    "login to cart": "تحتاج إلى تسجيل الدخول أولاً للوصول إلى سلة التسوق!"
+  },
+
+  "slider": {
+    "categories": "الفئات",
+    "brands": "العلامات التجارية",
+    "price": "السعر",
+    "clear all": "مسح الكل"
+  },
+
+  "remember": {
+    "start": "لنبدأ!",
+    "first": "استخدم رقم هاتفك المحمول لتسجيل الدخول أو الاشتراك.",
+    "second": "رقم الهاتف المحمول",
+    "third": "أدخل رقم هاتفك المحمول",
+    "button": "متابعة",
+    "create": "إنشاء حساب.",
+    "error": "يرجى إدخال رقم هاتف محمول صحيح"
+  },
+
+  "product": {
+    "price": "السعر",
+    "description": "الوصف",
+    "specification": "المواصفات",
+    "details": "التفاصيل",
+    "add to cart": "أضف إلى السلة",
+    "No products found for": "لم يتم العثور على منتجات ل",
+    "Products for": "منتجات ل"
+  },
+  "home": {
+    "featured categories": "الفئات المميزة",
+    "last view products": "المنتجات التي تم عرضها مؤخرًا",
+    "popular brands": "العلامات التجارية الشهيرة",
+    "B.TECH promo codes": "خصومات من بي تك",
+    "top offers": "أفضل العروض",
+    "shop now": "تسوق الآن",
+    "why B.TECH": "لماذا B.TECH",
+    "monthly pay": "أو من {{amount}}/شهر"
+  },
+  "alert": {
+    "login prompt": "تحتاج إلى تسجيل الدخول أولاً لإضافة منتجات إلى سلة التسوق!",
+    "continue exploring": "تابع استكشاف المنتجات",
+    "go to login": "اذهب إلى تسجيل الدخول"
+  },
+  "signin": {
+    "welcome message": "هيا لنبدأ!",
+    "instruction": "استخدم بريدك الإلكتروني وكلمة المرور لتسجيل الدخول.",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "sign in button": "تسجيل الدخول",
+     "forgot password": "هل نسيت كلمة المرور؟",
+    "create account": "إنشاء حساب",
+    "enter email": "أدخل بريدك الإلكتروني",
+    "enter password": "أدخل كلمة المرور"
+  },
+
+  "footer": {
+    "call_support": "اتصل بالدعم",
+    "support_number": "19966",
+    "warranty_section": "ضمان B.TECH",
+    "warranty_items": ["ألترا", "أريستون", "إنديست", "بيبيليس", "ميلي"],
+    "services_section": "خدمات B.TECH",
+    "services_items": ["ميني كاش", "TECH CARE", "فروع B.TECH"],
+    "faqs_section": "الأسئلة الشائعة في B.TECH",
+    "faqs_items": ["أسئلة شائعة حول الإرجاع"],
+    "trending_section": "المتداول الآن",
+    "trending_items": [
+      "عروض يومية",
+      "هواتف",
+      "عروض براون",
+      "تلفزيونات",
+      "إكسسوارات",
+      "أوبو",
+      "سامسونج",
+      "أبل"
+    ],
+    "connect_section": "تواصل معنا",
+    "download_app_section": "حمل تطبيق B.TECH",
+    "copyright": "© حقوق الطبع والنشر محفوظة لـ B.TECH للتجارة والتوزيع.",
+    "terms_conditions": "الشروط والأحكام",
+    "returns_policy": "سياسة الإرجاع"
+  }
+}

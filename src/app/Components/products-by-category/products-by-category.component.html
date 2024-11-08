@@ -1,0 +1,29 @@
+ <div [dir]="isArabic ? 'rtl' : 'ltr'" class="container my-5 shadow-sm rounded">
+
+    <div class="row p-3" *ngIf="products.length > 0; else noProducts">
+      <div *ngFor="let productItem of products | paginate: { itemsPerPage: ItemsPerPage, currentPage: p }" class="card m-3"
+       (click)="openProductDetails(productItem)">
+       <img *ngIf="productItem.product.images?.length > 0" [src]="productItem.product.images?.[isArabic ? 1 : 0]?.url" alt="{{ productItem.product.translations?.length > 0 ? productItem.product.translations?.[isArabic ? 1 : 0]?.name : 'Product Image' }}" />
+
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold fs-5">
+            {{ productItem.product.translations?.length > 0 ? productItem.product.translations?.[isArabic ? 1 : 0]?.name : 'No name available' }}          </h5>
+
+          <p class="card-text price">
+            {{ getFormattedPrice(productItem.product.price) }}
+          </p>
+          <hr>
+          <button class="btn btn-wrning  w-75" (click)="add($event)">
+            {{ "product.add to cart" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 py-5 d-flex justify-content-center ">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+    <ng-template #noProducts>
+      <p>{{'product.No products found for'|translate}} {{categoryId}}</p>
+    </ng-template>
+</div>

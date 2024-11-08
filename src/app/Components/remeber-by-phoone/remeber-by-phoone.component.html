@@ -1,0 +1,74 @@
+<nav class="navbar">
+  <div class="navbar-content">
+    <div class="language">
+      <a class="me-3" (click)="useLanguage()">{{
+        "language" | translate
+        }}</a>
+    </div>
+    <div class="logo">
+      <img src="https://btech.com/media/logo/stores/1/new3.png" alt="B.TECH Logo" class="logo-image" />
+    </div>
+  </div>
+</nav>
+
+<div [dir]="isArabic ? 'rtl' : 'ltr'" class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="circle-container">
+      <div class="circle">
+        <img
+          src="https://cdn.pixabay.com/animation/2022/08/06/11/56/11-56-56-209_512.gif"
+          alt="Hi Animation"
+          class="animated-image mb-4"
+        />
+      </div>
+    </div>
+      <br />
+      <h3 class="text-center">{{'remember.start'| translate}}</h3>
+
+      <p class="text-center">
+        {{'remember.first'| translate}}
+      </p>
+
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="mobileNumber">{{'remember.second'| translate}}</label>
+          <input
+            type="text"
+            class="form-control"
+            id="mobileNumber"
+            formControlName="mobileNumber"
+            [placeholder]="'remember.third' | translate"
+            required
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="signInForm.get('mobileNumber')?.invalid && signInForm.get('mobileNumber')?.touched"
+          >
+            {{'remember.error'|translate}}
+          </div>
+        </div>
+        <br />
+        <button
+          type="submit"
+          class="btn btn-primary btn-block mt-4"
+          [disabled]="!signInForm.valid"
+        >
+          {{'remember.button'| translate}}
+        </button>
+      </form>
+
+      <div class="text-center mt-3">
+        <span> | </span>
+        <a routerLink="/create-account">{{'remember.create'| translate}}</a>
+      </div>
+    </div>
+  </div>
+  <div class="height">
+
+  </div>
+
+
+</div>
+
+

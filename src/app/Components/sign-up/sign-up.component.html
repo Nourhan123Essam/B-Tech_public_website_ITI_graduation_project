@@ -1,0 +1,211 @@
+<nav class="navbar">
+  <div class="navbar-content">
+    <div class="language">
+      <a href="#" class="language-link">عربي</a>
+    </div>
+    <div class="logo">
+      <img src="https://btech.com/media/logo/stores/1/new3.png" alt="B.TECH Logo" class="logo-image" />
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="circle-container">
+        <div class="circle">
+          <img
+            src="https://cdn.pixabay.com/animation/2022/08/06/11/56/11-56-56-209_512.gif"
+            alt="Hi Animation"
+            class="animated-image mb-4"
+          />
+        </div>
+      </div>
+      <br />
+            <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+              <!-- Full Name -->
+              <div class="form-group">
+                <!-- <label for="fullName">Full Name</label> -->
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fullName"
+                  formControlName="fullName"
+                  placeholder="Enter your full name"
+                  required
+                />
+                <div class="invalid-feedback" *ngIf="signUpForm.get('fullName')?.invalid && signUpForm.get('fullName')?.touched">
+                  Full name is required.
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group mt-3">
+                <!-- <label for="email">Email Address</label> -->
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  formControlName="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <div class="invalid-feedback" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+                  Please enter a valid email address.
+                </div>
+              </div>
+
+              <!-- Mobile Number -->
+              <div class="form-group mt-3">
+                <!-- <label for="mobileNumber">Mobile Number</label> -->
+                <input
+                  type="text"
+                  class="form-control"
+                  id="mobileNumber"
+                  formControlName="mobileNumber"
+                  placeholder="Enter your mobile number"
+                  required
+                />
+                <div class="invalid-feedback" *ngIf="signUpForm.get('mobileNumber')?.invalid && signUpForm.get('mobileNumber')?.touched">
+                  Please enter a valid mobile number.
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="form-group mt-3">
+                <!-- <label for="password">Password</label> -->
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  formControlName="password"
+                  placeholder="Create a password"
+                  required
+                />
+                <div class="invalid-feedback" *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+                  Password must be at least 6 characters.
+                </div>
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="form-group mt-3">
+                <!-- <label for="confirmPassword">Confirm Password</label> -->
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  formControlName="confirmPassword"
+                  placeholder="Confirm your password"
+                  required
+                />
+                <div class="invalid-feedback" *ngIf="signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched">
+                  Passwords must match.
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+              type="submit"
+              class="btn btn-primary btn-block mt-4"
+              [disabled]="!signUpForm.valid"
+            >
+              Sign In
+            </button>
+            </form>
+
+            <div class="text-center mt-3">
+              <small>Already have an account? <a routerLink="/sign-in">Sign In</a></small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+<!-- <nav class="navbar">
+  <div class="navbar-content">
+    <div class="language">
+      <a href="#" class="language-link">عربي</a>
+    </div>
+    <div class="logo">
+      <img src="https://btech.com/media/logo/stores/1/new3.png" alt="B.TECH Logo" class="logo-image" />
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="circle-container">
+        <div class="circle">
+          <img
+            src="https://cdn.pixabay.com/animation/2022/08/06/11/56/11-56-56-209_512.gif"
+            alt="Hi Animation"
+            class="animated-image mb-4"
+          />
+        </div>
+      </div>
+      <br />
+      <h3 class="text-center">Let's get started!</h3>
+
+      <p class="text-center">Use your email and password to sign in.</p>
+
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            placeholder="Enter your email"
+            required
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched"
+          >
+            Please enter a valid email
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            required
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="signInForm.get('password')?.invalid && signInForm.get('password')?.touched"
+          >
+            Password is required
+          </div>
+        </div>
+        <br />
+        <button
+          type="submit"
+          class="btn btn-primary btn-block mt-4"
+          [disabled]="!signInForm.valid"
+        >
+          Sign In
+        </button>
+      </form>
+
+      <div class="text-center mt-3">
+        <a routerLink="/forgot-password">Forgot Password?</a>
+        <span> | </span>
+        <a routerLink="/create-account">Create an Account</a>
+      </div>
+    </div>
+  </div>
+  <div class="height">
+
+  </div>
+</div> -->

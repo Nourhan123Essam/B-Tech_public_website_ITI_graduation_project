@@ -1,0 +1,98 @@
+{
+  "language": "العربية",
+  "topbar": {
+    "My_delivery_area": "My delivery area:",
+    "city": "Cairo",
+    "sall_on_BTECH": "Sell on B.TECH",
+    "call": "Call"
+  },
+
+  "nav": {
+    "categories": "Categories",
+    "daily_deals": "Daily Deals",
+    "search_placeholder": "Search",
+    "sign_in": "Sign in",
+    "cart": "Cart",
+    "search by category": "Search by category",
+    "login to cart": "You need to log in first to go to your cart!"
+  },
+
+  "slider": {
+    "categories": "Categories",
+    "brands": "Bands",
+    "price": "Price",
+    "clear all": "Clear all"
+  },
+  "remember": {
+    "start": "Let's get started!",
+    "first": "Use your mobile number to sign in or sign up.",
+    "second": "Mobile Number",
+    "third": "Enter your mobile number",
+    "button": "Continue",
+    "create": "Create an Account.",
+    "error": "Please enter a valid mobile number"
+  },
+
+  "product": {
+    "price": "Price",
+    "description": "Description",
+    "specification": "Specification",
+    "details": "Details",
+    "add to cart": "Add to Cart",
+    "No products found for": "No products found for",
+    "Products for": "Products for"
+  },
+  "home": {
+    "featured categories": "Featured Categories",
+    "last view products": "Last Viewed Products",
+    "popular brands": "Popular Brands",
+    "B.TECH promo codes": "B.TECH Promo Codes",
+    "top offers": "Top Offers",
+    "shop now": "Shop Now",
+    "why B.TECH": "Why B.TECH",
+    "monthly pay": "or from {{amount}}/mo"
+  },
+  "alert": {
+    "login prompt": "You need to log in first to add to your cart!",
+    "continue exploring": "Continue exploring products",
+    "go to login": "Go to log in"
+  },
+  "signin": {
+    "welcome message": "Let's get started!",
+    "instruction": "Use your email and password to sign in.",
+    "email": "Email",
+    "password": "Password",
+    "sign in button": "Sign In",
+     "forgot password": "Forgot Password?",
+    "create account": "Create an Account",
+    "enter email": "Enter your email",
+    "enter password": "Enter your password"
+  },
+
+  "footer": {
+    "call_support": "Call support",
+    "support_number": "19966",
+    "warranty_section": "B.TECH warranty",
+    "warranty_items": ["Ultra", "Ariston", "Indesit", "Babyliss", "Miele"],
+    "services_section": "B.TECH services",
+    "services_items": ["Minicash", "TECH CARE", "B.TECH Branches"],
+    "faqs_section": "B.TECH FAQs",
+    "faqs_items": ["Returns FAQs"],
+    "trending_section": "Trending now",
+    "trending_items": [
+      "Everyday Deals",
+      "Mobile",
+      "Braun offers",
+      "TVs",
+      "Accessories",
+      "Oppo",
+      "Samsung",
+      "Apple"
+    ],
+    "connect_section": "Connect with us",
+    "download_app_section": "Download the B.TECH app",
+    "copyright": "© B.TECH for Trade and Distribution, all rights reserved.",
+    "terms_conditions": "Terms & Conditions",
+    "returns_policy": "Returns Policy"
+  }
+}

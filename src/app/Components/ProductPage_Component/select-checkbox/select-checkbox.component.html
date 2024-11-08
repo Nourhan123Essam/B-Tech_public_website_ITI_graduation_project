@@ -1,0 +1,6 @@
+<ul class="list-unstyled">
+  <li *ngFor="let item of dataEntity">
+    <input type="checkbox"  (change)="onDataChange(item)" [checked]="item === selectEntity">
+    <label class="me-3 ms-3">{{ item }}</label>
+  </li>
+</ul>

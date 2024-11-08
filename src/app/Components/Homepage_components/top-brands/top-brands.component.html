@@ -1,0 +1,8 @@
+<div class="card m-3 p-3 shadow-sm">
+  <h4>{{ "home.popular brands" | translate }}</h4>
+  <div class="categories-container">
+    <div class="category-item" *ngFor="let brand of topBrands" (click)="navigateToBrandProducts(brand.name)">
+      <img [src]="brand.image" [alt]="brand.name" />
+    </div>
+  </div>
+</div>

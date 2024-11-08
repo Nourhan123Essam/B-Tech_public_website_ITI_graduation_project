@@ -1,0 +1,68 @@
+<div class="container my-5">
+  <!-- <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card" (click)="openProductDetails(data)"> -->
+  <div [dir]="isArabic ? 'rtl' : 'ltr'" class="card" (click)="openProductDetails(data)">
+    <img
+      [src]="(data.product?.images && data.product.images.length > 0) ? data.product.images[0].url : (data.images?.[0]?.url || 'default-image-url.png')"
+      class="card-img-top"
+      [alt]="data.product?.translations?.[isArabic ? 1 : 0]?.name || data.translations?.[isArabic ? 1 : 0]?.name || 'Product Image'" />
+    <div class="card-body text-center">
+      <h5 class="card-title fw-bold fs-5">
+        {{ data.product?.translations?.[isArabic ? 1 : 0]?.name || data.translations?.[isArabic ? 1 : 0]?.name ||
+        'Product Name' }}
+      </h5>
+      <p class="card-text price">
+        {{ getFormattedPrice(data.price) }}
+      </p>
+      <hr />
+      <button class="btn btn-wrning w-75" (click)="add(data)">
+        {{ "product.add to cart" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- pop-up modal for add to cart if the user not logged in -->
+
+<ng-template #confirmRemoveModal let-modal>
+  <div class="modal-header justify-content-center" style="font-weight: bold; background-color: rgb(244, 220, 175)">
+    <h5 class="modal-title text-center">
+      {{ "alert.login prompt" | translate }}
+    </h5>
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-warning" (click)="modal.close('Remove')">
+      {{ "alert.continue exploring" | translate }}
+    </button>
+    <button type="button" class="btn btn-dark" (click)="modal.close('cancel')">
+      {{ "alert.go to login" | translate }}
+    </button>
+  </div>
+</ng-template>
+
+
+<!--
+<div class="card"(click)="openProductDetails(data)" >
+  <img [src]="data.product.images && data.product.images.length > 0 ? data.product.images[0].url : 'default-image-url.png'"
+       class="card-img-top"
+
+       [alt]="data.product.translations?.[0]?.name || 'Product Image'">
+  <div class="card-body">
+    <h5 class="card-title">{{ data.product.translations?.[0]?.name || 'Product Name' }}</h5>
+    <p class="card-text">{{ data.product.price }} EGP</p>
+
+    <button class="btn btn-warning" (click)="add()">Add to Cart</button>
+  </div>
+</div>
+
+
+ <div class="card" (click)="openProductDetails(data)">
+  <img [src]="data.images?.[0]?.url || 'default-image-url.png'"
+       class="card-img-top"
+       [alt]="data.translations?.[0]?.name || 'Product Image'">
+  <div class="card-body">
+    <h5 class="card-title">{{ data.translations?.[0]?.name || 'Product Name' }}</h5>
+    <p class="card-text">{{ data.price }} EGP</p>
+
+    <button class="btn btn-warning" (click)="add($event)">Add to Cart</button>
+  </div>
+</div> -->

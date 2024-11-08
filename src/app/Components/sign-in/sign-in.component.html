@@ -1,0 +1,66 @@
+<nav class="navbar">
+  <div class="navbar-content">
+    <div class="language">
+      <a class="me-3" (click)="useLanguage()">{{
+        "language" | translate
+        }}</a>
+    </div>
+    <div class="logo">
+      <img src="https://btech.com/media/logo/stores/1/new3.png" alt="B.TECH Logo" class="logo-image" />
+    </div>
+  </div>
+</nav>
+
+
+<div [dir]="isArabic ? 'rtl' : 'ltr'" class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="circle-container">
+        <div class="circle">
+          <img src="https://cdn.pixabay.com/animation/2022/08/06/11/56/11-56-56-209_512.gif" alt="Hi Animation"
+            class="animated-image mb-4" />
+        </div>
+      </div>
+      <br />
+      <h3 class="text-center">{{'signin.welcome message'|translate}}</h3>
+
+      <p class="text-center">{{'signin.instruction'|translate}}.</p>
+
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">{{'signin.email'|translate}}</label>
+          <input type="email" class="form-control" id="email" formControlName="email" [placeholder]="'signin.enter email' | translate"
+
+            required />
+          <div class="invalid-feedback" *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched">
+            Please enter a valid email
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="password">{{'signin.password'|translate}}</label>
+          <input type="password" class="form-control" id="password" formControlName="password"
+          [placeholder]="'signin.enter password'| translate"
+          required />
+          <div class="invalid-feedback"
+            *ngIf="signInForm.get('password')?.invalid && signInForm.get('password')?.touched">
+            Password is required
+          </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!signInForm.valid">
+          {{'signin.sign in button'|translate}}
+        </button>
+      </form>
+
+      <div class="text-center mt-3">
+        <a routerLink="/forgot-password">{{'signin.forgot password'|translate}}</a>
+        <span> | </span>
+        <a routerLink="/create-account">{{'signin.create account'|translate}}</a>
+      </div>
+    </div>
+  </div>
+  <div class="height">
+
+  </div>
+</div>

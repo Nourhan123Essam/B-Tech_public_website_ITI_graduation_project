@@ -1,0 +1,115 @@
+<header class="sticky-top">
+  <!-- Top Bar -->
+  <div class="top-bar text-light py-1" style="background-color: #0e001a">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <a href="#" class="ms-3 me-3" (click)="useLanguage()">{{
+          "language" | translate
+          }}</a>
+        <span>{{ "topbar.My_delivery_area" | translate
+          }}<strong>{{ "topbar.city" | translate }}</strong></span>
+      </div>
+      <div class="d-flex align-items-center">
+        <a href="#" class="me-3">{{ "topbar.sall_on_BTECH" | translate }}</a>
+        <a href="tel:19966" class="me-3"><i class="fas fa-phone-alt"></i>
+          {{ "topbar.call" | translate }} 19966</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <nav [dir]="isArabic ? 'rtl' : 'ltr'" class="navbar navbar-expand-lg navbar-light bg-light py-3">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" routerLink="promotion">
+        <img src="https://btech.com/media/logo/stores/1/new3.png" alt="B.TECH" width="100" />
+      </a>
+
+      <!-- Toggler for mobile view -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <!-- Categories Dropdown -->
+          <li class="nav-item dropdown" [ngClass]="{ 'dropdown-ar': isArabic, 'dropdown-en': !isArabic }">
+            <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              {{ "nav.categories" | translate }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+              <li *ngFor="let categoryItem of categories" class="dropdown-submenu">
+                <!-- Main Category Item -->
+                <a class="dropdown-item" (mouseenter)="onCategoryHover(categoryItem.id)">
+                  {{ categoryItem.categoryName }}
+                </a>
+                <!-- Subcategory Dropdown -->
+                <ul *ngIf="selectedCategoryId === categoryItem.id && subCategories.length > 0" class="dropdown-menu">
+                  <li *ngFor="let subCategory of subCategories">
+                    <a class="dropdown-item" [routerLink]="['/product-by-category', subCategory.id]">
+                      {{ subCategory.categoryName }}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Daily Deals -->
+          <li class="nav-item col-md-8">
+            <a routerLink="products" class="nav-link text-danger">{{'nav.daily_deals'|translate}}</a>
+          </li>
+        </ul>
+
+        <!-- Search Bar -->
+        <form (ngSubmit)="onSearch($event)" class="d-flex mx-auto w-50">
+          <input [(ngModel)]="searchQuery" name="searchQuery" class="form-control me-2 mx-2" type="search"
+            [placeholder]="'nav.search by category' | translate" aria-label="Search">
+          <button title="." class="btn btn-outline-secondary" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+        <!-- Sign In and Cart -->
+        <ul class="navbar-nav ms-auto d-flex align-items-center">
+          <li class="nav-item col-md-7" *ngIf="!isUserLoggedIn">
+            <a class="nav-link" (click)="opensignin()">
+              <i class="fas fa-user"></i> {{ "nav.sign_in" | translate }}
+            </a>
+          </li>
+          <li class="nav-item col-md-7">
+            <a class="nav-link" (click)="goToCart()">
+              <i class="fas fa-shopping-cart"></i> {{ "nav.cart" | translate }}
+            </a>
+          </li>
+          <li class="nav-item col-md-7" *ngIf="isUserLoggedIn">
+            <a class="nav-link" (click)="onSignOut()">
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<!-- pop-up modal for go to cart if the user not logged in -->
+
+<ng-template #logFirstModal let-modal>
+  <div class="modal-header justify-content-center" style="font-weight: bold; background-color: rgb(244, 220, 175)">
+    <h5 class="modal-title text-center">
+      {{ "nav.login to cart" | translate }}
+    </h5>
+  </div>
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-warning" (click)="modal.close('Remove')">
+      {{ "alert.continue exploring" | translate }}
+    </button>
+    <button type="button" class="btn btn-dark" (click)="modal.close('cancel')">
+      {{ "alert.go to login" | translate }}
+    </button>
+  </div>
+</ng-template>
