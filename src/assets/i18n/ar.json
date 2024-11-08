@@ -104,6 +104,17 @@
     "Remove Product": "إزالة المنتج من عربة التسوق؟",
     "Don't Remove": "لا تزيل"
   },
+  "account": {
+    "account home": "الصفحة الرئيسية للحساب",
+    "my orders": "طلباتي",
+    "log out": "تسجيل الخروج",
+    "return policy": "سياسة الإرجاع",
+    "return policy description": "يمكن إرجاع معظم العناصر خلال 30 يومًا من الاستلام",
+    "have a question": "هل لديك سؤال؟",
+    "use our app": "استخدم تطبيقنا",
+    "app benefits": "استمتع بالمزايا والميزات باستخدام تطبيق B.TECH",
+    "greeting": "مرحباً,"
+  },
   "footer": {
     "call_support": "اتصل بالدعم",
     "support_number": "19966",

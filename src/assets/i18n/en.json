@@ -104,6 +104,17 @@
     "Remove Product": "Remove Product from cart?",
     "Don't Remove": "Don't Remove"
   },
+  "account": {
+    "account home": "Account Home",
+    "my orders": "My orders",
+    "log out": "Log out",
+    "return policy": "Return policy",
+    "return policy description": "Most items can be returned within 30 days of delivery",
+    "have a question": "Have a question?",
+    "use our app": "Use our app",
+    "app benefits": "Enjoy benefits & features using the B.TECH app",
+    "greeting": "Hi,"
+  },
   "footer": {
     "call_support": "Call support",
     "support_number": "19966",
