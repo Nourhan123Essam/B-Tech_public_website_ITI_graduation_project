@@ -161,7 +161,6 @@ onSubCategorySelect(subCategoryId: number) {
   opensignin() {
     this.router.navigate(['remember-by-phoone']).then(() => {
       // بعد تسجيل الدخول، تحديث حالة isUserLoggedIn
-      this.isUserLoggedIn = true;
       this.userName = this.auth.getUserNameFromToken() || '';
       this.cdr.detectChanges(); // تحديث العرض بدون إعادة تحميل الصفحة
     });

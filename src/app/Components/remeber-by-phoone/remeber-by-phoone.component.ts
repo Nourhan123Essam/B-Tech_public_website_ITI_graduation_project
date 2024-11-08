@@ -53,4 +53,7 @@ export class RemeberByPhooneComponent {
   useLanguage() {
     this.translate.ChangeLanguage();
   }
+  signin(){
+    this.router.navigate(['sign-in']);
+  }
 }

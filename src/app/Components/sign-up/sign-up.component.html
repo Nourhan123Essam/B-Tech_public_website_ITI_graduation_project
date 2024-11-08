@@ -84,8 +84,8 @@
       </form>
 
       <div class="text-center mt-3">
-        <small>{{'signup.already have an account'|translate}}<a routerLink="/sign-in"></a>
-          {{'signup.signin'|translate}}</small>
+        <small>{{'signup.already have an account'|translate}}<a (click)="signin()"> {{'signup.signin'|translate}}</a>
+         </small>
       </div>
     </div>
   </div>
@@ -93,89 +93,3 @@
 
 
 
-<!-- <nav class="navbar">
-  <div class="navbar-content">
-    <div class="language">
-      <a href="#" class="language-link">عربي</a>
-    </div>
-    <div class="logo">
-      <img src="https://btech.com/media/logo/stores/1/new3.png" alt="B.TECH Logo" class="logo-image" />
-    </div>
-  </div>
-</nav>
-
-
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="circle-container">
-        <div class="circle">
-          <img
-            src="https://cdn.pixabay.com/animation/2022/08/06/11/56/11-56-56-209_512.gif"
-            alt="Hi Animation"
-            class="animated-image mb-4"
-          />
-        </div>
-      </div>
-      <br />
-      <h3 class="text-center">Let's get started!</h3>
-
-      <p class="text-center">Use your email and password to sign in.</p>
-
-      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            formControlName="email"
-            placeholder="Enter your email"
-            required
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched"
-          >
-            Please enter a valid email
-          </div>
-        </div>
-
-        <div class="form-group mt-3">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            formControlName="password"
-            placeholder="Enter your password"
-            required
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="signInForm.get('password')?.invalid && signInForm.get('password')?.touched"
-          >
-            Password is required
-          </div>
-        </div>
-        <br />
-        <button
-          type="submit"
-          class="btn btn-primary btn-block mt-4"
-          [disabled]="!signInForm.valid"
-        >
-          Sign In
-        </button>
-      </form>
-
-      <div class="text-center mt-3">
-        <a routerLink="/forgot-password">Forgot Password?</a>
-        <span> | </span>
-        <a routerLink="/create-account">Create an Account</a>
-      </div>
-    </div>
-  </div>
-  <div class="height">
-
-  </div>
-</div> -->
