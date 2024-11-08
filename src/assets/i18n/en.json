@@ -29,8 +29,8 @@
     "second": "Mobile Number",
     "third": "Enter your mobile number",
     "button": "Continue",
-    "create": "Create an Account.",
-    "error": "Please enter a valid mobile number"
+    "error": "Please enter a valid mobile number",
+    "or sign in with email": "Or sign in with email."
   },
 
   "product": {
