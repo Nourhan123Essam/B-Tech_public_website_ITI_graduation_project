@@ -56,7 +56,7 @@
       <div class="text-center mt-3">
         <a routerLink="/forgot-password">{{'signin.forgot password'|translate}}</a>
         <span> | </span>
-        <a routerLink="/create-account">{{'signin.create account'|translate}}</a>
+        <a (click)="signup()">{{'signin.create account'|translate}}</a>
       </div>
     </div>
   </div>

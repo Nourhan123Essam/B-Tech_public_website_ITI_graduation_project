@@ -76,6 +76,9 @@ saveUserInfo(){
 useLanguage() {
   this.translate.ChangeLanguage();
 }
+signup(){
+  this.router.navigate(['sign-up']);
+}
 }
 
 
