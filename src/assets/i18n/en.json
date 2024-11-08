@@ -50,7 +50,8 @@
     "top offers": "Top Offers",
     "shop now": "Shop Now",
     "why B.TECH": "Why B.TECH",
-    "monthly pay": "or from {{amount}}/mo"
+    "monthly pay": "or from {{amount}}/mo",
+    "no products": "No recently viewed products."
   },
   "alert": {
     "login prompt": "You need to log in first to add to your cart!",

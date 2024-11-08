@@ -15,14 +15,17 @@ export class RecentProductsService {
     // تحقق من وجود المنتج في القائمة بالفعل
     const exists = recentProducts.find((p: any) => p.id === product.id);
     if (!exists) {
+
       // حفظ المنتج مع الحقول المطلوبة فقط وإضافة التاريخ
       const productData = {
         id: product.id,
-        name: product.translations?.[0]?.name || 'Unknown Product',
+        nameAr: product.translations?.[1]?.name || 'منتج غير معرف',
+        nameEn: product.translations?.[0]?.name || 'Unknown Product',
+
         image: product.images?.[0]?.url || 'https://placeholder.com/150',
         addedDate: new Date().getTime() // تاريخ إضافة المنتج بالميللي ثانية
       };
-      
+
       recentProducts.unshift(productData); // أضف المنتج إلى بداية القائمة
 
       // حفظ القائمة في localStorage

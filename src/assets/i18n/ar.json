@@ -50,7 +50,8 @@
     "top offers": "أفضل العروض",
     "shop now": "تسوق الآن",
     "why B.TECH": "لماذا B.TECH",
-    "monthly pay": "أو من {{amount}}/شهر"
+    "monthly pay": "أو من {{amount}}/شهر",
+    "no products":" لا يوجد منتجات تم عرضها مؤخرًا."
   },
   "alert": {
     "login prompt": "تحتاج إلى تسجيل الدخول أولاً لإضافة منتجات إلى سلة التسوق!",
