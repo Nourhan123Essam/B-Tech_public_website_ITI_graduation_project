@@ -1,5 +1,5 @@
 
-  
+
   .smallCart{
     padding: 20px;
     padding-top: 10px;
@@ -8,7 +8,7 @@
     background-color: white;
   }
   .cart-page {
-    
+
     padding: 20px;
     font-family: Arial, sans-serif;
     /* border: 1px solid #c2bcbcbc; */
@@ -17,7 +17,7 @@
     box-shadow: 0 0 0 2px rgba(224, 230, 237, 0.5); /* Thin border-like shadow */
     background-color: white;
     margin: 20px; margin-top: 0px; height: auto; align-self: flex-start;
-   
+
   }
 
   .checkout-btn {
@@ -28,43 +28,43 @@
     border: none;
     cursor: pointer;
   }
-  
+
   .cart-container {
     display: flex;
     justify-content: space-between;
     padding: 20px;
     background-color: #f9f9f9;
   }
-  
+
   .cart-items, .cart-summary {
     width: 48%;
   }
 
   .hint{
-    color: rgb(234, 153, 1); 
-    background-color: rgb(255, 244, 225); 
-    border-radius: 5px; 
-    padding: 10px; 
+    color: rgb(234, 153, 1);
+    background-color: rgb(255, 244, 225);
+    border-radius: 5px;
+    padding: 10px;
     font-size: 12px;
     margin-bottom: 55px;
   }
   .section-number{
-    border: 2px black solid; 
-    padding: 1px 8px; 
-    border-radius: 50%; 
-    display: inline-block; 
+    border: 2px black solid;
+    padding: 1px 8px;
+    border-radius: 50%;
+    display: inline-block;
   }
   .section-parts{
     background-color: white;
   }
   .section-number-disable{
-    border: 2px gray solid; 
-    padding: 1px 8px; 
-    border-radius: 50%; 
-    display: inline-block; 
+    border: 2px gray solid;
+    padding: 1px 8px;
+    border-radius: 50%;
+    display: inline-block;
   }
 
- 
+
 
   /* /////////////////////////////////// */
 
@@ -88,5 +88,18 @@
     font-size: 20px;
   }
 
-  
- 
+
+  .cityButton{
+    width: 100%;
+    border: 1px solid rgb(213, 210, 210);
+    background-color: white;
+    border-radius: 10px;
+  }
+  .cityButton:hover{
+    width: 100%;
+    border: 1px solid rgb(15, 14, 14);
+    background-color: white;
+    border-radius: 10px;
+  }
+
+

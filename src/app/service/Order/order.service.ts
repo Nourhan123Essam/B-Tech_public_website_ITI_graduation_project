@@ -23,10 +23,15 @@ export class OrderService {
   updateOrderItemQuantity(orderItemId: number, newQuantity: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/update-order-item-quantity?orderItemId=${orderItemId}&newQuantity=${newQuantity}`, { orderItemId, newQuantity });
   }
+  finishOrder(orderId: number, total: number, user:string): Observable<any> {
+    // alert(`${orderId}, ${total}, ${user}`)
+    return this.http.put(`${this.apiUrl}/finish-order?orderId=${orderId}&total=${total}&user=${user}`
+      , { orderId, total, user });
+  }
   deleteOrderItem(orderItemId: number): Observable<any> {
     var req = `${this.apiUrl}/order-item/${orderItemId}`;
     console.log(req);
-    
+
     return this.http.delete(req);
   }
 

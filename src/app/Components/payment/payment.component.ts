@@ -1,4 +1,4 @@
-import { Component, Input, input, OnInit } from '@angular/core';
+import { Component, Input, input, OnInit , Output, ViewChild , OnChanges, SimpleChanges, OnDestroy} from '@angular/core';
 import {OrderService} from '../../service/Order/order.service'
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -8,12 +8,17 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PaypalButtonComponent} from "../paypal-button/paypal-button.component";
 import {PaypalPaymentService } from '../../service/payment/paypal-payment.service'
 import { AuthService } from '../../service/Identity/auth.service';
+import {CitySidebarComponent} from '../city-side-bar-component/city-side-bar-component.component';
+import { Subject } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, FormsModule, PaypalButtonComponent],
+  imports: [CommonModule, FormsModule, PaypalButtonComponent, CitySidebarComponent],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })
@@ -30,19 +35,19 @@ export class PaymentComponent implements OnInit {
   currentStep = 1;
   deliveryDetails = { city: '' };
   paymentInfo = { cardNumber: '' };
-  cartItems: any[] = []; 
+  cartItems: any[] = [];
   fee:number = 22;
   selectedPaymentMethod: string = "paypal";
   totalAmount:number = 100;
   isExpanded:boolean = false;
-  @Input()orderId:number = 0;
- 
+  orderId:number|null = 0;
+
 
   constructor(private orderService: OrderService, private router:Router, private modalService: NgbModal,
-              private paypalService: PaypalPaymentService, private authService: AuthService){}
-  ngOnInit(): void {
-    this.loadCartItems();
-  }
+    private paypalService: PaypalPaymentService, private authService: AuthService, private route: ActivatedRoute){}
+
+
+
   cities = [
     "Cairo",
     "Alexandria",
@@ -80,24 +85,70 @@ export class PaymentComponent implements OnInit {
     "New Cairo",
     "Badr City"
   ];
-  
+
+  @ViewChild('citySidebar') citySidebar: any;
+  choosedCity: string = "Select city";
+  ngOnInit(): void {
+    this.loadCartItems();
+    // alert(this.route.snapshot.paramMap.get('orderId'));
+    this.orderId = Number(this.route.snapshot.paramMap.get('orderId'));
+    // alert(`${this.orderId}agu`);
+  }
+
+  openCitySidebar() {
+    if (this.citySidebar && typeof this.citySidebar.openSidebar === 'function') {
+      this.citySidebar.openSidebar();
+      console.log("from payment", this.choosedCity);
+
+    } else {
+      console.error('openSidebar method is not available on citySidebar');
+    }
+  }
+  receiveData(data:string){
+    this.choosedCity = data;
+    const ele = document.getElementById("fullAddress");
+    if(ele){
+      ele.style.display = "block";
+    }
+  }
+  fullAddress(){
+    const but = document.getElementById("continueDelivery");
+    if(but){
+      but.style.display = "block";
+    }
+    //this.nextStep();
+  }
+
   //====== finishing the payment =============
   completePayment() {
-    const paymentDetails = {
-      transactionId: (this.selectedPaymentMethod == 'cash')?'':'sample-transaction-id',
-      orderId: 'sample-order-id',
-      shippingCost: 10.0,
-      shippingAddress: '123 Example St, City, Country'
-    };
+    // const paymentDetails = {
+    //   transactionId: (this.selectedPaymentMethod == 'cash')?'':'sample-transaction-id',
+    //   orderId: 'sample-order-id',
+    //   shippingCost: 10.0,
+    //   shippingAddress: '123 Example St, City, Country'
+    // };
 
-    this.paypalService.completePayment(paymentDetails).subscribe(
-      response => {
-        console.log('Payment completed successfully', response);
-      },
-      error => {
-        console.error('Payment completion failed', error);
-      }
-    );
+    // this.paypalService.completePayment(paymentDetails).subscribe(
+    //   response => {
+    //     console.log('Payment completed successfully', response);
+    //   },
+    //   error => {
+    //     console.error('Payment completion failed', error);
+    //   }
+    // );
+    const userID = this.authService.getUserIdNourhan();
+    if(userID && this.orderId){
+      // alert(this.orderId)
+      this.orderService.finishOrder(this.orderId, this.totalAmount, userID).subscribe(
+        (response) => {
+          console.log('Quantity updated successfully', response);
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          console.error('Error updating quantity', error);
+        }
+      );
+    }
   }
 
   //************************************************** */
@@ -151,19 +202,23 @@ export class PaymentComponent implements OnInit {
     if (ele) {
       ele.disabled = false;
     }
-  }  
+  }
 
   applyDiscount():void{
 
   }
   //===========fetch order items=============
   loadCartItems(): void {
-    const userId = this.authService.getUserIdNourhan(); 
+    const userId = this.authService.getUserIdNourhan();
     if(userId){
       this.orderService.viewCart(userId).subscribe(
         (data) => {
           console.log(data);
           this.cartItems = data;
+
+          for (const item of this.cartItems) {
+            this.totalAmount  += item.totalPrice;
+          }
         },
         (error) => {
           console.error(error);

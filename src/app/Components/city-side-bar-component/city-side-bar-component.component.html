@@ -1,0 +1,31 @@
+<div class="sidebar" [class.open]="isOpen">
+    <div class="row">
+      <div class="col-md-10">
+        <h5>Choose your pick-up location</h5>
+      </div>
+      <div class="col-md-2">
+        <button class="close-btn" (click)="closeSidebar()">×</button>
+      </div>
+    </div>
+    <hr>
+    <ul>
+        <p style="font-size: 12px; font-weight: bold; color: gray;" class="text-start">
+            Select city
+        </p>
+      <li *ngFor="let city of cities" (click)="selectCity(city)" class="text-start" 
+                style="padding: 15px 0; border-bottom: solid 1px rgb(205, 204, 204);">
+        <div class="row">
+            <div class="col-md-10">
+                {{ city }}
+            </div>
+            <div class="col-md-2">
+                <i class="fa-solid fa-circle-check" *ngIf="choosenCity == city"></i>
+                <i class="fa-regular fa-circle" *ngIf="choosenCity != city"></i>
+            </div>
+        </div>  
+        
+        
+      </li>
+
+    </ul>
+  </div>
