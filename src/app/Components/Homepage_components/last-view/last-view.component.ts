@@ -34,4 +34,11 @@ export class LastViewComponent implements OnInit {
     this.recentProductsService.addProductToRecent(product); // إضافة المنتج إلى قائمة المشاهدات الأخيرة
     this.router.navigate(['/details', product.id]);
   }
+
+ getProductName(product: any): string {
+  console.log('isArabic:', this.isArabic);
+  console.log('Product:', product);
+  return this.isArabic ? product.nameAr : product.nameEn;
+}
+
 }

@@ -6,6 +6,7 @@ import { BehaviorSubject, map, Observable, take, timer } from 'rxjs';
   providedIn: 'root',
 })
 export class LocalizationService {
+  
   private isArabic: BehaviorSubject<boolean>;
   constructor(private translate: TranslateService) {
     this.isArabic = new BehaviorSubject<boolean>(false);
@@ -15,6 +16,7 @@ export class LocalizationService {
   get IsArabic(): Observable<boolean> {
     return this.isArabic.asObservable();
   }
+
   ChangeLanguage() {
 
     let language = localStorage.getItem('language') ?? 'en';
