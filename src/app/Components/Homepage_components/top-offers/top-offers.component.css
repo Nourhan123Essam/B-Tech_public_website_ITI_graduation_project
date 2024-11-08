@@ -1,14 +1,12 @@
 .top-offers {
   padding: 1.5rem;
-  background-color: #1a1a1a;
-  color: #f1f1f1;
-  border-radius: 12px;
-  padding: 1.5rem;
-  background-color: #1a1a1a;
+  background-image:url('https://btech.com/media/homecontent/campaign/m/u/multicolor_desktop_rtl_1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: #f1f1f1;
   border-radius: 12px;
   overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -17,15 +15,11 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
 }
 
 .top-offers-header h2 {
   font-size: 1.8rem;
-  font-size: 1.8rem;
   font-weight: bold;
-  margin: 0;
-  color: #ffffff;
   margin: 0;
   color: #ffffff;
 }
@@ -33,23 +27,16 @@
 .shop-now-btn {
   background-color: #f8b400;
   color: #1a1a1a;
-  background-color: #f8b400;
-  color: #1a1a1a;
   border: none;
-  border-radius: 20px;
-  padding: 0.5rem 1.5rem;
   border-radius: 20px;
   padding: 0.5rem 1.5rem;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .shop-now-btn:hover {
-  background-color: #ffd24d;
-  color: #000;
   background-color: #ffd24d;
   color: #000;
 }
@@ -65,8 +52,6 @@
   gap: 1rem;
   overflow-x: auto;
   padding-bottom: 1rem;
-  padding-right: 5rem;
-  padding-left: 20rem;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   padding-right: 10rem;
@@ -76,13 +61,6 @@
 }
 
 .product-card {
-  background-color: #2b2b2b;
-  color: #e0e0e0;
-  border-radius: 12px;
-  width: 180px;
-  min-width: 180px;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-  padding: 1rem;
   background-color: #2b2b2b;
   color: #e0e0e0;
   border-radius: 12px;
@@ -135,17 +113,13 @@
 
 .price {
   font-size: 1rem;
-  font-size: 1rem;
   font-weight: 600;
-  color: #f8b400;
-  margin: 0.25rem 0;
   color: #f8b400;
   margin: 0.25rem 0;
 }
 
 .monthly-pay {
   font-size: 0.9rem;
-  color: #cccccc;
   color: #cccccc;
   margin-top: 0.25rem;
 }
@@ -156,22 +130,16 @@
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.7);
   color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #ffffff;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
   width: 40px;
   height: 40px;
   font-size: 1.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  transition: background-color 0.3s ease;
 }
 
 .scroll-button.left {
-  left: -20px;
   left: -20px;
 }
 

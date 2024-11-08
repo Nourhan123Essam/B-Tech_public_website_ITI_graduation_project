@@ -63,12 +63,27 @@
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
     "sign in button": "تسجيل الدخول",
-     "forgot password": "هل نسيت كلمة المرور؟",
+    "forgot password": "هل نسيت كلمة المرور؟",
     "create account": "إنشاء حساب",
     "enter email": "أدخل بريدك الإلكتروني",
-    "enter password": "أدخل كلمة المرور"
+    "enter password": "أدخل كلمة المرور",
+    "please enter a valid email": "يرجى إدخال عنوان بريد إلكتروني صالح",
+    "password is required": "كلمة المرور مطلوبة"
   },
-
+  "signup": {
+    "enterFullName": "أدخل اسمك بالكامل",
+    "enterEmail": "أدخل بريدك الإلكتروني",
+    "enterMobileNumber": "أدخل رقم هاتفك المحمول",
+    "createPassword": "أنشئ كلمة مرور",
+    "confirmPassword": "أكد كلمة المرور",
+    "fullNameRequired": "الاسم الكامل مطلوب",
+    "validEmailRequired": "يرجى إدخال عنوان بريد إلكتروني صالح",
+    "validMobileRequired": "يرجى إدخال رقم هاتف صالح",
+    "passwordLength": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+    "passwordsMatch": "يجب أن تتطابق كلمات المرور",
+    "signin": "تسجيل الدخول",
+    "already have an account": "لديك حساب بالفعل؟"
+  },
   "footer": {
     "call_support": "اتصل بالدعم",
     "support_number": "19966",
