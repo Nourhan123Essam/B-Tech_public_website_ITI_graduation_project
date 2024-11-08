@@ -31,7 +31,7 @@
 
           <header class="cart-header text-start">
 
-            <h3 style="display: inline-block;">Cart</h3>
+            <h3 style="display: inline-block;">{{'cart.cart'|translate}}</h3>
             <p style="display: inline-block;" class="cartSize">{{ cartItems.length }}</p>
           </header>
 
@@ -52,7 +52,7 @@
               <div>
                 <a (click)="openRemoveModal(confirmRemoveModal, item.id)" style="color: rgb(0, 115, 255);">
                   <i class="fa-regular fa-trash-can"></i>
-                  Remove
+                  {{'cart.remove'|translate}}
                 </a>
               </div>
             </div>
@@ -63,14 +63,14 @@
     <div class="col-md-4">
       <div class="text-center smallCart">
         <div class="row" style="margin-top: 15px;">
-          <div class="col-md-6 text-start">Quanity:</div>
-          <div class="col-md-6 text-end">{{Quantity}} items</div>
+          <div class="col-md-6 text-start">{{'cart.Quantity'|translate}}</div>
+          <div class="col-md-6 text-end">{{Quantity}} {{'cart.items'|translate}}</div>
         </div>
         <div class="row" style="margin-bottom: 15px; font-size: 20px;">
-          <div style="font-weight: bold;" class="col-md-6 text-start">Subtotal:</div>
+          <div style="font-weight: bold;" class="col-md-6 text-start">{{'cart.Subtotal'|translate}}</div>
           <div style="font-weight: bold;" class="col-md-6 text-end">{{ totalCost.toFixed(2) }} EGP</div>
         </div>
-        <button (click)="goToCheckout()"  class="checkout-btn">Checkout</button>
+        <button (click)="goToCheckout()"  class="checkout-btn">{{'cart.checkout'|translate}}</button>
       </div>
 
       <div class="text-center smallCart2" style="margin-top: 20px;">
@@ -79,8 +79,8 @@
             <p style="font-size: 20px;"><i class="fa-solid fa-wallet"></i></p>
           </div>
           <div class="col-md-10 text-start">
-            <p style="font-weight: bold;">Pay on delivery</p>
-            <p>For all orders</p>
+            <p style="font-weight: bold;">{{'cart.Pay on delivery'|translate}}</p>
+            <p>{{'cart.For all orders'|translate}}</p>
             <hr>
           </div>
         </div>
@@ -90,8 +90,8 @@
             <p style="font-size: 20px;"><i class="fa-solid fa-rotate"></i></p>
           </div>
           <div class="col-md-10 text-start">
-            <p style="font-weight: bold;">Return policy</p>
-            <p>Most items can be returned withing 30 days of delivery</p>
+            <p style="font-weight: bold;">{{'cart.Return policy'|translate}}</p>
+            <p>{{'cart.Most items'|translate}}</p>
             <hr>
           </div>
         </div>
@@ -101,7 +101,7 @@
             <p style="font-size: 20px;"><i class="fa-regular fa-circle-question"></i></p>
           </div>
           <div class="col-md-10 text-start">
-            <p style="font-weight: bold;">Have a question?</p>
+            <p style="font-weight: bold;">{{'cart.Have a question'|translate}}</p>
             <p style="color: rgb(0, 115, 255);">19966</p>
           </div>
         </div>
@@ -116,11 +116,11 @@
 <!-- Remove Confirmation Modal -->
 <ng-template #confirmRemoveModal let-modal>
   <div class="modal-body" style="font-weight: bold;">
-    Remove Product from cart?
+    {{'cart.Remove Product'|translate}}
   </div>
   <div class="modal-footer text-center">
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')">Don't Remove</button>
-    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Remove')">Remove</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')">{{'cart.Remove Product'|translate}}</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Remove')">{{'cart.remove'|translate}}</button>
   </div>
 </ng-template>
 

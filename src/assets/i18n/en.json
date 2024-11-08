@@ -89,7 +89,20 @@
     "cart empty message": "Your shopping cart is empty!",
     "welcome message": "B.TECH is the #1 place for all your needs, explore \nour wide range of products, flexible payments &",
     "offers!": "offers!",
-    "shop now button": "Shop now!"
+    "shop now button": "Shop now!",
+    "cart": "Cart",
+    "remove": "Remove",
+    "Quantity": "Quantity:",
+    "items": "items",
+    "Subtotal": "Subtotal:",
+    "checkout": "Checkout",
+    "Pay on delivery": "Pay on delivery",
+    "For all orders": "For all orders",
+    "Return policy": "Return policy",
+    "Most items": "Most items can be returned withing 30 days of delivery",
+    "Have a question": "Have a question?",
+    "Remove Product": "Remove Product from cart?",
+    "Don't Remove": "Don't Remove"
   },
   "footer": {
     "call_support": "Call support",

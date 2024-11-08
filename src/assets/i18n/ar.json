@@ -89,7 +89,20 @@
     "cart empty message": "عربة التسوق فارغة!",
     "welcome message": "B.TECH هو المكان الأول لجميع احتياجاتك، استكشف \nمجموعتنا الواسعة من المنتجات، والدفع المرن",
     "offers": "والعروض!",
-    "shop now button": "تسوق الآن!"
+    "shop now button": "تسوق الآن!",
+    "cart": "عربة التسوق",
+    "remove": "إزالة",
+    "Quantity": "الكمية:",
+    "items": "العناصر",
+    "Subtotal": "المجموع الفرعي",
+    "checkout": "الدفع",
+    "Pay on delivery": "الدفع عند الاستلام",
+    "For all orders": "لكل الطلبات",
+    "Return policy": "سياسة الإرجاع",
+    "Most items": "يمكن إرجاع معظم العناصر خلال 30 يومًا من الاستلام",
+    "Have a question": "هل لديك سؤال؟",
+    "Remove Product": "إزالة المنتج من عربة التسوق؟",
+    "Don't Remove": "لا تزيل"
   },
   "footer": {
     "call_support": "اتصل بالدعم",
