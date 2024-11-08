@@ -84,7 +84,12 @@
     "passwordsMatch": "Passwords must match",
     "signin": "Sign In",
     "already have an account": "Already have an account?"
-
+  },
+  "cart": {
+    "cart empty message": "Your shopping cart is empty!",
+    "welcome message": "B.TECH is the #1 place for all your needs, explore \nour wide range of products, flexible payments &",
+    "offers!": "offers!",
+    "shop now button": "Shop now!"
   },
   "footer": {
     "call_support": "Call support",

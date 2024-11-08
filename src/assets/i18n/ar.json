@@ -51,7 +51,7 @@
     "shop now": "تسوق الآن",
     "why B.TECH": "لماذا B.TECH",
     "monthly pay": "أو من {{amount}}/شهر",
-    "no products":" لا يوجد منتجات تم عرضها مؤخرًا."
+    "no products": " لا يوجد منتجات تم عرضها مؤخرًا."
   },
   "alert": {
     "login prompt": "تحتاج إلى تسجيل الدخول أولاً لإضافة منتجات إلى سلة التسوق!",
@@ -84,6 +84,12 @@
     "passwordsMatch": "يجب أن تتطابق كلمات المرور",
     "signin": "تسجيل الدخول",
     "already have an account": "لديك حساب بالفعل؟"
+  },
+  "cart": {
+    "cart empty message": "عربة التسوق فارغة!",
+    "welcome message": "B.TECH هو المكان الأول لجميع احتياجاتك، استكشف \nمجموعتنا الواسعة من المنتجات، والدفع المرن",
+    "offers": "والعروض!",
+    "shop now button": "تسوق الآن!"
   },
   "footer": {
     "call_support": "اتصل بالدعم",

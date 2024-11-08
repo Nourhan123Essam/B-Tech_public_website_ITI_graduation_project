@@ -1,5 +1,5 @@
 
-<div class="container my-4 text-center" style="width: 80%;">
+<div [dir]="isArabic ? 'rtl' : 'ltr'" class="container my-4 text-center" style="width: 80%;">
 
   <!-- <ng-container  class="text-center" > -->
     <div *ngIf="cartItems.length === 0;"  class="row text-center">
@@ -10,15 +10,14 @@
                   style="width: 300px; height: auto;">
         </div>
         <p>
-          <span style="font-weight: bold; font-size: 20px;">Your shopping cart is empty!</span>
-          <br><span class="empty-cart">B.TECH is the #1 place for all you needs, explore
-          <br>our wide range of products, flexible payments &
-          <br><span class="text-center">offers!</span></span>
+          <span style="font-weight: bold; font-size: 20px;">{{'cart.cart empty message'|translate }}</span>
+          <br><span class="empty-cart">{{'cart.welcome message'|translate }}
+          <br><span class="text-center">{{'cart.offers'|translate}}</span></span>
         </p>
 
         <button (click)="navigateToHome()" class="shop-button"
           style="width: 35%; border-radius: 10px; padding: 15px 0; border: 1px solid rgb(191, 190, 190); background-color: white;">
-          <span style="font-weight: bold; font-size: 16px;">Shop now!</span>
+          <span style="font-weight: bold; font-size: 16px;">{{'cart.shop now button'|translate}}</span>
         </button>
 
       </div>
