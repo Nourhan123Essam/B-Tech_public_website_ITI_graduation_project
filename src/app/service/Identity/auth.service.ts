@@ -1,15 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
+
+
 export class AuthService {
   private apiUrl = 'https://localhost:7122/api/Account' ; // استخدم رابط الـ API الخاص بك
 
   constructor(private http: HttpClient) {}
 
+  getTokenClaims(token: string): any {
+    try {
+      const payload = token.split('.')[1];  // الحصول على الجزء الثاني من الـ token
+      const decodedPayload = JSON.parse(atob(payload));  // فك تشفير الـ token إلى كائن JSON
+      return decodedPayload;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+
+
+  getUserNameFromToken(): string | null {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const claims = this.getTokenClaims(token);
+      return claims?.['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'] || null;  // التأكد من أن "Name" هو الـ Claim الصحيح
+    }
+    return null;
+  }
+  
   checkPhoneNumber(mobileNumber: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/CheckNumber`, { PhoneNumber: mobileNumber });
   }
@@ -35,10 +58,12 @@ export class AuthService {
   //   return this.http.post(`${this.apiUrl}/signout`, {});
   // }
 
-  signOut(): void {
+  signOut() : Observable<any>  {
     localStorage.removeItem('authToken');  // إزالة التوكن من localStorage
     localStorage.removeItem('userId');     // إزالة userId (إن وجد)
     console.log('User signed out successfully.');
+    return this.http.post(`${this.apiUrl}/signout`, {});
+
   }
 
 
@@ -70,16 +95,6 @@ export class AuthService {
     );
   }
 
-  getTokenClaims(token: string): any {
-    try {
-      const payload = token.split('.')[1];  // الحصول على الجزء الثاني من التوكن
-      const decodedPayload = JSON.parse(atob(payload));  // فك الترميز وتحويله إلى كائن JSON
-      return decodedPayload;
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      return null;
-    }
-  }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('authToken');

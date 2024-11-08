@@ -47,6 +47,8 @@ export class HeaderComponent implements AfterViewInit , OnInit{
   // isLoggedIn: boolean = true;
   searchQuery: string = '';
   isUserLoggedIn: boolean = false;
+  userName: string = '';
+
 
 
   // categoryNames: string[] = [];
@@ -73,12 +75,22 @@ export class HeaderComponent implements AfterViewInit , OnInit{
   }
   ngAfterViewInit(): void {
     throw new Error('Method not implemented.');
+    
   }
   ngOnInit(): void {
-    this.getallcategory();
+    this.getallcategory(); // جلب الفئات كما في الكود السابق
     this.isUserLoggedIn = this.auth.isLoggedIn();
+  
+    if (this.isUserLoggedIn) {
+      // استرجاع اسم المستخدم من التوكن وتخزينه في userName
+      this.userName = this.auth.getUserNameFromToken() || ''; 
+    }
   }
+  
 
+  openMyAccount() {
+    this.router.navigate(['/my-account']); // التوجه لصفحة "My Account"
+  }
 
 getallcategory() {
   this.catservice.getmainCategories().subscribe(

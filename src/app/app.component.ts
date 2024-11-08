@@ -28,6 +28,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { TopOffersComponent } from './Components/Homepage_components/top-offers/top-offers.component';
 import { SearchresultComponent } from './Components/searchresult/searchresult.component';
+import { MyAccountComponent } from './Components/my-account/my-account.component';
 
 
 @Component({
@@ -48,7 +49,8 @@ import { SearchresultComponent } from './Components/searchresult/searchresult.co
     LastViewComponent,
     TranslateModule,
     TopOffersComponent,
-    SearchresultComponent
+    SearchresultComponent,
+    MyAccountComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
