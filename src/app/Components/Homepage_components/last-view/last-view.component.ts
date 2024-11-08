@@ -36,8 +36,7 @@ export class LastViewComponent implements OnInit {
   }
 
  getProductName(product: any): string {
-  console.log('isArabic:', this.isArabic);
-  console.log('Product:', product);
+  
   return this.isArabic ? product.nameAr : product.nameEn;
 }
 

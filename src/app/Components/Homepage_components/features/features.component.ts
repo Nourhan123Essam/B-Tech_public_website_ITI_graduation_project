@@ -18,6 +18,7 @@ export class FeaturesComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  
   productPage() {
     this.router.navigate(['/products']);
   }

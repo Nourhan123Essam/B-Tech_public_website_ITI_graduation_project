@@ -1,7 +1,7 @@
 <div class="top-offers mt-5">
   <div class="top-offers-header">
     <h2>{{'home.top offers'|translate}}</h2>
-    <button class="shop-now-btn">{{'home.shop now'|translate}}</button>
+    <button class="shop-now-btn" (click)="productPage()">{{'home.shop now'|translate}}</button>
   </div>
 
   <div class="product-carousel" >
@@ -10,9 +10,9 @@
       <div *ngFor="let product of expensiveProducts" class="product-card " (click)="openProductDetails(product)">
         <img *ngIf="product.images.length  && product.images.length > 0"
             [src]="product.images[0].url"
-            [alt]="product.translations[isArabic ? 1 : 0]?.name ">
+            [alt]="product.translations[isArabic ? 1 : 0].name ">
         <h5 *ngIf="product.translations">
-          {{ product.translations[isArabic ? 1 : 0]?.name }}
+          {{ product.translations[isArabic ? 1 : 0].name }}
         </h5>
         <p class="price">
           {{ "product.price" | translate }}:
