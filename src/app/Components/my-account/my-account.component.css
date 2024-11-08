@@ -9,24 +9,36 @@
 }
 
 .sidebar {
-    width: 250px;
+    /* width: 250px;
     background-color: #f8f9fa;
-    padding: 20px;
+    padding: 5px; */
+    position:absolute;
+    /* top: 0; */
+    left: 0;
+    width: 350px;
+    height: 100%;
+    background-color: #f8f9fa;
+    padding: 5px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
-
+.main-content {
+    margin-left: 250px; 
+    /* إضافة هامش يعادل عرض الشريط الجانبي */
+    padding: 20px;
+    background-color: #ffffff;
+    width: calc(100% - 250px);
+     /* لضبط عرض المحتوى الرئيسي بحيث يبدأ بعد الشريط الجانبي */
+}
 .sidebar h2 {
     color: #0e001a;
 }
 
 .sidebar ul {
     list-style: none;
-    padding: 0;
+    padding: 10px;
     margin: 0;
 }
 
-.sidebar li {
-    margin: 15px 0;
-}
 
 .sidebar a {
     text-decoration: none;
@@ -39,8 +51,8 @@
 }
 
 .sidebar a:hover {
-    background-color: #0e001a;
-    color: #ffffff;
+    background-color: #cdcdcd;
+    /* color: #0e001a; */
 }
 
 .sidebar button {
@@ -66,8 +78,7 @@
 }
 
 .app-links img {
-    width: 120px;
-    margin-right: 10px;
+    width: 100px;
 }
 
 .main-content {

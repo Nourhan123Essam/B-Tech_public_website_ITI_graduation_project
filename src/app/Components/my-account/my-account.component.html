@@ -1,35 +1,73 @@
 <div class="page-container">
     <!-- Sidebar -->
-    <aside class="sidebar">
-        <h2> {{userName}}</h2>
-        <ul>
-            <li><a href="#">My orders</a></li>
-            <li><button (click)="signOut()">Log out</button></li>
-        </ul>
-        <div class="sidebar-details">
-            <h3>Return policy</h3>
-            <p>Most items can be returned within 30 days of delivery</p>
-            <h3>Have a question?</h3>
-            <p>19966</p>
-            <h3>Use our app</h3>
-            <div class="app-links">
-                <a href="https://play.google.com/store">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" width="120" height="40">
-                </a>
-                <a href="https://www.apple.com/app-store/">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" width="120" height="40">
-                </a>
-            </div>
+    <aside class="sidebar ">
 
-        </div>
+        <ul class="list-group">
+            <li class="list-group-item"><a><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path
+                            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                    </svg>&nbsp; Acount Home</a></li>
+            <li class="list-group-item"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
+                        <path
+                            d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
+                    </svg> &nbsp; My orders</a></li>
+            <li class="list-group-item"><a (click)="signOut()">Log out</a></li>
+        </ul>
+
+        <ul class="sidebar-details list-group ">
+            <li class="list-group-item">
+                <div class="d-flex"><strong><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                            fill="currentColor" class="bi bi-repeat" viewBox="0 0 16 16">
+                            <path
+                                d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z" />
+                        </svg></strong>&nbsp;&nbsp;&nbsp;<div>
+                        <h5><strong>Return policy</strong></h5>
+                        <p>Most items can be returned within 30 days of delivery</p>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="d-flex"><strong><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+                  </svg></strong>&nbsp;&nbsp;&nbsp;<div>
+                        <h5><strong>Have a question?</strong></h5>
+                        <p>19966</p>
+                    </div>
+                </div>
+            </li>
+
+
+        </ul>
+        <div class="card m-2 ">
+            <div class="card-body">
+              <p><strong>Use our app</strong></p>
+              <p class="fs-6">Enjoy benefits & features use B.TECH app</p>
+              <div class="d-flex app-links">
+                <a href="https://play.google.com/store">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                        alt="Google Play" width="120" height="40">
+                </a>
+                <a href="https://apps.apple.com/us/app/b-tech/id1258773067">
+                    <img src="https://btech.com/media/wysiwyg/our-app/app-store-tiny.png"
+                        alt="App Store" width="120" height="40">
+                </a>
+              </div>
+            </div>
+          </div>
+
+
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="welcome-message">
-            <h1>Hi, {{userName}}</h1>
+        <div class="card">
+            <div class="welcome-message card-body">
+                <h1><strong>Hi, {{userName}}</strong></h1>
+            </div>
         </div>
-
         <!-- Orders Section (Empty Space) -->
         <div class="orders-section">
             <!-- Orders content can be added here -->
