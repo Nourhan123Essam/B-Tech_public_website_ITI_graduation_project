@@ -56,6 +56,11 @@ dropdown-submenu {
   left: 100%; /* تأكد من أن الفئة الفرعية تظهر بشكل صحيح */
 }
 
+.fa-user{
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+}
 
 /* Position nested dropdowns */
 .dropdown-submenu .dropdown-menu {
