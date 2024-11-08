@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Route, Router } from '@angular/router';
 import { LocalizationService } from '../../../service/localiztionService/localization.service';
+import { AuthService } from '../../../service/Identity/auth.service';
 interface Image {
   url_en: string;
   url_ar: string;
@@ -20,8 +21,12 @@ interface Image {
 export class BannerComponent implements OnInit {
   images: Image[] = [];
   isArabic!: boolean;
+  userName: string = '';
+  isLoggedIn: boolean = false;
 
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
     private router: Router,
     private localizationService: LocalizationService
   ) {
@@ -32,8 +37,15 @@ export class BannerComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadImages();
+    this.authService.isLoggedInStatus$.subscribe((loggedInStatus) => {
+      this.isLoggedIn = loggedInStatus;
+      this.userName = loggedInStatus ? this.authService.getUserNameFromToken() || '' : '';
+    });
+    
   }
 
+
+ 
 
   loadImages() {
     this.http.get<Image[]>('http://localhost:3000/Images').subscribe((data) => {

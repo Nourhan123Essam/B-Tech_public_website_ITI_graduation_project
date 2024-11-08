@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,10 @@ import { Observable, tap } from 'rxjs';
 
 export class AuthService {
   private apiUrl = 'https://localhost:7122/api/Account' ; // استخدم رابط الـ API الخاص بك
+  private loggedInStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
 
+  // Expose the loggedInStatus as an observable for components to subscribe to
+  public isLoggedInStatus$ = this.loggedInStatus.asObservable();
   constructor(private http: HttpClient) {}
 
   getTokenClaims(token: string): any {
@@ -44,11 +47,20 @@ export class AuthService {
    // alert(url);
     return this.http.get<any>(url);
   }
-
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/Login`, { Email: email, Password: password });
-
+    return this.http.post(`${this.apiUrl}/Login`, { Email: email, Password: password }).pipe(
+      tap((response: any) => {
+        if (response.token) {
+          localStorage.setItem('authToken', response.token);
+          this.loggedInStatus.next(true); // Update login status to "logged in"
+        }
+      })
+    );
   }
+  // login(email: string, password: string): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/Login`, { Email: email, Password: password });
+
+  // }
 
   register(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, userData);
@@ -62,6 +74,7 @@ export class AuthService {
     localStorage.removeItem('authToken');  // إزالة التوكن من localStorage
     localStorage.removeItem('userId');     // إزالة userId (إن وجد)
     console.log('User signed out successfully.');
+    this.loggedInStatus.next(false); // Update login status to "logged out"
     return this.http.post(`${this.apiUrl}/signout`, {});
 
   }
