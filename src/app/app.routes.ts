@@ -13,6 +13,7 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { ProductsByBrandComponent } from './Components/products-by-brand/products-by-brand.component';
 import { ProductsByCategoryComponent } from './Components/products-by-category/products-by-category.component';
 import { SearchresultComponent } from './Components/searchresult/searchresult.component';
+import { MyAccountComponent } from './Components/my-account/my-account.component';
 
 export const routes: Routes = [
 
@@ -25,6 +26,7 @@ export const routes: Routes = [
 
     { path: 'payment/:orderId', component: PaymentComponent },
     { path: 'cart', component: CartComponent },
+    { path: 'my-account', component: MyAccountComponent },
 
     { path: 'sign-in', component: SignInComponent, data: { hideHeaderFooter: true } },
     { path: 'sign-up', component: SignUpComponent },

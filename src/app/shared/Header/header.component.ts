@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit ,NgModule } from '@angular/core';
+import { AfterViewInit, Component, OnInit ,NgModule, ChangeDetectorRef } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -47,6 +47,8 @@ export class HeaderComponent implements AfterViewInit , OnInit{
   // isLoggedIn: boolean = true;
   searchQuery: string = '';
   isUserLoggedIn: boolean = false;
+  userName: string = '';
+
 
 
   // categoryNames: string[] = [];
@@ -65,20 +67,29 @@ export class HeaderComponent implements AfterViewInit , OnInit{
     private activatedRoute: ActivatedRoute,
     private auth:AuthService,
     private catservice: CategoryService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private cdr: ChangeDetectorRef, // إضافة ChangeDetectorRef هنا
 
-    // private catservice:CategoryService
   ) {
     this.translate.IsArabic.subscribe((ar) => (this.isArabic = ar));
   }
   ngAfterViewInit(): void {
     throw new Error('Method not implemented.');
+    
   }
   ngOnInit(): void {
-    this.getallcategory();
-    this.isUserLoggedIn = this.auth.isLoggedIn();
+    this.getallcategory(); // جلب الفئات كما في الكود السابق
+  
+    this.auth.isLoggedInStatus$.subscribe((status) => {
+      this.isUserLoggedIn = status;
+      this.userName = this.auth.getUserNameFromToken() || '';
+    });
   }
+  
 
+  openMyAccount() {
+    this.router.navigate(['/my-account']); // التوجه لصفحة "My Account"
+  }
 
 getallcategory() {
   this.catservice.getmainCategories().subscribe(
@@ -134,7 +145,6 @@ getSubCategories(categoryId: number) {
 onSubCategorySelect(subCategoryId: number) {
   this.selectedCategoryId = subCategoryId; // Store the selected subcategory ID
   console.log("Selected Subcategory ID:", subCategoryId);
-  // this.router.navigate(['/product-by-category', subCategoryId]); // Navigate to the product page
   this.router.navigate(['/product-by-category', this.selectedCategoryId]).then(() => {
     // إعادة ضبط selectedCategoryId بعد التنقل لضمان استقبال اختيارات جديدة
     this.selectedCategoryId = null;
@@ -144,26 +154,25 @@ onSubCategorySelect(subCategoryId: number) {
 
   useLanguage() {
     this.translate.ChangeLanguage();
+    this.cdr.detectChanges(); // يجبر Angular على التحقق من التغييرات وتحديث العرض
+
   }
 
   opensignin() {
-    this.router.navigate(['remember-by-phoone']);
+    this.router.navigate(['remember-by-phoone']).then(() => {
+      // بعد تسجيل الدخول، تحديث حالة isUserLoggedIn
+      this.isUserLoggedIn = true;
+      this.userName = this.auth.getUserNameFromToken() || '';
+      this.cdr.detectChanges(); // تحديث العرض بدون إعادة تحميل الصفحة
+    });
   }
   onSignOut() {
     this.auth.signOut();
     this.isUserLoggedIn = false;
-    this.router.navigate(['/']);  // توجيه المستخدم إلى صفحة تسجيل الدخول
+    this.router.navigate(['/']);  
+    this.cdr.detectChanges(); // تحديث العرض بعد تسجيل الخروج
   }
-  // signOut() {
-  //   this.auth.signOut().subscribe(
-  //     () => {
-  //       localStorage.removeItem('authToken'); // مسح التوكن من التخزين المحلي
-  //       this.isLoggedIn = false; // تحديث حالة تسجيل الدخول
-  //       this.router.navigate(['/sign-in']); // إعادة توجيه المستخدم للصفحة الرئيسية
-  //     },
-  //     (error) => console.error('Logout failed:', error)
-  //   );
-  // }
+ 
 
 onSearch(event: Event) {
     event.preventDefault(); // منع إعادة تحميل الصفحة
@@ -224,8 +233,6 @@ onSearch(event: Event) {
     }
     else this.router.navigate(['/cart']);
   }
-
-
 
   }
 
