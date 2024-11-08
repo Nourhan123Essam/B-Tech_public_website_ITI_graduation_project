@@ -16,6 +16,8 @@
   gap: 1.5rem;
   overflow-x: auto;
   padding-bottom: 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
 }
 
 .product-card {
