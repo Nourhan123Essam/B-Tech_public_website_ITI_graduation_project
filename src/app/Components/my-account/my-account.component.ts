@@ -18,7 +18,7 @@ export class MyAccountComponent  implements OnInit {
 
   constructor(
      private authService: AuthService,
-     private router: Router, 
+     private router: Router,
      private cdr: ChangeDetectorRef, // إضافة ChangeDetectorRef هنا
 
   ) {}
@@ -30,7 +30,7 @@ export class MyAccountComponent  implements OnInit {
   signOut() {
     this.authService.signOut();
     this.isUserLoggedIn = false;
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
     this.cdr.detectChanges(); // تحديث العرض بعد تسجيل الخروج
 
   }
