@@ -1,0 +1,29 @@
+<!-- src/app/order-details/order-details.component.html -->
+<h2>Order Details</h2>
+<div *ngIf="order">
+  <p><strong>Date:</strong> {{ order.orderDate }}</p>
+  <p><strong>Total Amount:</strong> {{ order.totalAmount }}</p>
+  <p><strong>Status:</strong> {{ order.status }}</p>
+
+  <h3>Products</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total price for this prodcut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of order.items">
+        <td>{{ product.productName }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.price }} EGP</td>
+        <td>{{(product.price * product.quantity).toFixed(2)}} EGP</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button (click)="goBack()">Back</button>
+</div>

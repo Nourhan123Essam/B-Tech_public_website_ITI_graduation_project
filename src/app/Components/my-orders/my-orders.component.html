@@ -1,0 +1,114 @@
+<!-- src/app/components/orders/orders.component.html -->
+<div *ngIf="loading">Loading...</div>
+<!-- <div *ngIf="errorMessage">{{ errorMessage }}</div> -->
+
+
+<!-- No orders found -->
+
+<div *ngIf="!loading && orders.length === 0">
+    <div class="row text-start">
+        <h3>My orders</h3>
+    </div>
+
+    <div class="text-center">
+        <div style="margin-bottom: 15px;">
+            <img src="../../../assets/images/no-orders-concept-character-can-260nw-1617887866.jpg" 
+            alt=""
+            style="width: 300px; height: auto;">
+        </div>
+        <h3>No orders yet</h3>
+        <p>Your orders will show here after buying something.</p>
+    </div>
+</div>
+
+<div *ngIf="!loading && orders.length > 0 && details" class="orders-table-container">
+  <app-my-orders-items *ngIf="details" [order]="selectedOrder" (closeDetails)="onCloseDetails()"></app-my-orders-items>
+</div>
+
+
+<!-- There are orders -->
+ <!-- src/app/components/orders/orders.component.html -->
+<div *ngIf="!loading && orders.length > 0 && !details" class="orders-table-container">
+  <table class="orders-table">
+    <thead>
+      <tr>
+        <th>Order Date</th>
+        <th>Status</th>
+        <th>Total Amount</th>
+        <th>Items</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.orderDate | date }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.totalAmount| currency }}</td>
+        <td>
+          <button (click)="toggleOrderItems(order.id)">
+             Order Items
+          </button>   
+        </td>
+        <td>
+          <button
+            *ngIf="order.status !== 'Shipped' && order.status !== 'Cancelled'"
+            (click)="cancelOrder(order.id)"
+            class="cancel-button">
+            Cancel Order
+          </button>
+          <span *ngIf="order.status === 'Shipped' || order.status === 'Cancelled'" class="disabled-text">
+            Cannot be canceled
+          </span>       
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- src/app/components/orders/orders.component.html -->
+<!-- <div class="orders-container">
+  <div *ngFor="let order of orders" class="order-card">
+    <h3>Order ID: {{ order.id }}</h3>
+    <p>Order Date: {{ order.orderDate }}</p>
+    <p>Status: {{ order.status }}</p>
+    <p>Total Amount: {{ order.totalAmount | currency }}</p>
+    <p>Shipping Address: {{ order.shippingAddress }}</p>
+
+    <h4>Items:</h4>
+    <ul>
+      <li *ngFor="let item of order.items">
+        {{ item.productName }} - Quantity: {{ item.quantity }} - Price: {{ item.price | currency }}
+      </li>
+    </ul>
+
+    <button *ngIf="order.status !== 'Shipped'" (click)="cancelOrder(order.id)">
+      Cancel Order
+    </button>
+  </div>
+</div>
+ -->
+
+<!-- <div *ngIf="!loading && orders.length > 0">
+  <h2>My Orders</h2>
+
+  <div *ngFor="let order of orders" class="order-card">
+    <h3>Order ID: {{ order.id }}</h3>
+    <p>Order Date: {{ order.orderDate }}</p>
+    <p>Status: {{ order.status }}</p>
+    <p>Total Amount: {{ order.totalAmount | currency }}</p>
+    <p>Shipping Address: {{ order.shippingAddress }}</p>
+
+    <h4>Items:</h4>
+    <ul>
+      <li *ngFor="let item of order.items">
+        {{ item.productName }} - Quantity: {{ item.quantity }} - Price: {{ item.price | currency }}
+      </li>
+    </ul>
+
+    <button *ngIf="order.status !== 'Shipped' && order.status !== 'cancelled' && order.status !== 'delivered'" 
+      (click)="cancelOrder(order.id)">
+      Cancel Order
+    </button>
+  </div>
+</div> -->

@@ -1,4 +1,5 @@
-import { Component, Input, input, OnInit , Output, ViewChild , OnChanges, SimpleChanges, OnDestroy} from '@angular/core';
+
+import { Component, Input, input, OnInit , Output, ViewChild , OnChanges, SimpleChanges, OnDestroy, ElementRef } from '@angular/core';
 import {OrderService} from '../../service/Order/order.service'
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -12,7 +13,9 @@ import {CitySidebarComponent} from '../city-side-bar-component/city-side-bar-com
 import { Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-
+// import bootstrap from 'bootstrap';
+import { Modal } from 'bootstrap';
+declare const bootstrap: any;
 
 
 @Component({
@@ -41,10 +44,12 @@ export class PaymentComponent implements OnInit {
   totalAmount:number = 100;
   isExpanded:boolean = false;
   orderId:number|null = 0;
+  totalPayPal:string = "100.0";
 
 
   constructor(private orderService: OrderService, private router:Router, private modalService: NgbModal,
-    private paypalService: PaypalPaymentService, private authService: AuthService, private route: ActivatedRoute){}
+    private paypalService: PaypalPaymentService, private authService: AuthService, private route: ActivatedRoute,
+    private elementRef: ElementRef){}
 
 
 
@@ -121,27 +126,14 @@ export class PaymentComponent implements OnInit {
 
   //====== finishing the payment =============
   completePayment() {
-    // const paymentDetails = {
-    //   transactionId: (this.selectedPaymentMethod == 'cash')?'':'sample-transaction-id',
-    //   orderId: 'sample-order-id',
-    //   shippingCost: 10.0,
-    //   shippingAddress: '123 Example St, City, Country'
-    // };
-
-    // this.paypalService.completePayment(paymentDetails).subscribe(
-    //   response => {
-    //     console.log('Payment completed successfully', response);
-    //   },
-    //   error => {
-    //     console.error('Payment completion failed', error);
-    //   }
-    // );
     const userID = this.authService.getUserIdNourhan();
     if(userID && this.orderId){
       // alert(this.orderId)
       this.orderService.finishOrder(this.orderId, this.totalAmount, userID).subscribe(
         (response) => {
           console.log('Quantity updated successfully', response);
+          this.showThankYouModal();
+
           this.router.navigate(['/']);
         },
         (error) => {
@@ -151,12 +143,31 @@ export class PaymentComponent implements OnInit {
     }
   }
 
+  showThankYouModal(): void {
+    const modalElement = this.elementRef.nativeElement.querySelector('#thankYouModal');
+    const bootstrapModal = new bootstrap.Modal(modalElement);
+    bootstrapModal.show();
+  }
+
   //************************************************** */
 
   chashPayment():void{
     const ele = document.getElementById("continuePayment") as HTMLButtonElement;
     if (ele) {
       ele.disabled = false;
+    }
+  }
+
+  onPaymentCompleted(success: boolean) {
+    if (success) {
+      console.log('Payment was successful. Proceeding to update the order status...');
+      const ele = document.getElementById("continuePayment") as HTMLButtonElement;
+      if (ele) {
+        ele.disabled = false;
+      }
+    } else {
+      console.log('Payment failed or was cancelled.');
+      // Handle payment failure if needed
     }
   }
 
@@ -210,15 +221,25 @@ export class PaymentComponent implements OnInit {
   //===========fetch order items=============
   loadCartItems(): void {
     const userId = this.authService.getUserIdNourhan();
-    if(userId){
+    if(userId){console.log("Entered");
+    
       this.orderService.viewCart(userId).subscribe(
         (data) => {
-          console.log(data);
+          console.log("this id the data", data);
           this.cartItems = data;
+          this.totalAmount = 0;
+          this.totalPayPal = "0.0";
 
           for (const item of this.cartItems) {
-            this.totalAmount  += item.totalPrice;
+            this.totalAmount  += item.totalPrice + this.fee;
           }
+          this.totalPayPal = String(this.totalAmount);
+          console.log("********************");
+          
+          console.log(this.totalAmount);
+          console.log(this.totalPayPal);
+          
+          
         },
         (error) => {
           console.error(error);

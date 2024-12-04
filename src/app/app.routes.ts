@@ -14,6 +14,8 @@ import { ProductsByBrandComponent } from './Components/products-by-brand/product
 import { ProductsByCategoryComponent } from './Components/products-by-category/products-by-category.component';
 import { SearchresultComponent } from './Components/searchresult/searchresult.component';
 import { MyAccountComponent } from './Components/my-account/my-account.component';
+import {MyOrdersComponent} from "./Components/my-orders/my-orders.component";
+import {MyOrdersItemsComponent} from './Components/my-orders-items/my-orders-items.component';
 
 export const routes: Routes = [
 
@@ -25,6 +27,8 @@ export const routes: Routes = [
     {path:'details/:id',component:DetailsComponent, title:'Details'},
 
     { path: 'payment/:orderId', component: PaymentComponent },
+    { path: 'my-orders', component: MyOrdersComponent },
+    { path: 'my-orders-items', component: MyOrdersItemsComponent },
     { path: 'cart', component: CartComponent },
     { path: 'my-account', component: MyAccountComponent },
 

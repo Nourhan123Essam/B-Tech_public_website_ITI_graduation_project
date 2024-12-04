@@ -3,6 +3,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
+export interface Order {
+  id: number;
+  orderDate: string;
+  status: string;
+  totalAmount: number;
+  shippingAddress: string;
+  items: OrderItem[];
+  showItems: boolean;
+}
+
+export interface OrderItem {
+  productName: string;
+  quantity: number;
+  price: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,6 +50,16 @@ export class OrderService {
     console.log(req);
 
     return this.http.delete(req);
+  }
+
+  //======== for my orders component ==========
+  getUserOrders(userId:string): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}/user-orders?userId=${userId}`);
+  }
+
+  // Cancel a specific order if not shipped
+  cancelOrder(orderId: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/cancel-order?orderId=${orderId}`, {});
   }
 
 }

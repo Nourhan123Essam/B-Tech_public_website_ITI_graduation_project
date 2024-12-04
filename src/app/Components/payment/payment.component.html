@@ -89,8 +89,8 @@
 
               <div class="row" style="margin: 15px 0;">
                 <div class="col-md-6 text-start" >
-                  <input type="radio" id="paypal" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="paypal">
-                  <label [ngClass]="{'selected-label': selectedPaymentMethod === 'paypal'}" for="paypal">PayPal</label>
+                  <input type="radio" id="paypal-option" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="paypal">
+                  <label [ngClass]="{'selected-label': selectedPaymentMethod === 'paypal'}" for="paypal-option">PayPal</label>
                 </div>
                 <div class="col-md-6 text-end">
                   <i [ngClass]="{'selected-label': selectedPaymentMethod === 'paypal'}" class="fa-regular fa-credit-card"></i>
@@ -98,7 +98,10 @@
               </div>
 
               <div *ngIf="selectedPaymentMethod === 'paypal'">
-                <app-paypal-button [amount]="totalAmount"></app-paypal-button>
+                  
+                <!-- [clientId]="'ATvDFJFysYICcOZtRecpSyQbw0iwDwl6tVuTRTyYDi-aJAbFLNTIQMrY21C-xY11cB9cykkearVgb5Op'"> -->
+                <app-paypal-button (paymentCompleted)="onPaymentCompleted($event)"
+                  [amount]="totalPayPal"></app-paypal-button>
               </div>
 
             </div>
@@ -167,6 +170,26 @@
         <button (click)="completePayment()" id="finish" disabled class="btn btn-dark text-center orderButton" style="width: 100%; border-radius: 10px; padding: 10px"> Place Order</button>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- After finishing the payment -->
+<!-- Thank-You Modal -->
+<div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="thankYouModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="thankYouModalLabel">🎉 Thank You for Your Purchase! 🎉</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Your payment was successful, and your order has been placed!</p>
+        <p>We appreciate your business. 😊</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Continue Shopping</button>
+      </div>
     </div>
   </div>
 </div>

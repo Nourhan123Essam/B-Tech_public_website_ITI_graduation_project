@@ -96,3 +96,17 @@
     margin-top: 20px;
     /* يمكن إضافة المزيد من التنسيقات هنا لقسم الطلبات */
 }
+
+/* src/app/components/my-account/my-account.component.css */
+
+.my-account-container {
+    max-width: 1000px; /* Adjust as needed */
+    margin: 0 auto;
+    margin-left: 300px;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 600px; /* Set the height for the container */
+  overflow-y: auto; /* Enable vertical scroll for overflow */
+  border: 1px solid #ddd; /* Optional: Adds a border to see the container */
+  }
+  

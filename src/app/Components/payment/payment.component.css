@@ -103,3 +103,24 @@
   }
 
 
+
+  /* finshing the payment */
+  .modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .modal-header {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .modal-footer {
+    justify-content: center;
+  }
+  
+  .modal-body p {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
