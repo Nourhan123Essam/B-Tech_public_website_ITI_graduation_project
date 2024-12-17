@@ -1,11 +1,4 @@
 
----
-
-### 2. **Frontend Repository README (Angular)**
-
-This README will explain the frontend components you created, their purpose, and how to run the application.
-
----
 
 # E-Commerce Frontend (Angular)
 
