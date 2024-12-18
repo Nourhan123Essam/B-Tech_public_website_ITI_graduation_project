@@ -17,7 +17,7 @@ Watch my contribution to the **project demonstration video** [here](https://driv
 
 ## Related Repositories
 - **Backend Repository**: The Angular frontend interacts with the backend repository to handle all data storage, order processing, and payment logic.  
-  👉 [Visit the Backend Repository](<backend-repo-url>)
+  👉 [Visit the Backend Repository](https://github.com/Nourhan123Essam/B-Tech_API-Dashboard_ITI_graduation_project)
 
 ---
 ## Features
@@ -124,7 +124,7 @@ The application implements **Angular Routing** to ensure smooth navigation acros
 ### Prerequisites
 - **Node.js** and **npm** installed on your system.  
 - **Angular CLI** installed globally.  
-- Clone the **backend repository** and run the backend API as mentioned [here](https://github.com/Nourhan123Essam/Employee-Management-System-API-ASP.Net).
+- Clone the **backend repository** and run the backend API as mentioned [here](https://github.com/Nourhan123Essam/B-Tech_API-Dashboard_ITI_graduation_project).
 
 ### Steps:
 1. Clone this repository:
