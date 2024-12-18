@@ -95,9 +95,10 @@ Watch my contribution to the **project demonstration video** [here](https://driv
 
 ## Routing
 The application implements **Angular Routing** to ensure smooth navigation across the platform:
-- 🛒 **Cart** (`/cart`): View and manage cart items.
-- 💳 **Payment** (`/payment`): Enter delivery and payment details, finalize orders.
-- 📜 **Order History** (`/orders`): View past orders with detailed breakdowns.
+- 🛒 **Cart** (`cart`): View and manage cart items.
+- 💳 **Payment** (`payment/:orderId`): Enter delivery and payment details, finalize orders.
+- 📜 **Order History** (`my-orders`): View past orders with detailed breakdowns.
+- 🛍️ **Order Items** (`my-orders-items`): Allows users to view individual item details, such as quantity, price for a secific order.
 
 ---
 
