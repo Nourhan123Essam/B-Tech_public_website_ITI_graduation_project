@@ -24,38 +24,38 @@ Watch my contribution to the **project demonstration video** [here](https://driv
 
 ### 🛒 **Cart Management**
 - **Cart Component**:
-  - 🧾 Displays cart items stored in the database and dynamically updates the **total price** and **item count** based on user actions.
-  - 🔒 **User Authentication Check**:
+  -  Displays cart items stored in the database and dynamically updates the **total price** and **item count** based on user actions.
+  -  **User Authentication Check**:
     - If the user is not logged in, displays a popup with two options:
       - **Log in**: Navigate to the login page.
       - **Continue Exploring**: Navigate back to the homepage.
-  - ❌ **Empty Cart Handling**:
+  -  **Empty Cart Handling**:
     - If no items are present in the cart:
       - A friendly message informs the user.
       - Includes a button to navigate to the homepage and start shopping.
   - **Functionalities**:
-    - 🗑️ **Delete Items**: Remove items from the cart.
-    - 🔄 **Update Quantity**: Adjust item quantities and view real-time updates to the total price and item count.
-    - ➡️ **Navigate to Payment**: Proceed to the payment page.
+    -  **Delete Items**: Remove items from the cart.
+    -  **Update Quantity**: Adjust item quantities and view real-time updates to the total price and item count.
+    -  **Navigate to Payment**: Proceed to the payment page.
 
 ---
 
 ### 💳 **Payment Workflow**
 - **Payment Component**:
-  - **🖼️ Right Section**:
+  - ** Right Section**:
     - Displays a summary of cart items, including:
-      - 📸 Images
-      - 🔢 Quantities
-      - 💰 Prices
-  - **📝 Left Section**:
+      -  Images
+      -  Quantities
+      -  Prices
+  - **Left Section**:
     - Collects **delivery information** and **payment details** through a step-by-step flow:
       - Each section unlocks after completing the previous one.
   - **Payment Options**:
-    - 💵 **Cash on Delivery**: Simple order placement without online payment.
-    - 💳 **PayPal Integration**:
+    -  **Cash on Delivery**: Simple order placement without online payment.
+    -  **PayPal Integration**:
       - Calls the backend to handle PayPal payments.
       - **PayPal Buttons**: Displays secure PayPal buttons for payment completion.
-  - ✅ **Order Finalization**:
+  -  **Order Finalization**:
     - Calls the backend to confirm the payment and finalize the order.
 
 - **City Sidebar Component**:
@@ -65,48 +65,48 @@ Watch my contribution to the **project demonstration video** [here](https://driv
 
 ### 📜 **Order History**
 - **My Orders Component**:
-  - 🕰️ Displays a detailed list of the user’s past orders.
+  -  Displays a detailed list of the user’s past orders.
   - **Order Actions**:
-    - 🚫 **Cancel Orders**: If the order hasn’t been shipped yet, users can cancel it.
-    - 📋 **View Details**: Navigate to a detailed breakdown of items in each order.
+    -  **Cancel Orders**: If the order hasn’t been shipped yet, users can cancel it.
+    -  **View Details**: Navigate to a detailed breakdown of items in each order.
 - **Order Items Component**:
-  - 🛍️ Displays individual items for a specific order, including quantity and price.
+  -  Displays individual items for a specific order, including quantity and price.
 
 ---
 
 ## Components and Services
 
 ### 📦 **Main Components**
-1. 🛒 **Cart Component** (`cart.component.ts`)
-2. 💳 **Payment Component** (`payment.component.ts`)
-3. 🪙 **PayPal Buttons Component** (`paypal-buttons.component.ts`)
-4. 🌆 **City Sidebar Component** (`city-side-bar.component.ts`)
-5. 📜 **My Orders Component** (`my-orders.component.ts`)
-6. 📋 **Order Items Component** (`my-orders-items.component.ts`)
+1.  **Cart Component** (`cart.component.ts`)
+2.  **Payment Component** (`payment.component.ts`)
+3.  **PayPal Buttons Component** (`paypal-buttons.component.ts`)
+4.  **City Sidebar Component** (`city-side-bar.component.ts`)
+5.  **My Orders Component** (`my-orders.component.ts`)
+6.  **Order Items Component** (`my-orders-items.component.ts`)
 
 ### 🔗 **Order Service**
 - **OrderService** (`order.service.ts`):
   - Handles backend communication for:
-    - 📤 Fetching user cart items and orders.
-    - 🖊️ Updating cart details (e.g., adding, deleting, or modifying items).
-    - 💳 Initiating PayPal payments via the backend API.
+    -  Fetching user cart items and orders.
+    -  Updating cart details (e.g., adding, deleting, or modifying items).
+    -  Initiating PayPal payments via the backend API.
 
 ---
 
 ## Routing
 The application implements **Angular Routing** to ensure smooth navigation across the platform:
-- 🛒 **Cart** (`cart`): View and manage cart items.
-- 💳 **Payment** (`payment/:orderId`): Enter delivery and payment details, finalize orders.
-- 📜 **Order History** (`my-orders`): View past orders with detailed breakdowns.
-- 🛍️ **Order Items** (`my-orders-items`): Allows users to view individual item details, such as quantity, price for a secific order.
+-  **Cart** (`cart`): View and manage cart items.
+-  **Payment** (`payment/:orderId`): Enter delivery and payment details, finalize orders.
+-  **Order History** (`my-orders`): View past orders with detailed breakdowns.
+-  **Order Items** (`my-orders-items`): Allows users to view individual item details, such as quantity, price for a secific order.
 
 ---
 
 ## Highlights
-- 🚀 **Dynamic Cart Updates**: Real-time adjustments to total amount and item count.
-- 🔄 **Step-by-Step Payment Flow**: Ensures a clear and user-friendly process.
-- 💳 **PayPal Integration**: Secure and efficient payment handling.
-- 📜 **Order History with Details**: Provides users with transparency and control over their orders.
+-  **Dynamic Cart Updates**: Real-time adjustments to total amount and item count.
+-  **Step-by-Step Payment Flow**: Ensures a clear and user-friendly process.
+-  **PayPal Integration**: Secure and efficient payment handling.
+-  **Order History with Details**: Provides users with transparency and control over their orders.
 
 ---
 
