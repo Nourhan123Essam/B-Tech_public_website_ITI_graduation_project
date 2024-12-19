@@ -59,7 +59,7 @@ Watch my contribution to the **project demonstration video** [here](https://driv
     - Calls the backend to confirm the payment and finalize the order.
 
 - **City Sidebar Component**:
-  - 🌆 A visually appealing sidebar for selecting cities during the delivery information phase.
+  -  A visually appealing sidebar for selecting cities during the delivery information phase.
 
 ---
 
