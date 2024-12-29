@@ -119,6 +119,67 @@ The application implements **Angular Routing** to ensure smooth navigation acros
   
 ---
 
+## 📸 Screenshots
+
+### Before logging trying to add to cart:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/not%20loggin%20add%20to%20cart.png)
+
+### Before logging trying to see to cart:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/not%20logging%20see%20cart.png)
+
+### Add to cart:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/add%20to%20cart.png)
+
+
+### Cart:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/cart.png)
+
+### Empty cart:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/empty%20cart.png)
+
+### Checkout:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/payment.png)
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/payment%202.png)
+
+### Cities side bar to choose from in checkout page:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/cities%20sidebar.png)
+
+### Complete delivery info:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/delivery%20info.png)
+
+### Payment options:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/paypal.png)
+
+### Data Completed:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/completing%20data.png)
+
+### Now the place order button become active:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/active%20order.png)
+
+### Successful payment:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/after%20place%20payment.png)
+
+### My orders page:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/My%20orders.png)
+
+### Order Items:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/order%20detials.png)
+
+### No orders:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/empty%20orders.png)
+
+### Orders in Dashboard:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/dashboard.png)
+
+### Order details in Dashboard:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/dashboard%202.png)
+
+### Edit status of the order:
+![Home Page Screenshot](https://github.com/Nourhan123Essam/B-Tech_public_website_ITI_graduation_project/blob/main/Demo%20Images%20of%20the%20project/dashboard%203.png)
+
+
+---
+
 ## 💡 How to Run
 
 ### Prerequisites
